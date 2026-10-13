@@ -1,11 +1,11 @@
 # Implementation status
 
-- Current task: merge to main and deploy to GitHub Pages (owner-authorized 2026-10-14)
-- Last completed task: T10 (implementation diff review and local handoff)
-- Branch: codex/cv-homepage
+- Current task: release complete; GitHub Pages live and verified
+- Last completed task: main merge, Actions deployment and live verification (2026-10-14)
+- Branch: main (portfolio merged from codex/cv-homepage)
 - Code: this separate projects repository
 - Local release preview: http://127.0.0.1:4326
-- Release state: branch pushed; release authorized; merge/deployment pending CI validation
+- Release state: deployed site code `3bea82e`; https://espressotonic.github.io/
 
 ## Initial v1 baseline — historical
 
@@ -29,16 +29,16 @@
 - Local IAB navigation and visual inspection completed; selected evidence in ignored .qa/.
 - npm audit: zero reported vulnerabilities.
 
-## Before publication
+## Ongoing content review
 
 - Review biography, public email/ORCID choice, current employment and all public wording.
 - Spatial-omics stays excluded until its employer-facing wording is reviewed.
-- Merge and GitHub Pages deployment authorized on 2026-10-14; validate CI and the live artifact.
-- Check the final GitHub Actions deployment and public deep links as part of release.
+- Publish subsequent changes through the manually triggered main-only Actions workflow after validation.
+- Latest deployment and live deep-link verification passed; repeat these checks for subsequent releases.
 
 ## Continue
 
-Read README.md and the actual working state. Night Gallery implementation T00–T10 is complete. The owner authorized commit/push followed by merge and Pages deployment on 2026-10-14. Complete the CI and live checks; preserve the dated checkpoints below. Prior v1 test counts below are history, not the redesign validation.
+Read README.md and the actual working state. Night Gallery implementation T00–T10 and the owner-authorized release are complete. Pages uses the custom Actions build; the site is live. Preserve the dated checkpoints below. Prior v1 test counts are history; the final release checks are recorded in the latest checkpoint.
 
 ## 2026-10-13 — Night Gallery design handoff
 
@@ -102,3 +102,10 @@ The owner requested committing and pushing the completed implementation to `orig
 Implementation commit `e2dee33` was pushed to `codex/cv-homepage`; the owner then authorized merging to `main` and deploying to GitHub Pages. The existing Pages source is legacy `main` root publishing and must switch to the custom Actions build for Astro output.
 
 The first Linux CI release check falsely reported missing publication authors: PDF.js inserted spaces within positioned glyphs (for example `Yo o jung Hwang`). The retained two-page CI PDF was inspected and all 38 source author entries confirmed. Text comparison now tolerates extraction whitespace while preserving authored characters; a regression test rejects missing/misspelled entries. Local validation passed ten unit tests, the full release build/PDF check and thirty-four browser tests. The validation workflow retains its build artifact even on failure so future release failures are inspectable. Final CI, merge, deployment and live checks remain the next release steps.
+
+
+## 2026-10-14 — Main merge and GitHub Pages release complete
+
+Corrected branch validation [38485685583](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38485685583) passed all ten unit tests, the nineteen-page release build/two-page CV PDF validation, and thirty-four Chromium tests. `main` was fast-forwarded to site code `3bea82e` and pushed. Pages was switched from legacy root publishing to custom workflow publishing. The manually dispatched [deployment 38485870488](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38485870488) passed both build and deploy jobs.
+
+The live site is https://espressotonic.github.io/. Live Chromium checks passed all eighteen public content routes, canonical URLs, loaded images and zero page/console errors. Desktop (1280×800) and phone (390×844) screenshots were inspected; representative phone routes had no horizontal overflow. Research → MAGraph → CV → actual PDF download worked; all four primary navigation links and keyboard skip worked without JavaScript. The downloaded PDF contains two pages, all 38 author entries, all three languages and no localhost annotations. Unknown routes return the custom 404 and the employer draft remains excluded from routes and sitemap. Live-check scripts, downloaded PDFs and screenshots are retained only in temporary storage outside the repository/vault. This documentation checkpoint does not change the deployed site code.

@@ -55,7 +55,7 @@ Before releasing, review public copy, contact details, current employment, outpu
 
 ## Current implementation
 
-Night Gallery is implemented as a tested local release candidate. The release contains four research and nine personal projects, both indexes, homepage, Blog, CV and custom 404: nineteen HTML pages, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
+Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The release contains four research and nine personal projects, both indexes, homepage, Blog, CV and custom 404: nineteen HTML pages, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
 
 - [Implementation status](IMPLEMENTATION_STATUS.md) — completed slices, checks, source preservation and fidelity ledger.
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md) — retained task sequence and contracts.
@@ -64,3 +64,6 @@ Night Gallery is implemented as a tested local release candidate. The release co
 - The current static release preview is `http://127.0.0.1:4326`; `npm run preview` uses 4321 when it is free. The separate design gallery can be reopened with `python3 docs/design/stitch/serve-preview.py` on 4324.
 
 The owner authorized committing/pushing and then merging to `main` and deploying to GitHub Pages on 2026-10-14. Publish through the validated, manually triggered Actions workflow; check the final deployment and live routes.
+
+
+The first release was merged into `main` and deployed successfully on 2026-10-14 from site code `3bea82e`. GitHub Pages uses the custom Actions workflow. CI release checks and subsequent live-route, phone-layout, navigation, CV-download and custom-404 checks passed; see the latest implementation-status checkpoint.
