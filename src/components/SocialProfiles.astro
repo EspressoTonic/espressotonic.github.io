@@ -1,0 +1,12 @@
+---
+interface Props {
+  items: { label: string; url?: string }[];
+}
+const { items } = Astro.props;
+---
+
+<ul class="social-labels" aria-label="Social platforms">
+  {items.map((item) => (
+    <li>{item.url ? <a href={item.url}>{item.label}</a> : <span>{item.label}</span>}</li>
+  ))}
+</ul>

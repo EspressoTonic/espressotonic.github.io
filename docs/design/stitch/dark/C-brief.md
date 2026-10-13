@@ -1,0 +1,8 @@
+Refine this C — Carbon Atlas DARK DESKTOP screen. Output exactly one DESKTOP 1440px-wide complete homepage. Keep the existing desktop navigation rail, graphite background #0e1113, sage actions #bddb73, IBM Plex Sans headings and body, and current layout. Do not switch the device or create additional screens.
+Make these focused corrections only:
+1. Replace #4f5c55 dim text with #b7c2bc in meaningful captions and labels. All project summaries at least 15px; meaningful diagram labels and metadata at least 13px.
+2. MAGraph diagram heading: Gene-neighbourhood representation. Keep Concept illustration visible. Remove the repeated Status: Master's Thesis footer row.
+3. Virtual Cell illustration heading: Model comparison and evaluation. Give Biological context, Candidate models, Evaluation their own non-overlapping readable labels below the conceptual shapes. Remove Latent representation and evaluation protocol text.
+4. GenoMycAnalyzer illustration caption: Reproducible software workflow. Remove Containerized pipeline architecture.
+5. Main headline Understanding biology through its many measurements. is the single H1. Name is a home link. Remove extraneous section eyebrow text (Investigation tracks, Applied tools, Curiosity & scope, Academic track record).
+Preserve every other project summary, publication title and year/status, research-interest sentence, paragraph and href from the source exactly. Keep all six sections and all research/personal entries. No extra results, facts, affiliations, metrics or scientific-method details. Keep prototype sample captions. Retain the dark desktop rail composition.

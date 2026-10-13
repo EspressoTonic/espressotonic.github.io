@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { posts, postUrl, reviewDate } from '../../lib/content';
+const items = await posts();
+const topics = [
+  {
+    title: 'Research notes',
+    description: 'Questions, methods, and the limits of what a result can tell us.',
+  },
+  {
+    title: 'Building useful tools',
+    description: 'Product decisions, implementation lessons, and unfinished experiments.',
+  },
+  {
+    title: 'Learning in public',
+    description: 'Ideas worth explaining carefully and returning to.',
+  },
+];
+---
+
+<BaseLayout
+  title="Blog"
+  description="Research notes, project write-ups, and things Woo Young Cho learns along the way."
+>
+  <div class="wrap blog-page">
+    <div class="blog-layout">
+      <header class="blog-intro">
+        <span class="eyebrow">{items.length ? 'Blog' : 'Blog / Coming later'}</span>
+        <h1>Notes from the work.</h1>
+        <p>A place for research notes, project write-ups, and things I learn along the way.</p>
+        {!items.length && (
+          <ol class="blog-topics">
+            {topics.map((topic, i) => (
+              <li>
+                <span aria-hidden="true">0{i + 1}</span>
+                <div>
+                  <h2>{topic.title}</h2>
+                  <p>{topic.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+      </header>
+      {!items.length && (
+        <section class="blog-empty" aria-labelledby="blog-empty-title">
+          <span class="eyebrow">Coming later</span>
+          <h2 id="blog-empty-title">No posts yet.</h2>
+          <p>
+            I’m making room for longer-form writing here. In the meantime, the project pages
+            describe what I’ve been working on.
+          </p>
+          <a class="text-link" href="/research/">
+            Explore research <Icon />
+          </a>
+          <a class="text-link" href="/personal-projects/">
+            Explore personal projects <Icon />
+          </a>
+        </section>
+      )}
+    </div>
+    {items.length > 0 && (
+      <ol class="blog-post-list">
+        {items.map((post) => (
+          <li>
+            <div class="project-meta">
+              {post.data.publishedDate && (
+                <time datetime={post.data.publishedDate}>
+                  {reviewDate(post.data.publishedDate)}
+                </time>
+              )}{' '}
+              · {post.data.language === 'ko' ? '한국어' : 'English'}
+              {post.data.draft && <span class="draft-label">Draft preview</span>}
+            </div>
+            <h2>
+              <a href={postUrl(post.id)} lang={post.data.language}>
+                {post.data.title}
+              </a>
+            </h2>
+            <p lang={post.data.language}>{post.data.excerpt}</p>
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</BaseLayout>

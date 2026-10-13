@@ -1,0 +1,32 @@
+{
+  "name": "woo-young-cho-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4321",
+    "check": "node scripts/check-content.mjs && astro check",
+    "build": "astro build",
+    "build:release": "node scripts/build-release.mjs",
+    "preview": "astro preview --host 127.0.0.1 --port 4321",
+    "test:site": "playwright test",
+    "test": "node --test tests/content.test.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.64.0",
+    "linkedom": "0.18.13",
+    "pdfjs-dist": "6.4.299",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.1",
+    "typescript": "6.0.3",
+    "yaml": "2.9.1"
+  }
+}

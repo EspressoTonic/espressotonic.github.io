@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>B — Research Fieldnotes / Mobile</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Newsreader, Inter, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#c7c6ca",
+            "on-tertiary-fixed-variant": "#693b1b",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#848387",
+            "on-primary-fixed-variant": "#46464a",
+            "tertiary-fixed": "#ffdbc7",
+            "outline-variant": "#c7c6cb",
+            "error-container": "#ffdad6",
+            "primary-container": "#1b1b1f",
+            "primary-fixed": "#e3e2e6",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e9e8e4",
+            "on-tertiary-fixed": "#311300",
+            "on-error": "#ffffff",
+            "outline": "#76777b",
+            "surface-bright": "#faf9f5",
+            "inverse-on-surface": "#f2f1ed",
+            "tertiary-fixed-dim": "#fbb88e",
+            "on-surface-variant": "#46464b",
+            "on-background": "#1b1c1a",
+            "surface-dim": "#dbdad6",
+            "secondary-fixed": "#c6e9e8",
+            "surface-container": "#efeeea",
+            "surface": "#faf9f5",
+            "surface-tint": "#5e5e62",
+            "surface-container-highest": "#e3e2df",
+            "secondary": "#436463",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#476867",
+            "background": "#faf9f5",
+            "surface-container-low": "#f5f4f0",
+            "on-secondary-fixed-variant": "#2b4c4b",
+            "on-secondary-fixed": "#00201f",
+            "inverse-surface": "#30312e",
+            "inverse-primary": "#c7c6ca",
+            "on-primary": "#ffffff",
+            "primary": "#000000",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#b07751",
+            "tertiary": "#000000",
+            "surface-variant": "#e3e2df",
+            "secondary-fixed-dim": "#aacdcc",
+            "on-primary-fixed": "#1b1b1f",
+            "tertiary-container": "#311300",
+            "on-surface": "#1b1c1a",
+            "secondary-container": "#c3e7e5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "4rem",
+            "space-xl": "3rem",
+            "space-lg": "1.75rem",
+            "gutter": "2rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1.25rem"
+          },
+          "fontFamily": {
+            "display-lg": ["Newsreader"],
+            "display-xl": ["Newsreader"],
+            "headline-md": ["Newsreader"],
+            "meta-mono": ["JetBrains Mono"],
+            "display-lg-mobile": ["Newsreader"],
+            "headline-sm": ["Newsreader"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "meta-mono-sm": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "display-xl-mobile": ["Newsreader"],
+            "title-editorial": ["Newsreader"],
+            "citation-code": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "400"}],
+            "display-xl": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+            "headline-md": ["26px", {"lineHeight": "34px", "fontWeight": "400"}],
+            "meta-mono": ["12px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "400"}],
+            "display-lg-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+            "body-lg": ["17px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "meta-mono-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+            "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "display-xl-mobile": ["38px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "400"}],
+            "title-editorial": ["18px", {"lineHeight": "26px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+            "citation-code": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    :focus-visible {
+      outline: 2px solid #2b4c4b !important;
+      outline-offset: 2px !important;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-fixed-variant min-h-screen">
+<!-- Mobile Container Wrapper: 390px optimized viewport -->
+<div class="w-full max-w-[390px] mx-auto min-h-screen bg-surface flex flex-col border-x border-outline-variant">
+<!-- 1. Header & Navigation -->
+<header class="w-full border-b border-outline-variant bg-surface px-margin-mobile pt-3 pb-2 sticky top-0 z-30">
+<div class="flex flex-col gap-2">
+<a class="min-h-[44px] flex items-center font-title-editorial text-title-editorial font-medium tracking-tight text-on-surface hover:text-secondary focus-visible:outline transition-colors duration-150" href="/">
+          Woo Young Cho
+        </a>
+<!-- Visible Nav Links (Wrap naturally, NO hamburger, explicit tap target >= 44px, no active indicators on home) -->
+<nav aria-label="Main Navigation" class="flex flex-wrap items-center gap-x-4 -mt-1 pb-1">
+<a class="min-h-[44px] inline-flex items-center font-body-sm text-body-sm text-stone-700 hover:text-secondary transition-colors duration-150 focus-visible:outline" href="/research/">
+            Research
+          </a>
+<a class="min-h-[44px] inline-flex items-center font-body-sm text-body-sm text-stone-700 hover:text-secondary transition-colors duration-150 focus-visible:outline" href="/personal-projects/">
+            Personal Projects
+          </a>
+<a class="min-h-[44px] inline-flex items-center font-body-sm text-body-sm text-stone-700 hover:text-secondary transition-colors duration-150 focus-visible:outline" href="/cv/">
+            CV
+          </a>
+</nav>
+</div>
+</header>
+<main class="flex-1 flex flex-col divide-y divide-outline-variant">
+<!-- 2. Introduction & Hero -->
+<section class="px-margin-mobile pt-6 pb-8 flex flex-col justify-between">
+<div>
+<div class="mb-3 font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 tracking-wider font-medium">
+            [RESEARCH FIELDNOTES]
+          </div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight leading-tight">
+            Understanding biology through its many measurements.
+          </h1>
+<div class="mt-4 space-y-3 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<p>
+              I'm Woo Young Cho, a bioinformatics researcher working across omics, spatial imaging, and scientific software. I'm interested in developing machine-learning methods that bring complementary measurements into a shared representation of cellular states.
+            </p>
+<p>
+              Alongside research, I build practical applications and explore how useful AI assistants should work.
+            </p>
+</div>
+</div>
+<!-- Action buttons: comfortably within 844px fold -->
+<div class="mt-6 flex flex-col gap-2.5">
+<a class="min-h-[44px] h-[44px] px-4 bg-primary text-surface font-meta-mono text-meta-mono uppercase tracking-wider inline-flex items-center justify-between border border-primary hover:bg-on-secondary-fixed-variant focus-visible:outline transition-colors duration-150" href="/research/">
+<span>Explore research</span>
+<span class="font-body-sm text-body-sm leading-none ml-2">→</span>
+</a>
+<a class="min-h-[44px] h-[44px] px-4 bg-transparent text-on-surface font-meta-mono text-meta-mono uppercase tracking-wider inline-flex items-center justify-center border border-primary hover:bg-primary hover:text-surface focus-visible:outline transition-colors duration-150" href="/personal-projects/">
+<span>Personal projects</span>
+</a>
+</div>
+</section>
+<!-- 3. Research Section (Concept B Order: Opening Feature MAGraph first, followed by Selected Research) -->
+<section class="pt-6 pb-8 px-margin-mobile" id="research">
+<!-- Opening Feature: MAGraph -->
+<div class="mb-8 border border-outline-variant p-4 bg-surface-container-low">
+<div class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 tracking-wider mb-2 font-medium">
+            Opening Feature · Master's thesis | Academic research
+          </div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-medium">
+<a class="hover:text-secondary transition-colors" href="/projects/magraph/">MAGraph</a>
+</h2>
+<p class="mt-2 font-body-md text-body-md text-on-surface-variant leading-normal">
+            Representing metagenomic gene neighbourhoods as graphs to investigate functional context.
+          </p>
+<!-- Diagram: stackable flow -->
+<div class="mt-4 border border-outline-variant p-3 bg-surface">
+<div class="flex flex-col gap-1.5 font-meta-mono text-meta-mono">
+<div class="p-2 border border-outline-variant bg-surface-container text-center text-on-surface">
+                Gene neighbourhoods
+              </div>
+<div class="text-center text-stone-700 text-xs font-semibold">↓</div>
+<div class="p-2 border border-outline-variant bg-surface-container text-center text-on-surface">
+                Graph representation
+              </div>
+<div class="text-center text-stone-700 text-xs font-semibold">↓</div>
+<div class="p-2 border border-outline-variant bg-surface-container text-center text-on-surface">
+                Functional context
+              </div>
+</div>
+<div class="mt-2 text-center font-meta-mono-sm text-meta-mono-sm text-stone-700 font-medium italic">
+              Explanatory diagram
+            </div>
+</div>
+<div class="mt-4">
+<a class="min-h-[44px] inline-flex items-center font-meta-mono text-meta-mono text-primary font-medium hover:text-secondary focus-visible:outline transition-colors duration-150 underline underline-offset-4 decoration-outline-variant" href="/projects/magraph/">
+              Read project -&gt;
+            </a>
+</div>
+</div>
+<!-- Selected Research Header -->
+<div class="flex items-baseline justify-between border-b border-outline-variant pb-2 mb-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">
+            Selected research
+          </h2>
+<a class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium hover:text-secondary focus-visible:outline transition-colors" href="/research/">
+            ALL RESEARCH -&gt;
+          </a>
+</div>
+<!-- Entries List -->
+<div class="space-y-6">
+<!-- Entry 2: Virtual Cell Challenge 2026 -->
+<article class="border-b border-outline-variant pb-6">
+<div class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium mb-1">
+              Independent research · Experiments and evaluation
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium">
+<a class="hover:text-secondary transition-colors" href="/projects/virtual-cell-challenge/">Virtual Cell Challenge 2026</a>
+</h3>
+<p class="mt-2 font-body-md text-body-md text-on-surface-variant">
+              Developing and evaluating models of cellular responses across biological contexts.
+            </p>
+<!-- Diagram -->
+<div class="mt-3 border border-outline-variant p-3 bg-surface-container-low">
+<div class="flex flex-col gap-1.5 font-meta-mono text-meta-mono">
+<div class="p-2 border border-outline-variant bg-surface text-center text-on-surface">
+                  Biological context
+                </div>
+<div class="text-center text-stone-700 text-xs font-semibold">↓</div>
+<div class="p-2 border border-outline-variant bg-surface text-center text-on-surface">
+                  Candidate models
+                </div>
+<div class="text-center text-stone-700 text-xs font-semibold">↓</div>
+<div class="p-2 border border-outline-variant bg-surface text-center text-on-surface">
+                  Evaluation
+                </div>
+</div>
+<div class="mt-2 text-center font-meta-mono-sm text-meta-mono-sm text-stone-700 font-medium italic">
+                Explanatory diagram
+              </div>
+</div>
+<div class="mt-3">
+<a class="min-h-[44px] inline-flex items-center font-meta-mono text-meta-mono text-primary hover:text-secondary focus-visible:outline transition-colors underline underline-offset-4 decoration-outline-variant" href="/projects/virtual-cell-challenge/">
+                Read project -&gt;
+              </a>
+</div>
+</article>
+<!-- Entry 3: GenoMycAnalyzer -->
+<article class="pb-2">
+<div class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium mb-1">
+              Team software · Published work
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium">
+<a class="hover:text-secondary transition-colors" href="/projects/genomycanalyzer/">GenoMycAnalyzer</a>
+</h3>
+<p class="mt-2 font-body-md text-body-md text-on-surface-variant">
+              Contributing pipelines and deployment work to reproducible sequencing-analysis software.
+            </p>
+<!-- Diagram -->
+<div class="mt-3 border border-outline-variant p-3 bg-surface-container-low">
+<div class="flex flex-col gap-1.5 font-meta-mono text-meta-mono">
+<div class="p-2 border border-outline-variant bg-surface text-center text-on-surface">
+                  Sequencing data
+                </div>
+<div class="text-center text-stone-700 text-xs font-semibold">↓</div>
+<div class="p-2 border border-outline-variant bg-surface text-center text-on-surface">
+                  Reproducible workflow
+                </div>
+<div class="text-center text-stone-700 text-xs font-semibold">↓</div>
+<div class="p-2 border border-outline-variant bg-surface text-center text-on-surface">
+                  Reviewable outputs
+                </div>
+</div>
+<div class="mt-2 text-center font-meta-mono-sm text-meta-mono-sm text-stone-700 font-medium italic">
+                Explanatory diagram
+              </div>
+</div>
+<div class="mt-3">
+<a class="min-h-[44px] inline-flex items-center font-meta-mono text-meta-mono text-primary hover:text-secondary focus-visible:outline transition-colors underline underline-offset-4 decoration-outline-variant" href="/projects/genomycanalyzer/">
+                Read project -&gt;
+              </a>
+</div>
+</article>
+</div>
+</section>
+<!-- 4. Personal Projects Section -->
+<section class="pt-6 pb-8 px-margin-mobile" id="personal-projects">
+<div class="border-b border-outline-variant pb-2 mb-4">
+<div class="flex items-baseline justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">
+              Personal projects
+            </h2>
+<a class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium hover:text-secondary focus-visible:outline transition-colors" href="/personal-projects/">
+              ALL PERSONAL PROJECTS -&gt;
+            </a>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Practical tools, built around everyday problems.
+          </p>
+</div>
+<!-- Single-column stacked cards with readable mockups -->
+<div class="space-y-6">
+<!-- Card 1: Fridge Match -->
+<div class="border border-outline-variant bg-surface-container-low p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium">
+<a class="hover:text-secondary transition-colors" href="/projects/fridge-match/">Fridge Match</a>
+</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium px-1.5 py-0.5 border border-outline-variant bg-surface">
+                [Private prototype]
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              An ingredient inventory and meal-planning prototype.
+            </p>
+<!-- Interface Mockup -->
+<div class="mt-3 border border-outline-variant bg-surface p-3">
+<div class="text-[10px] font-meta-mono-sm uppercase text-stone-800 font-semibold tracking-wider border-b border-outline-variant pb-1 mb-2">
+                Sample data · Interface concept
+              </div>
+<div class="space-y-1.5 font-meta-mono text-meta-mono">
+<div class="flex justify-between items-center py-0.5 border-b border-surface-container">
+<span class="text-on-surface">Tofu</span>
+<span class="text-stone-700 font-medium text-[11px]">in stock</span>
+</div>
+<div class="flex justify-between items-center py-0.5 border-b border-surface-container">
+<span class="text-on-surface">Rice</span>
+<span class="text-stone-700 font-medium text-[11px]">pantry</span>
+</div>
+<div class="flex justify-between items-center py-0.5 border-b border-surface-container">
+<span class="text-on-surface">Mushrooms</span>
+<span class="text-stone-700 font-medium text-[11px]">fresh</span>
+</div>
+<div class="mt-2 pt-1 text-on-secondary-fixed-variant font-medium">
+                  Suggested meal: Stir-fried Tofu &amp; Mushrooms
+                </div>
+</div>
+</div>
+<div class="mt-1.5 text-center font-meta-mono-sm text-meta-mono-sm text-stone-700 font-medium italic">
+              Interface concept — replace with actual screenshot
+            </div>
+<div class="mt-3">
+<a class="min-h-[44px] inline-flex items-center font-meta-mono text-meta-mono text-primary hover:text-secondary focus-visible:outline transition-colors underline underline-offset-4 decoration-outline-variant" href="/projects/fridge-match/">
+                View prototype details -&gt;
+              </a>
+</div>
+</div>
+<!-- Card 2: Commute Log -->
+<div class="border border-outline-variant bg-surface-container-low p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium">
+<a class="hover:text-secondary transition-colors" href="/projects/commute-log/">Commute Log</a>
+</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium px-1.5 py-0.5 border border-outline-variant bg-surface">
+                [Local MVP]
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Exploring recorded journeys and departure windows with traceable source information.
+            </p>
+<!-- Interface Mockup -->
+<div class="mt-3 border border-outline-variant bg-surface p-3">
+<div class="text-[10px] font-meta-mono-sm uppercase text-stone-800 font-semibold tracking-wider border-b border-outline-variant pb-1 mb-2">
+                Sample data · Interface concept
+              </div>
+<div class="space-y-1.5 font-meta-mono text-meta-mono">
+<div class="flex justify-between items-center">
+<span class="text-on-surface font-medium">Station A to Station B</span>
+<span class="text-secondary font-bold">08:20</span>
+</div>
+<div class="pt-1 text-[11px] text-stone-700 font-medium border-t border-surface-container">
+                  Source: sample record
+                </div>
+</div>
+</div>
+<div class="mt-1.5 text-center font-meta-mono-sm text-meta-mono-sm text-stone-700 font-medium italic">
+              Interface concept — replace with actual screenshot
+            </div>
+<div class="mt-3">
+<a class="min-h-[44px] inline-flex items-center font-meta-mono text-meta-mono text-primary hover:text-secondary focus-visible:outline transition-colors underline underline-offset-4 decoration-outline-variant" href="/projects/commute-log/">
+                View MVP details -&gt;
+              </a>
+</div>
+</div>
+<!-- Card 3: Location Todo -->
+<div class="border border-outline-variant bg-surface-container-low p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium">
+<a class="hover:text-secondary transition-colors" href="/projects/location-todo/">Location Todo</a>
+</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium px-1.5 py-0.5 border border-outline-variant bg-surface">
+                [Prototype]
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              A location-aware reminder prototype with native mobile implementations.
+            </p>
+<!-- Interface Mockup -->
+<div class="mt-3 border border-outline-variant bg-surface p-3">
+<div class="text-[10px] font-meta-mono-sm uppercase text-stone-800 font-semibold tracking-wider border-b border-outline-variant pb-1 mb-2">
+                Sample data · Interface concept
+              </div>
+<div class="space-y-2 font-meta-mono text-meta-mono">
+<div class="flex items-center justify-between py-0.5 border-b border-surface-container">
+<span class="text-on-surface">Library</span>
+<span class="text-stone-700 font-medium text-[11px]">Return a book</span>
+</div>
+<div class="flex items-center justify-between py-0.5">
+<span class="text-on-surface">Shop</span>
+<span class="text-stone-700 font-medium text-[11px]">Collect an item</span>
+</div>
+</div>
+</div>
+<div class="mt-1.5 text-center font-meta-mono-sm text-meta-mono-sm text-stone-700 font-medium italic">
+              Interface concept — replace with actual screenshot
+            </div>
+<div class="mt-3">
+<a class="min-h-[44px] inline-flex items-center font-meta-mono text-meta-mono text-primary hover:text-secondary focus-visible:outline transition-colors underline underline-offset-4 decoration-outline-variant" href="/projects/location-todo/">
+                View prototype details -&gt;
+              </a>
+</div>
+</div>
+</div>
+<!-- Distinct link below -->
+<div class="mt-6 pt-4 border-t border-outline-variant">
+<a class="min-h-[44px] inline-flex items-center font-body-md text-body-md text-on-surface font-medium hover:text-secondary focus-visible:outline transition-colors" href="/projects/junior/">
+            Exploring supervised research assistants with JUNIOR -&gt;
+          </a>
+</div>
+</section>
+<!-- 5. Questions I'm drawn to -->
+<section class="pt-6 pb-8 px-margin-mobile">
+<h2 class="font-headline-sm text-headline-sm text-on-surface border-b border-outline-variant pb-2 mb-4">
+          Questions I'm drawn to
+        </h2>
+<div class="space-y-5">
+<!-- Item 1 -->
+<article class="border-b border-outline-variant pb-4">
+<div class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium tracking-wider mb-1">
+              01 / Cell States
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium mb-1.5">
+              Multimodal representations of cellular states
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Learning common representations from complementary biological measurements to understand cellular states.
+            </p>
+</article>
+<!-- Item 2 -->
+<article class="border-b border-outline-variant pb-4">
+<div class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium tracking-wider mb-1">
+              02 / Spatial Context
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium mb-1.5">
+              Spatial biology and computational pathology
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Connecting tissue morphology, molecular measurements, and spatial context to biological questions.
+            </p>
+</article>
+<!-- Item 3 -->
+<article class="pb-4 border-b border-outline-variant">
+<div class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium tracking-wider mb-1">
+              03 / Molecular Learning
+            </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-medium mb-1.5">
+              Protein structure, function, and molecular learning
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Understanding molecular function and exploring how computational models can guide informative experiments.
+            </p>
+</article>
+<!-- Restored statement -->
+<div class="pt-1">
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Currently exploring virtual biological systems and learning from experimental feedback.
+            </p>
+</div>
+</div>
+</section>
+<!-- 6. Selected publications & Footer / Connect -->
+<section class="pt-6 pb-8 px-margin-mobile">
+<!-- Publications Header -->
+<div class="flex items-baseline justify-between border-b border-outline-variant pb-2 mb-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">
+            Selected publications
+          </h2>
+<a class="font-meta-mono-sm text-meta-mono-sm uppercase text-stone-800 font-medium hover:text-secondary focus-visible:outline transition-colors" href="/cv/">
+            FULL CV -&gt;
+          </a>
+</div>
+<!-- Publications Stack -->
+<div class="space-y-4">
+<!-- Pub 1 -->
+<div class="p-3 border border-outline-variant bg-surface-container-low">
+<div class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium mb-1">
+              2026 · Journal of Microbiology
+            </div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">
+              Genomic signatures associated with epidemiologically defined high-risk pathogenic Escherichia coli isolates identified by interpretable machine learning
+            </p>
+<div class="mt-2.5 flex items-center justify-between border-t border-outline-variant pt-2">
+<span class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium">Published</span>
+<a class="min-h-[44px] inline-flex items-center font-meta-mono-sm text-meta-mono-sm text-primary hover:text-secondary focus-visible:outline font-medium" href="https://pubmed.ncbi.nlm.nih.gov/42687640/" rel="noopener noreferrer" target="_blank">
+                [PubMed -&gt;]
+              </a>
+</div>
+</div>
+<!-- Pub 2 -->
+<div class="p-3 border border-outline-variant bg-surface-container-low">
+<div class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium mb-1">
+              2025 · bioRxiv
+            </div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">
+              Gene-centric metagenomic analyses reveal microbiome functional insights into diseases
+            </p>
+<div class="mt-2.5 flex items-center justify-between border-t border-outline-variant pt-2">
+<span class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium">Preprint</span>
+<a class="min-h-[44px] inline-flex items-center font-meta-mono-sm text-meta-mono-sm text-primary hover:text-secondary focus-visible:outline font-medium" href="https://doi.org/10.1101/2025.09.29.679262" rel="noopener noreferrer" target="_blank">
+                [bioRxiv -&gt;]
+              </a>
+</div>
+</div>
+<!-- Pub 3 -->
+<div class="p-3 border border-outline-variant bg-surface-container-low">
+<div class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium mb-1">
+              2024 · BMC Genomics
+            </div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">
+              GenoMycAnalyzer: a web-based tool for species and drug resistance prediction for Mycobacterium genomes
+            </p>
+<div class="mt-2.5 flex items-center justify-between border-t border-outline-variant pt-2">
+<span class="font-meta-mono-sm text-meta-mono-sm text-stone-800 font-medium">Published</span>
+<a class="min-h-[44px] inline-flex items-center font-meta-mono-sm text-meta-mono-sm text-primary hover:text-secondary focus-visible:outline font-medium" href="https://doi.org/10.1186/s12864-024-10320-3" rel="noopener noreferrer" target="_blank">
+                [BMC Genomics -&gt;]
+              </a>
+</div>
+</div>
+</div>
+<!-- Connect Section -->
+<div class="mt-8 pt-6 border-t border-outline-variant">
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            My experience spans metagenomic representations, protein-structure analysis, scientific software, and spatial imaging.
+          </p>
+<p class="font-headline-sm text-headline-sm text-on-surface mt-3">
+            Let's connect. For research conversations, collaborations, and opportunities.
+          </p>
+<!-- 4 clean mobile buttons/cards (min 44px tap targets) -->
+<div class="grid grid-cols-2 gap-2 mt-4">
+<a class="min-h-[44px] px-3 py-2 border border-primary bg-surface flex items-center justify-center font-meta-mono text-meta-mono text-on-surface hover:bg-primary hover:text-surface focus-visible:outline transition-colors" href="mailto:wooyoung510@gmail.com">
+              Email
+            </a>
+<a class="min-h-[44px] px-3 py-2 border border-primary bg-surface flex items-center justify-center font-meta-mono text-meta-mono text-on-surface hover:bg-primary hover:text-surface focus-visible:outline transition-colors" href="https://github.com/EspressoTonic" rel="noopener noreferrer" target="_blank">
+              GitHub
+            </a>
+<a class="min-h-[44px] px-3 py-2 border border-primary bg-surface flex items-center justify-center font-meta-mono text-meta-mono text-on-surface hover:bg-primary hover:text-surface focus-visible:outline transition-colors" href="https://orcid.org/0009-0002-7227-3326" rel="noopener noreferrer" target="_blank">
+              ORCID
+            </a>
+<a class="min-h-[44px] px-3 py-2 border border-primary bg-primary text-surface flex items-center justify-center font-meta-mono text-meta-mono hover:bg-on-secondary-fixed-variant focus-visible:outline transition-colors" href="/cv/">
+              View CV
+            </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-outline-variant bg-surface px-margin-mobile py-4 mt-auto">
+<div class="flex flex-col gap-2">
+<a class="min-h-[44px] inline-flex items-center font-title-editorial text-title-editorial font-medium text-on-surface hover:text-secondary focus-visible:outline transition-colors" href="/">
+          Woo Young Cho
+        </a>
+<nav aria-label="Footer Navigation" class="flex flex-wrap items-center gap-x-4 -mt-2">
+<a class="min-h-[44px] inline-flex items-center font-body-sm text-body-sm text-stone-700 hover:text-secondary focus-visible:outline transition-colors" href="/research/">
+            Research
+          </a>
+<a class="min-h-[44px] inline-flex items-center font-body-sm text-body-sm text-stone-700 hover:text-secondary focus-visible:outline transition-colors" href="/personal-projects/">
+            Personal Projects
+          </a>
+<a class="min-h-[44px] inline-flex items-center font-body-sm text-body-sm text-stone-700 hover:text-secondary focus-visible:outline transition-colors" href="/cv/">
+            CV
+          </a>
+</nav>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,214 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectMedia from '../components/ProjectMedia.astro';
+import PublicationList from '../components/PublicationList.astro';
+import SocialProfiles from '../components/SocialProfiles.astro';
+import Icon from '../components/Icon.astro';
+import {
+  profile,
+  homepageProjects,
+  publications,
+  projectUrl,
+  posts,
+  postUrl,
+  reviewDate,
+} from '../lib/content';
+const p = await profile();
+const { Content } = await render(p);
+const { hero, research, personal, secondaryPersonal } = await homepageProjects();
+const outputs = (await publications()).sort((a, b) => b.data.year - a.data.year);
+const blog = await posts();
+const screenshotFeatures = personal.filter((project) => !!project.data.cover);
+const textFeatures = personal.filter((project) => !project.data.cover);
+---
+
+<BaseLayout>
+  <div class="wrap home-page">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title">{p.data.headline}</h1>
+          <div class="bio">
+            <Content />
+          </div>
+          <div class="actions">
+            <a class="button" href="/research/">
+              Explore research <Icon />
+            </a>
+            <a class="button button-outline" href="/personal-projects/">
+              Personal projects
+            </a>
+          </div>
+        </div>
+        {hero && (
+          <aside class="hero-feature" aria-labelledby="hero-project-title">
+            <div>
+              <div class="feature-label">
+                <span>FEATURED WORK</span>
+                <span>{hero.id === 'magraph' ? 'Master’s thesis' : 'Research'}</span>
+              </div>
+              <h2 id="hero-project-title">{hero.data.title}</h2>
+              <p>{hero.data.shortSummary ?? hero.data.summary}</p>
+            </div>
+            <div class="hero-feature-bottom">
+              <span>{hero.data.context === 'academic' ? 'Academic research' : 'Research'}</span>
+              <a class="text-link" href={projectUrl(hero.id)}>
+                Read project <Icon name="external" />
+              </a>
+            </div>
+          </aside>
+        )}
+      </div>
+      {hero && (
+        <div class="hero-media">
+          <div class="diagram-header">
+            <span>Gene-neighbourhood representation</span>
+            <span>Concept illustration</span>
+          </div>
+          <ProjectMedia project={hero} context="hero" loading="eager" />
+        </div>
+      )}
+    </section>
+    {research.length > 0 && (
+      <section class="home-section" aria-labelledby="research-title">
+        <div class="section-heading">
+          <h2 id="research-title">Selected research</h2>
+          <a class="text-link" href="/research/">
+            All research <Icon />
+          </a>
+        </div>
+        {research.map((project) => (
+          <ProjectCard project={project} variant="home-research" />
+        ))}
+      </section>
+    )}
+    <section class="home-section personal-home" aria-labelledby="personal-title">
+      <div class="section-heading">
+        <h2 id="personal-title">Personal projects</h2>
+        <a class="text-link" href="/personal-projects/">
+          All personal projects <Icon />
+        </a>
+      </div>
+      {screenshotFeatures.length > 0 && (
+        <div class="feature-grid">
+          {screenshotFeatures.map((project) => (
+            <ProjectCard project={project} variant="feature" />
+          ))}
+        </div>
+      )}
+      {textFeatures.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+      {secondaryPersonal.length > 0 && (
+        <div class="secondary-personal">
+          <span class="eyebrow">More projects &amp; experiments</span>
+          <ul class="project-link-list">
+            {secondaryPersonal.map((project) => (
+              <li>
+                <a href={projectUrl(project.id)}>
+                  {project.data.title}
+                  <Icon name="external" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+    <section class="home-section" aria-labelledby="interests-title">
+      <div class="section-heading">
+        <h2 id="interests-title">Questions I'm drawn to</h2>
+      </div>
+      <div class="interest-grid">
+        {p.data.interests.map((interest) => (
+          <div>
+            <h3>{interest.title}</h3>
+            <p>{interest.description}</p>
+          </div>
+        ))}
+      </div>
+      {p.data.exploring && <p class="exploring">{p.data.exploring}</p>}
+    </section>
+    <section class="home-section" aria-labelledby="publications-title">
+      <div class="section-heading">
+        <h2 id="publications-title">Selected publications</h2>
+        <a class="text-link" href="/cv/">
+          Full CV <Icon />
+        </a>
+      </div>
+      <PublicationList items={outputs} variant="compact" />
+    </section>
+    <section class="home-section blog-preview" id="blog" aria-labelledby="blog-title">
+      <div>
+        <span class="eyebrow">{blog.length ? 'Blog' : 'Blog / Coming later'}</span>
+        <h2 id="blog-title">Notes from the work.</h2>
+      </div>
+      <div>
+        {blog.length ? (
+          <ol class="blog-post-list">
+            {blog.slice(0, 3).map((post) => (
+              <li>
+                <span class="project-meta">
+                  {post.data.publishedDate && reviewDate(post.data.publishedDate)}
+                </span>
+                <h3>
+                  <a href={postUrl(post.id)} lang={post.data.language}>
+                    {post.data.title}
+                  </a>
+                </h3>
+                <p lang={post.data.language}>{post.data.excerpt}</p>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p>
+            Research notes, project write-ups, and things I learn along the way. No posts yet;
+            longer-form writing will live here.
+          </p>
+        )}
+        <a class="text-link" href="/blog/">
+          Visit the blog <Icon />
+        </a>
+      </div>
+    </section>
+    {p.data.socialProfiles.length > 0 && (
+      <section
+        class="home-section social-section social-group"
+        id="sns"
+        aria-labelledby="social-title"
+      >
+        <span class="eyebrow">SNS</span>
+        <h2 id="social-title">Elsewhere</h2>
+        <SocialProfiles items={p.data.socialProfiles} />
+      </section>
+    )}
+    <section class="background-contact" id="contact" aria-labelledby="contact-title">
+      <div>
+        <h2>Background</h2>
+        {p.data.background && <p>{p.data.background}</p>}
+      </div>
+      <div class="contact-panel">
+        <h2 id="contact-title">Let's connect.</h2>
+        <p>For research conversations, collaborations, and opportunities.</p>
+        <div class="contact-links">
+          {p.data.email && (
+            <a href={`mailto:${p.data.email}`}>
+              Email <Icon />
+            </a>
+          )}
+          {p.data.links.map((link) => (
+            <a href={link.url}>
+              {link.label}
+              <Icon />
+            </a>
+          ))}
+          <a href="/cv/">
+            View CV <Icon />
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

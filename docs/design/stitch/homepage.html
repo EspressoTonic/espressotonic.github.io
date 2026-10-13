@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Woo Young Cho — Computational Biology & Genomics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Sora', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            night: {
+              base: '#090e1b',
+              surface: '#101a2c',
+              surfaceHighlight: '#16233b',
+              border: 'rgba(143, 167, 255, 0.12)',
+              borderSubtle: 'rgba(255, 255, 255, 0.08)',
+              periwinkle: '#8fa7ff',
+              periwinkleHover: '#b2c3ff',
+              textPrimary: '#edf3ff',
+              textSecondary: '#adb9d0',
+              textMuted: '#7f8ea8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #090e1b;
+      color: #edf3ff;
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #8fa7ff;
+      outline-offset: 3px;
+    }
+  </style>
+<link rel="stylesheet" href="/expansion/night-gallery.css"><style>@media(max-width:767px){main{padding-left:20px!important;padding-right:20px!important}main h1{font-size:34px!important}main article .justify-between{flex-wrap:wrap;gap:14px}}main .font-mono{font-family:Inter,sans-serif!important}</style></head>
+<body class="min-h-screen bg-[#090e1b] text-[#edf3ff] selection:bg-[#8fa7ff] selection:text-[#090e1b]"><a class="review-skip" href="#main-content">Skip to content</a>
+
+  <!-- Top Horizontal Header -->
+  <header class="review-header"><div class="review-header-inner"><a class="review-brand" href="/homepage.html">Woo Young Cho</a><nav class="review-nav" aria-label="Main navigation"><a href="/research/">Research</a><a href="/personal-projects/">Personal Projects</a><a href="/blog/">Blog</a><a href="/cv/">CV</a></nav></div></header>
+
+  <main id="main-content" class="max-w-[1280px] mx-auto px-6 lg:px-12 pt-14 pb-24">
+
+    <!-- Opening Gallery Hero Section -->
+    <section class="pb-20 border-b border-[#8fa7ff]/10">
+      <!-- Intro Grid: 2/3 headline & narrative, action buttons -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-8">
+          <h1 class="text-3xl sm:text-4xl lg:text-[44px] font-display font-bold text-[#edf3ff] leading-[1.18] tracking-tight">
+            Understanding biology through its many measurements.
+          </h1>
+          <div class="mt-6 space-y-4 max-w-[700px] text-[16px] leading-[1.65] text-[#adb9d0]">
+            <p>
+              I’m Woo Young Cho, a bioinformatics researcher working across omics, spatial imaging, and scientific software. I’m interested in developing machine-learning methods that bring complementary measurements into a shared representation of cellular states.
+            </p>
+            <p>
+              Alongside research, I build practical applications and explore how useful AI assistants should work.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="/research/" class="inline-flex items-center justify-center min-h-[46px] px-6 rounded-md bg-[#8fa7ff] text-[#090e1b] font-semibold text-[15px] hover:bg-[#b2c3ff] transition-all">
+              Explore research
+              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+            <a href="/personal-projects/" class="inline-flex items-center justify-center min-h-[46px] px-6 rounded-md border border-[#8fa7ff]/30 text-[#edf3ff] font-medium text-[15px] hover:bg-[#101a2c] hover:border-[#8fa7ff]/60 transition-all">
+              Personal projects
+            </a>
+          </div>
+        </div>
+
+        <!-- MAGraph Summary & Meta sidebar within hero -->
+        <div class="lg:col-span-4 bg-[#101a2c] p-6 lg:p-7 rounded-xl border border-[#8fa7ff]/15 flex flex-col justify-between self-stretch">
+          <div>
+            <div class="flex items-center justify-between text-[13px] tracking-wide text-[#adb9d0] font-mono mb-3">
+              <span>FEATURED WORK</span>
+              <span class="text-[#8fa7ff]">Master’s thesis</span>
+            </div>
+            <h2 class="text-2xl font-display font-bold text-[#edf3ff]">MAGraph</h2>
+            <p class="mt-3 text-[15px] leading-relaxed text-[#adb9d0]">
+              Representing metagenomic gene neighbourhoods as graphs to investigate functional context.
+            </p>
+          </div>
+          <div class="mt-6 pt-5 border-t border-[#8fa7ff]/15 flex items-center justify-between">
+            <span class="text-[13px] font-mono text-[#adb9d0]">Academic research</span>
+            <a href="/projects/magraph/" class="inline-flex items-center text-[14px] font-semibold text-[#8fa7ff] hover:text-[#b2c3ff] transition-colors group">
+              Read project
+              <svg class="ml-1.5 w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Broad MAGraph Visual Panel (Horizontal Image-Led Gallery Canvas) -->
+      <div class="mt-10 bg-[#101a2c] rounded-xl border border-[#8fa7ff]/15 p-6 lg:p-8 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+          <div class="text-[13px] font-mono tracking-wider uppercase text-[#8fa7ff]">
+            Gene-neighbourhood representation
+          </div>
+          <div class="text-[13px] text-[#adb9d0] font-mono">
+            Concept illustration
+          </div>
+        </div>
+
+        <!-- Large flat colored directional gene bands + abstract graph diagram -->
+        <div class="w-full bg-[#090e1b]/70 rounded-lg p-6 lg:p-8 border border-[#8fa7ff]/10">
+          <svg class="w-full h-auto max-h-[220px]" viewBox="0 0 1000 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Syntenic gene cassettes / directional gene bands -->
+            <g id="gene-bands">
+              <!-- Gene A -->
+              <path d="M 40 70 L 150 70 L 175 95 L 150 120 L 40 120 Z" fill="#203354" stroke="#8fa7ff" stroke-width="1.8"/>
+              <text x="100" y="99" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="500">gene_a</text>
+
+              <!-- Gene B (core) -->
+              <path d="M 185 70 L 305 70 L 330 95 L 305 120 L 185 120 Z" fill="#3d5080" stroke="#8fa7ff" stroke-width="2"/>
+              <text x="250" y="99" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="600">core_orf</text>
+
+              <!-- Gene C -->
+              <path d="M 340 70 L 450 70 L 475 95 L 450 120 L 340 120 Z" fill="#203354" stroke="#8fa7ff" stroke-width="1.8"/>
+              <text x="400" y="99" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="500">gene_c</text>
+            </g>
+
+            <!-- Connector band / bridge from synteny to topological graph -->
+            <path d="M 475 95 C 530 95, 540 95, 590 95" stroke="#8fa7ff" stroke-width="2" stroke-dasharray="4 4"/>
+            <circle cx="590" cy="95" r="4" fill="#8fa7ff"/>
+
+            <!-- Topological graph representation -->
+            <g id="graph-topology">
+              <!-- Graph links -->
+              <line x1="650" y1="95" x2="740" y2="45" stroke="#adb9d0" stroke-width="1.8" stroke-opacity="0.6"/>
+              <line x1="650" y1="95" x2="750" y2="145" stroke="#adb9d0" stroke-width="1.8" stroke-opacity="0.6"/>
+              <line x1="740" y1="45" x2="850" y2="65" stroke="#8fa7ff" stroke-width="2"/>
+              <line x1="750" y1="145" x2="850" y2="125" stroke="#8fa7ff" stroke-width="2"/>
+              <line x1="850" y1="65" x2="930" y2="95" stroke="#adb9d0" stroke-width="1.8" stroke-opacity="0.6"/>
+              <line x1="850" y1="125" x2="930" y2="95" stroke="#adb9d0" stroke-width="1.8" stroke-opacity="0.6"/>
+              <line x1="850" y1="65" x2="850" y2="125" stroke="#8fa7ff" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+              <!-- Graph nodes -->
+              <circle cx="650" cy="95" r="18" fill="#16233b" stroke="#8fa7ff" stroke-width="2"/>
+              <text x="650" y="99" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="12" font-weight="600">v_1</text>
+
+              <circle cx="740" cy="45" r="15" fill="#16233b" stroke="#adb9d0" stroke-width="1.5"/>
+              <text x="740" y="49" text-anchor="middle" fill="#adb9d0" font-family="Inter, sans-serif" font-size="11">u_a</text>
+
+              <circle cx="750" cy="145" r="15" fill="#16233b" stroke="#adb9d0" stroke-width="1.5"/>
+              <text x="750" y="149" text-anchor="middle" fill="#adb9d0" font-family="Inter, sans-serif" font-size="11">u_b</text>
+
+              <!-- Central Neighborhood Embedding node -->
+              <circle cx="850" cy="65" r="22" fill="#2a3d68" stroke="#8fa7ff" stroke-width="2.4"/>
+              <text x="850" y="70" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="12" font-weight="700">target</text>
+
+              <circle cx="850" cy="125" r="16" fill="#16233b" stroke="#8fa7ff" stroke-width="1.8"/>
+              <text x="850" y="129" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="11">v_k</text>
+
+              <circle cx="930" cy="95" r="16" fill="#16233b" stroke="#adb9d0" stroke-width="1.5"/>
+              <text x="930" y="99" text-anchor="middle" fill="#adb9d0" font-family="Inter, sans-serif" font-size="11">ctx</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selected Research Section (Asymmetric Open Visual Features) -->
+    <section class="py-20 border-b border-[#8fa7ff]/10">
+      <div class="flex items-baseline justify-between mb-12">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-[#edf3ff]">Selected research</h2>
+        </div>
+        <a href="/research/" class="text-[14px] font-semibold text-[#8fa7ff] hover:text-[#b2c3ff] transition-colors inline-flex items-center group">
+          All research
+          <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Feature 1: Virtual Cell Challenge 2026 -->
+      <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-14 border-b border-[#8fa7ff]/10">
+        <div class="lg:col-span-5 space-y-4">
+          <div class="text-[13px] font-mono text-[#adb9d0]">Independent research · Experiments and evaluation</div>
+          <h3 class="text-2xl font-display font-bold text-[#edf3ff]">Virtual Cell Challenge 2026</h3>
+          <p class="text-[15px] leading-relaxed text-[#adb9d0]">
+            Developing and evaluating models of cellular responses across biological contexts.
+          </p>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="inline-block text-[13px] font-mono text-[#adb9d0] px-2.5 py-1 rounded bg-[#101a2c] border border-[#8fa7ff]/20">Status: Experiments &amp; evaluation</span>
+            <a href="/projects/virtual-cell-challenge/" class="inline-flex items-center text-[14px] font-semibold text-[#8fa7ff] hover:text-[#b2c3ff] transition-colors group">
+              Read project
+              <svg class="ml-1.5 w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-[#101a2c] rounded-xl border border-[#8fa7ff]/15 p-6">
+          <div class="flex items-center justify-between text-[13px] font-mono mb-4">
+            <span class="text-[#8fa7ff]">Model comparison and evaluation</span>
+            <span class="text-[#adb9d0]">Concept illustration</span>
+          </div>
+          <!-- Clean visual artwork without colliding labels or implied positive results -->
+          <div class="bg-[#090e1b] rounded-lg p-5 border border-[#8fa7ff]/10">
+            <svg class="w-full h-auto max-h-[160px]" viewBox="0 0 700 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Step 1: Biological context -->
+              <rect x="20" y="35" width="180" height="70" rx="8" fill="#16233b" stroke="#8fa7ff" stroke-width="1.6"/>
+              <text x="110" y="75" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="500">Biological context</text>
+
+              <!-- Arrow 1 -->
+              <path d="M 210 70 L 255 70" stroke="#8fa7ff" stroke-width="2"/>
+              <path d="M 250 65 L 257 70 L 250 75" fill="none" stroke="#8fa7ff" stroke-width="2"/>
+
+              <!-- Step 2: Candidate models -->
+              <rect x="265" y="35" width="180" height="70" rx="8" fill="#203354" stroke="#8fa7ff" stroke-width="2"/>
+              <text x="355" y="75" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="600">Candidate models</text>
+
+              <!-- Arrow 2 -->
+              <path d="M 455 70 L 500 70" stroke="#8fa7ff" stroke-width="2"/>
+              <path d="M 495 65 L 502 70 L 495 75" fill="none" stroke="#8fa7ff" stroke-width="2"/>
+
+              <!-- Step 3: Evaluation -->
+              <rect x="510" y="35" width="170" height="70" rx="8" fill="#16233b" stroke="#8fa7ff" stroke-width="1.6"/>
+              <text x="595" y="75" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="500">Evaluation</text>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 2: GenoMycAnalyzer -->
+      <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-14">
+        <div class="lg:col-span-5 space-y-4">
+          <div class="text-[13px] font-mono text-[#adb9d0]">Team software · Published work</div>
+          <h3 class="text-2xl font-display font-bold text-[#edf3ff]">MycoChase <span style="display:block;font-size:16px;font-family:Inter,sans-serif;letter-spacing:0;font-weight:400;margin-top:8px;color:#adb9d0">Published as GenoMycAnalyzer</span></h3>
+          <p class="text-[15px] leading-relaxed text-[#adb9d0]">
+            Contributing pipelines and deployment work to reproducible sequencing-analysis software.
+          </p>
+          <div class="pt-2 flex items-center justify-between">
+            <span class="inline-block text-[13px] font-mono text-[#adb9d0] px-2.5 py-1 rounded bg-[#101a2c] border border-[#8fa7ff]/20">Status: Published work</span>
+            <a href="/projects/genomycanalyzer/" class="inline-flex items-center text-[14px] font-semibold text-[#8fa7ff] hover:text-[#b2c3ff] transition-colors group">
+              Read project
+              <svg class="ml-1.5 w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-[#101a2c] rounded-xl border border-[#8fa7ff]/15 p-6">
+          <div class="flex items-center justify-between text-[13px] font-mono mb-4">
+            <span class="text-[#8fa7ff]">Reproducible software workflow</span>
+            <span class="text-[#adb9d0]">Concept illustration</span>
+          </div>
+          <!-- Workflow illustration without fake metrics -->
+          <div class="bg-[#090e1b] rounded-lg p-5 border border-[#8fa7ff]/10">
+            <svg class="w-full h-auto max-h-[160px]" viewBox="0 0 700 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Sequencing data -->
+              <rect x="20" y="35" width="180" height="70" rx="8" fill="#16233b" stroke="#8fa7ff" stroke-width="1.6"/>
+              <text x="110" y="75" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="500">Sequencing data</text>
+
+              <!-- Link 1 -->
+              <path d="M 210 70 L 255 70" stroke="#8fa7ff" stroke-width="2"/>
+              <path d="M 250 65 L 257 70 L 250 75" fill="none" stroke="#8fa7ff" stroke-width="2"/>
+
+              <!-- Reproducible workflow -->
+              <rect x="265" y="35" width="180" height="70" rx="8" fill="#203354" stroke="#8fa7ff" stroke-width="2"/>
+              <text x="355" y="75" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="600">Reproducible workflow</text>
+
+              <!-- Link 2 -->
+              <path d="M 455 70 L 500 70" stroke="#8fa7ff" stroke-width="2"/>
+              <path d="M 495 65 L 502 70 L 495 75" fill="none" stroke="#8fa7ff" stroke-width="2"/>
+
+              <!-- Reviewable outputs -->
+              <rect x="510" y="35" width="170" height="70" rx="8" fill="#16233b" stroke="#8fa7ff" stroke-width="1.6"/>
+              <text x="595" y="75" text-anchor="middle" fill="#edf3ff" font-family="Inter, sans-serif" font-size="14" font-weight="500">Reviewable outputs</text>
+            </svg>
+          </div>
+        </div>
+      </article>
+    </section>
+
+<section class="home-extension" id="personal-projects"><div class="section-heading"><h2>Personal projects</h2><a class="text-action" href="/personal-projects/">All personal projects →</a></div><div class="feature-grid"><article class="feature-card"><span class="eyebrow">Local/private prototype; no public demo</span><h3>Fridge Match</h3><p>An independent cooking-planning prototype connecting pantry inventory, recipe matching, shopping lists, and cooking history. I explored how local persistence and account synchronization can make an everyday workflow recoverable.</p><figure><img src="/subpages/fridge-match-interface.png" alt="Fridge Match prototype with sample ingredients, cooking suggestions, and recipe controls." loading="lazy"><figcaption>Actual local prototype interface using the authored sample kitchen. The screenshot documents the workflow, not production availability or measured impact.</figcaption></figure><a class="text-action" href="/projects/fridge-match/">Read project →</a></article><article class="feature-card"><span class="eyebrow">Android emulator checked; full iOS build pending</span><h3>Location Todo</h3><p>A place-linked task prototype with grocery checklists, manual check-ins, and editable visit history. The project explores local data ownership, visible permissions, and honest boundaries around inferred location events.</p><figure><img src="/subpages/location-todo-activity.png" alt="Location Todo Android prototype showing synthetic weekly visit totals and editable manual and estimated visits." loading="lazy"><figcaption>Actual Android emulator screenshot using synthetic places and visits. Totals represent prototype records, not verified workouts.</figcaption></figure><a class="text-action" href="/projects/location-todo/">Read project →</a></article></div><article class="project-row"><div><span class="stage">Archive-backed local MVP</span><h3><a href="/projects/commute-log/">Commute Log</a></h3><p>A local commute-history prototype for comparing recorded bus journeys and departure windows. It exposes the evidence behind each result and makes missing, ambiguous or unavailable records visible.</p><p class="role">Product direction, data interpretation &amp; prototype verification</p><a class="text-action" href="/projects/commute-log/">Read project →</a></div><span class="arrow" aria-hidden="true">↗</span></article><div class="more-projects"><span class="eyebrow">More projects & experiments</span><ul class="project-link-list"><li><a href="/projects/junior/">JUNIOR <span aria-hidden="true">↗</span></a></li><li><a href="/projects/lawgpt/">LawGPT <span aria-hidden="true">↗</span></a></li><li><a href="/projects/horse-racing/">Horse-Racing Forecast Research <span aria-hidden="true">↗</span></a></li><li><a href="/projects/tc-personal-agent/">TC Personal Agent <span aria-hidden="true">↗</span></a></li><li><a href="/projects/nookcam/">Nook Cam <span aria-hidden="true">↗</span></a></li><li><a href="/projects/ballet-pose-feedback/">Ballet Pose Feedback <span aria-hidden="true">↗</span></a></li></ul></div></section>
+    <!-- Questions I'm drawn to Section (Unboxed type section) -->
+    <section class="py-20 border-b border-[#8fa7ff]/10">
+      <h2 class="text-2xl sm:text-3xl font-display font-bold text-[#edf3ff] mb-12">Questions I'm drawn to</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="space-y-3">
+          <div class="text-[13px] font-mono text-[#8fa7ff]">01 / Multimodal States</div>
+          <h3 class="text-lg font-display font-bold text-[#edf3ff]">Multimodal representations of cellular states</h3>
+          <p class="text-[15px] leading-relaxed text-[#adb9d0]">
+            Learning common representations from complementary biological measurements to understand cellular states.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="text-[13px] font-mono text-[#8fa7ff]">02 / Spatial Biology</div>
+          <h3 class="text-lg font-display font-bold text-[#edf3ff]">Spatial biology and computational pathology</h3>
+          <p class="text-[15px] leading-relaxed text-[#adb9d0]">
+            Connecting tissue morphology, molecular measurements, and spatial context to biological questions.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="text-[13px] font-mono text-[#8fa7ff]">03 / Molecular Learning</div>
+          <h3 class="text-lg font-display font-bold text-[#edf3ff]">Protein structure, function, and molecular learning</h3>
+          <p class="text-[15px] leading-relaxed text-[#adb9d0]">
+            Understanding molecular function and exploring how computational models can guide informative experiments.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-[#8fa7ff]/10">
+        <p class="text-[15px] text-[#adb9d0] italic">
+          Currently exploring virtual biological systems and learning from experimental feedback.
+        </p>
+      </div>
+    </section>
+
+    <!-- Selected Publications Section (Clean unboxed rows) -->
+    <section class="py-20 border-b border-[#8fa7ff]/10">
+      <div class="flex items-baseline justify-between mb-10">
+        <h2 class="text-2xl sm:text-3xl font-display font-bold text-[#edf3ff]">Selected publications</h2>
+        <a href="/cv/" class="text-[14px] font-semibold text-[#8fa7ff] hover:text-[#b2c3ff] transition-colors inline-flex items-center group">
+          Full CV
+          <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="divide-y divide-[#8fa7ff]/10">
+        <!-- Pub 1 -->
+        <article class="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5 max-w-[850px]">
+            <div class="text-[13px] font-mono text-[#adb9d0]">
+              2026 · Journal of Microbiology · <span class="text-[#8fa7ff]">Published</span>
+            </div>
+            <h3 class="text-[16px] md:text-[17px] font-medium text-[#edf3ff] leading-snug">
+              Genomic signatures associated with epidemiologically defined high-risk pathogenic Escherichia coli isolates identified by interpretable machine learning
+            </h3>
+          </div>
+          <div>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/42687640/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-3.5 py-2 rounded-md bg-[#101a2c] border border-[#8fa7ff]/20 text-[13px] font-mono text-[#8fa7ff] hover:text-[#b2c3ff] hover:border-[#8fa7ff]/50 transition-colors">
+              PubMed
+              <svg class="ml-1.5 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Pub 2 -->
+        <article class="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5 max-w-[850px]">
+            <div class="text-[13px] font-mono text-[#adb9d0]">
+              2025 · bioRxiv · <span class="text-[#8fa7ff]">Preprint</span>
+            </div>
+            <h3 class="text-[16px] md:text-[17px] font-medium text-[#edf3ff] leading-snug">
+              Gene-centric metagenomic analyses reveal microbiome functional insights into diseases
+            </h3>
+          </div>
+          <div>
+            <a href="https://doi.org/10.1101/2025.09.29.679262" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-3.5 py-2 rounded-md bg-[#101a2c] border border-[#8fa7ff]/20 text-[13px] font-mono text-[#8fa7ff] hover:text-[#b2c3ff] hover:border-[#8fa7ff]/50 transition-colors">
+              bioRxiv
+              <svg class="ml-1.5 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Pub 3 -->
+        <article class="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5 max-w-[850px]">
+            <div class="text-[13px] font-mono text-[#adb9d0]">
+              2024 · BMC Genomics · <span class="text-[#8fa7ff]">Published</span>
+            </div>
+            <h3 class="text-[16px] md:text-[17px] font-medium text-[#edf3ff] leading-snug">
+              GenoMycAnalyzer: a web-based tool for species and drug resistance prediction for Mycobacterium genomes
+            </h3>
+          </div>
+          <div>
+            <a href="https://doi.org/10.1186/s12864-024-10320-3" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-3.5 py-2 rounded-md bg-[#101a2c] border border-[#8fa7ff]/20 text-[13px] font-mono text-[#8fa7ff] hover:text-[#b2c3ff] hover:border-[#8fa7ff]/50 transition-colors">
+              BMC Genomics
+              <svg class="ml-1.5 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+<section class="home-extension blog-preview" id="blog"><div><span class="eyebrow">Blog / Coming later</span><h2 style="margin-top:16px">Notes from the work.</h2></div><div><p>Research notes, project write-ups, and things I learn along the way. No posts yet; longer-form writing will live here.</p><a class="text-action" href="/blog/">Visit the blog →</a></div></section><section class="home-extension" id="sns"><span class="eyebrow">SNS</span><h2 style="margin-top:16px">Elsewhere</h2><ul class="sns-labels" aria-label="Social platforms"><li><span>LinkedIn</span></li><li><span>Instagram</span></li><li><span>X</span></li><li><span>Threads</span></li></ul></section>
+    <!-- Background & Contact Section -->
+    <section id="contact" class="py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-5 space-y-4">
+        <h2 class="text-2xl font-display font-bold text-[#edf3ff]">Background</h2>
+        <p class="text-[16px] leading-relaxed text-[#adb9d0]">
+          My experience spans metagenomic representations, protein-structure analysis, scientific software, and spatial imaging.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7 bg-[#101a2c] rounded-xl border border-[#8fa7ff]/15 p-8">
+        <h3 class="text-xl font-display font-bold text-[#edf3ff]">Let's connect.</h3>
+        <p class="mt-2 text-[15px] text-[#adb9d0]">
+          For research conversations, collaborations, and opportunities.
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="mailto:wooyoung510@gmail.com" class="min-h-[46px] px-5 py-3 rounded-lg bg-[#090e1b] border border-[#8fa7ff]/20 hover:border-[#8fa7ff] transition-all flex items-center justify-between text-[14px] font-medium text-[#edf3ff] group">
+            <span>Email</span>
+            <span class="text-[#8fa7ff] group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+          </a>
+          <a href="https://github.com/EspressoTonic" target="_blank" rel="noopener noreferrer" class="min-h-[46px] px-5 py-3 rounded-lg bg-[#090e1b] border border-[#8fa7ff]/20 hover:border-[#8fa7ff] transition-all flex items-center justify-between text-[14px] font-medium text-[#edf3ff] group">
+            <span>GitHub</span>
+            <span class="text-[#8fa7ff] group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+          </a>
+          <a href="https://orcid.org/0009-0002-7227-3326" target="_blank" rel="noopener noreferrer" class="min-h-[46px] px-5 py-3 rounded-lg bg-[#090e1b] border border-[#8fa7ff]/20 hover:border-[#8fa7ff] transition-all flex items-center justify-between text-[14px] font-medium text-[#edf3ff] group">
+            <span>ORCID</span>
+            <span class="text-[#8fa7ff] group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+          </a>
+          <a href="/cv/" class="min-h-[46px] px-5 py-3 rounded-lg bg-[#090e1b] border border-[#8fa7ff]/20 hover:border-[#8fa7ff] transition-all flex items-center justify-between text-[14px] font-medium text-[#edf3ff] group">
+            <span>View CV</span>
+            <span class="text-[#8fa7ff] group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Footer -->
+  <footer class="review-footer"><div class="review-footer-inner"><div><strong>Woo Young Cho</strong><p>Computational biology &amp; scientific software</p></div><nav aria-label="Contact"><a href="mailto:wooyoung510@gmail.com">Email</a><a href="https://github.com/EspressoTonic">GitHub</a><a href="https://orcid.org/0009-0002-7227-3326">ORCID</a><a href="/blog/">Blog</a><a href="/cv/">CV</a></nav></div><div class="footer-social"><span class="eyebrow">SNS</span><ul class="sns-labels" aria-label="Social platforms"><li><span>LinkedIn</span></li><li><span>Instagram</span></li><li><span>X</span></li><li><span>Threads</span></li></ul></div></footer>
+
+</body>
+</html>

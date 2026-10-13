@@ -1,0 +1,97 @@
+# Implementation status
+
+- Current task: commit and push the completed Night Gallery implementation (owner-authorized 2026-10-14)
+- Last completed task: T10 (implementation diff review and local handoff)
+- Branch: codex/cv-homepage
+- Code: this separate projects repository
+- Local release preview: http://127.0.0.1:4326
+- Release state: validated implementation; branch commit/push authorized; deployment remains separate
+
+## Initial v1 baseline — historical
+
+- Astro 7.3.8 static site, validated Markdown, ordinary CSS, no client framework.
+- Homepage, both category listings, individual case studies, CV, 404 and sitemap.
+- Four production-included project pages: MAGraph, EnzymeMatch, Fridge Match, Location Todo.
+- Spatial-omics page exists as an editorial draft, visible in development only.
+- Shared profile/CV/output records, optimized real sample-data screenshots, original explanatory SVGs.
+- Same-build two-page CV PDF with public-domain internal link annotations.
+- Validation and manually triggered main-only Pages deployment workflows.
+- README for content changes, preview, build, review, release and rollback.
+
+## Initial v1 verification — historical
+
+- Content/schema/TypeScript check passed; zero errors, zero warnings/hints on the final check.
+- Release build passed; nine HTML pages, local links/fragments/images and PDF checked.
+- Three content-policy tests passed.
+- Fifteen Chromium browser/accessibility tests passed on the final artifact.
+- Responsive overflow checked at 360, 768 and 1440px; no-JavaScript navigation and keyboard focus checked.
+- CV text extraction, both rendered pages and 13 link annotations checked; no localhost PDF targets.
+- Local IAB navigation and visual inspection completed; selected evidence in ignored .qa/.
+- npm audit: zero reported vulnerabilities.
+
+## Before publication
+
+- Review biography, public email/ORCID choice, current employment and all public wording.
+- Spatial-omics stays excluded until its employer-facing wording is reviewed.
+- Commit/push authorized on 2026-10-14; obtain a separate release instruction for merge and Pages configuration/deployment.
+- GitHub Actions and public deep links remain unrun until publication.
+
+## Continue
+
+Read README.md and the actual working state. Night Gallery implementation T00–T10 is complete. The owner authorized commit/push on 2026-10-14; merge, Pages configuration and deployment remain separate. Prior v1 test counts below are history, not the redesign validation.
+
+## 2026-10-13 — Night Gallery design handoff
+
+Owner selected D. Five Stitch-generated page concepts were locally reconciled to existing source copy; EnzymeMatch and Location Todo were added as applications of the two detail templates. All seven responsive HTML designs, current desktop opening captures, real local sample-data screenshots, content contracts, selected `docs/design/DESIGN.md`, and `docs/IMPLEMENTATION_PLAN.md` are retained. Narrow phone/desktop layout, assets and key navigation were checked in IAB. These are design checks, not new application test results.
+
+No website application, dependency, build/PDF script, test, or deployment configuration changed in this task. Existing v1 validation above remains historical. No commit/push/deployment. Implementation follows T00–T10 only when requested. The current preview's PDF is the existing v1 file; final dark-web/light-print behavior requires the planned release verification.
+
+
+## 2026-10-13 — Expanded portfolio, Blog and SNS design handoff
+
+The retained local designs now cover all thirteen requested projects: four research and nine personal. Nine complete public-copy briefs, a Blog empty state, the expanded homepage/indexes, shared four-item navigation and LinkedIn/Instagram/X/Threads as plain noninteractive labels are included. No public SNS profile URL is inferred. All thirteen project mockups are linked in the design gallery; the application still has four public records plus the excluded employer draft.
+
+The amended implementation plan retains eleven T00–T10 slices and specifies exact new content, source/release gates, optional unknown project periods, zero-post Blog behavior, future article language handling, unlinked SNS checks, CV selection preservation and meaningful validation. Existing CV content and the four original detail bodies are preserved. New text-led case studies do not invent images or results.
+
+Design QA checked all eighteen visitor pages at 360 and 1280 pixels and representative routes at 390 pixels. No horizontal overflow, broken loaded images or invalid fragments were observed; four mobile nav links have 44px targets and SNS lists contain zero anchors. Local opening captures were retained. This is design/planning completion only; no new application validation, source changes, commit, push or deployment occurred.
+
+
+## 2026-10-13 — Night Gallery implementation complete
+
+All eleven implementation slices T00–T10 are complete. The approved copy was assembled as nine editorial drafts, checked against its retained brief and privacy/evidence boundaries, and included in the local release candidate. There are now thirteen non-draft project records (four research/nine personal) plus the excluded employer draft. No new project date, code/demo link, image, benchmark, scientific result or product-release claim was fabricated. Unknown periods remain absent for Nook Cam, JUNIOR and TC.
+
+The current artifact has nineteen HTML pages (homepage, two indexes, thirteen details, Blog, CV and custom 404), zero article routes, a generated two-page CV PDF, local WOFF2 typography, actual optimized prototype captures, source-constrained concept diagrams, and a dark favicon/social image. Header navigation is Research / Personal Projects / Blog / CV. LinkedIn, Instagram, X and Threads are plain labels; professional contact links remain functional and the CV omits inactive SNS labels.
+
+### Current verification
+
+- `npm test`: nine policy/source-state tests, including drafts, hero exclusion, optional dates, curated groups, SNS URL validation and article publication rules.
+- `npm run build:release`: source checks and Astro diagnostics (zero errors/warnings/hints), static build, same-build CV PDF generation, and artifact validation. The standard empty-Blog loader notices are expected, not missing-content failures.
+- `npm run test:site`: thirty-four Chromium tests, covering all eighteen ordinary public routes, axe, five widths (360, 390, 768, 1280, 1440), 44px navigation, homepage curation, Blog zero state, noninteractive SNS, absent draft routes, actual TOC scroll, no-JavaScript navigation, PDF download, authored CV selections and 200% reflow. Public pages made no external runtime asset requests.
+- IAB reviewed the opening, indexes, representative image/text case studies, Blog/SNS and CV; traversed the primary research/detail/CV/Blog flow. Current desktop reference comparisons use 1280×800; phone review uses 390×844.
+- The future article template was built and rendered with long Korean text in a separate temporary copy. `lang=ko`, readable reflow and related public-project links were confirmed; its draft article route stayed absent. The actual collection still contains zero posts.
+- Both PDF pages were rendered with Poppler and inspected. Text, full authors, all three languages and canonical link annotations were checked. White paper, dark legible type, complete sections and two-page pagination are preserved.
+- All four original case-study bodies and the entire CV record are unchanged; publication records and package/lock files are unchanged. Source-only public-copy JSON provenance was not imported. Existing uncommitted work was preserved.
+
+### Fidelity ledger
+
+| Comparison | Accepted reference | Implementation evidence / resolution |
+| --- | --- | --- |
+| Opening copy and hierarchy | `docs/design/stitch/homepage.html`, `homepage-opening.png` | Exact selected headline, both paragraphs, name, navigation, actions and MAGraph feature; no extra hero copy. |
+| Desktop geometry | Same reference at 1280×800 | Header/outer gutters match; H1 is 44px Sora/40px line height, width 776px at x48/y137. Corrected initial line-height/column drift; important targets retain at least 44px. |
+| Palette and typography | `docs/design/DESIGN.md` | Exact navy/periwinkle/text tokens, local Sora/Inter, correct active/focus colors. No remote font/Tailwind runtime or warm site surfaces. |
+| Research media | Reviewed MAGraph/EnzymeMatch concepts | Removed unsupported `core_orf`, embedding/target labels and repeated generic graphics. Kept gene-family/proximity semantics and honest visible concept captions; readable text accompanies narrow diagrams. |
+| Actual product imagery | Fridge Match/Location Todo references | Reused the exact source captures, with contained orientation, sample-data captions and no recoloring or invented UI. Fixed the near-square Fridge capture being misclassified as a narrow portrait; added a rendered-width/aspect-ratio regression check. |
+| Project detail treatments | Existing exemplars and nine text-led designs | Shared route preserves full source prose, real stage/role/optional period, actual H2-derived TOC and category return links; no blank media filler. |
+| Blog/SNS | `subpages/blog.html`, expanded homepage | Exact empty-state copy and four unlinked platform labels. Zero fake articles, guessed profiles or disabled controls. |
+| CV and print | `subpages/cv.html`, source CV | Source selections/authors/periods complete; date-column web layout and responsive index; white-paper print reset, inspected two-page PDF. |
+
+The source-constrained diagram labels, compact paired MycoChase name, and 44px target refinements are intentional reconciliations required by the accepted plan. No material visual mismatch remains in the inspected views. Current review images were captured locally with the Stitch browser-capture CLI; nothing was uploaded to a design service.
+
+### Remaining release scope
+
+Local implementation is complete. No commit, push, merge or deployment occurred, and GitHub Actions/live Pages deep links were not run. Browser automation uses Chromium; additional browser/device-specific behavior can be checked after publication. The project case studies retain their own scientific/product limits; site tests do not validate those underlying research models or prototypes.
+
+
+## 2026-10-14 — Commit and push authorization
+
+The owner requested committing and pushing the completed implementation to `origin` on `codex/cv-homepage`. Include the intended application source, content, tests, workflows, licensed assets and retained design references. Generated build output, dependency directories, browser reports and private scratch records remain ignored. The validation workflow runs on branch push; the Pages workflow requires a separate manual run on `main`. Historical local-only statements above describe their dated checkpoints.

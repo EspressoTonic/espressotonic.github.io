@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://espressotonic.github.io/sitemap.xml

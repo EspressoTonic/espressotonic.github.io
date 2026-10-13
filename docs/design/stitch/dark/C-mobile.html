@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Woo Young Cho — Portfolio</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed-variant": "#3a4d00",
+            "primary-container": "#bddb73",
+            "error-container": "#93000a",
+            "tertiary-fixed": "#dae4ed",
+            "inverse-on-surface": "#2e3133",
+            "on-tertiary-container": "#505a61",
+            "surface-container-low": "#191c1e",
+            "surface-variant": "#323537",
+            "on-secondary-container": "#b0bbb5",
+            "on-surface": "#e1e2e5",
+            "on-tertiary-fixed-variant": "#3f484f",
+            "error": "#ffb4ab",
+            "secondary": "#bec9c3",
+            "primary": "#d9f88c",
+            "on-error": "#690005",
+            "on-primary-fixed": "#151f00",
+            "surface-container-lowest": "#0c0f11",
+            "secondary-container": "#414b47",
+            "secondary-fixed": "#dae5df",
+            "background": "#0e1113",
+            "on-secondary-fixed-variant": "#3f4945",
+            "outline": "#8f9281",
+            "inverse-primary": "#4e6706",
+            "on-background": "#e1e2e5",
+            "on-surface-variant": "#c5c8b5",
+            "tertiary": "#e4edf6",
+            "on-secondary": "#29332e",
+            "tertiary-container": "#c8d1da",
+            "surface-bright": "#37393c",
+            "secondary-fixed-dim": "#bec9c3",
+            "surface": "#111416",
+            "outline-variant": "#45483a",
+            "surface-container-high": "#272a2c",
+            "on-error-container": "#ffdad6",
+            "on-primary": "#273500",
+            "on-primary-container": "#496000",
+            "on-secondary-fixed": "#141e1a",
+            "primary-fixed": "#d0ee84",
+            "on-tertiary": "#283139",
+            "inverse-surface": "#e1e2e5",
+            "on-tertiary-fixed": "#141d23",
+            "tertiary-fixed-dim": "#bec8d1",
+            "surface-tint": "#b4d26b",
+            "surface-container": "#1d2022",
+            "surface-container-highest": "#323537",
+            "surface-dim": "#111416",
+            "primary-fixed-dim": "#b4d26b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "margin": "3rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "margin-sm": "1.25rem",
+            "gutter-sm": "1rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "sans": ["IBM Plex Sans", "sans-serif"],
+            "mono": ["IBM Plex Mono", "monospace"],
+            "headline-sm": ["IBM Plex Sans"],
+            "headline-lg": ["IBM Plex Sans"],
+            "code-sm": ["IBM Plex Mono"],
+            "display-lg": ["IBM Plex Sans"],
+            "body-md": ["IBM Plex Sans"],
+            "label-sm": ["IBM Plex Sans"],
+            "body-lg": ["IBM Plex Sans"],
+            "headline-lg-mobile": ["IBM Plex Sans"],
+            "display-lg-mobile": ["IBM Plex Sans"],
+            "body-sm": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"]
+          },
+          fontSize: {
+            "headline-sm": ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "0em", fontWeight: "500" }],
+            "headline-lg": ["2rem", { lineHeight: "2.5rem", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "code-sm": ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "0em", fontWeight: "400" }],
+            "display-lg": ["3.5rem", { lineHeight: "4rem", letterSpacing: "-0.025em", fontWeight: "600" }],
+            "body-md": ["0.9375rem", { lineHeight: "1.5rem", letterSpacing: "0.01em", fontWeight: "400" }],
+            "label-sm": ["0.6875rem", { lineHeight: "1rem", letterSpacing: "0.08em", fontWeight: "600" }],
+            "body-lg": ["1.125rem", { lineHeight: "1.75rem", letterSpacing: "0.01em", fontWeight: "400" }],
+            "headline-lg-mobile": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "display-lg-mobile": ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "body-sm": ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "0.015em", fontWeight: "400" }],
+            "label-md": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.02em", fontWeight: "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background-color: #0e1113;
+      color: #f0f3f1;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-[#0e1113] text-[#f0f3f1] min-h-screen flex flex-col antialiased selection:bg-[#bddb73] selection:text-[#0e1113]">
+<!-- Mobile Top Navigation Anchor -->
+<header class="w-full bg-[#0e1113] border-b border-[#252e35] sticky top-0 z-50">
+<div class="max-w-[420px] mx-auto px-5 h-14 flex items-center justify-between">
+<!-- Brand Logo / Identity Link -->
+<a class="flex items-center gap-1.5 text-[#f0f3f1] font-semibold text-base tracking-tight hover:text-[#bddb73] transition-colors focus:outline-none focus:ring-1 focus:ring-[#bddb73] min-h-[44px]" href="/">
+<span class="material-symbols-outlined text-[#bddb73] text-[20px]" data-icon="biotech">biotech</span>
+<span>Woo Young Cho</span>
+</a>
+<!-- Horizontal Navigation Links (All >=44px tap target height) -->
+<nav aria-label="Main Navigation" class="flex items-center gap-1">
+<a class="px-2.5 py-3 min-h-[44px] flex items-center text-xs font-medium text-[#b7c2bc] hover:text-[#bddb73] transition-colors focus:outline-none focus:text-[#bddb73]" href="/research/">Research</a>
+<a class="px-2.5 py-3 min-h-[44px] flex items-center text-xs font-medium text-[#b7c2bc] hover:text-[#bddb73] transition-colors focus:outline-none focus:text-[#bddb73]" href="/personal-projects/">Personal Projects</a>
+<a class="px-2.5 py-3 min-h-[44px] flex items-center text-xs font-medium text-[#b7c2bc] hover:text-[#bddb73] transition-colors focus:outline-none focus:text-[#bddb73]" href="/cv/">CV</a>
+</nav>
+</div>
+</header>
+<!-- Mobile Container (390px logical bounds) -->
+<main class="w-full max-w-[420px] mx-auto px-5 py-6 flex flex-col gap-9 flex-1">
+<!-- HERO & INTRODUCTION -->
+<section class="flex flex-col gap-4">
+<div class="inline-flex items-center gap-2 text-xs font-mono text-[#bddb73]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#bddb73] animate-pulse"></span>
+<span>Computational Biology &amp; Systems</span>
+</div>
+<h1 class="text-[32px] font-semibold text-[#f0f3f1] leading-[1.2] tracking-tight">
+        Understanding biology through its many measurements.
+      </h1>
+<div class="space-y-3 text-[16px] text-[#f0f3f1] leading-relaxed">
+<p>
+          I'm Woo Young Cho, a bioinformatics researcher working across omics, spatial imaging, and scientific software. I'm interested in developing machine-learning methods that bring complementary measurements into a shared representation of cellular states.
+        </p>
+<p class="text-[#b7c2bc]">
+          Alongside research, I build practical applications and explore how useful AI assistants should work.
+        </p>
+</div>
+<!-- Compact Actions -->
+<div class="flex flex-wrap items-center gap-3 pt-1">
+<a class="bg-[#bddb73] hover:bg-[#c8e484] text-[#0e1113] font-semibold px-4 py-3 rounded text-sm inline-flex items-center gap-2 min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-[#bddb73]" href="/research/">
+<span>Explore research</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="border border-[#2d3840] hover:border-[#bddb73] text-[#f0f3f1] px-4 py-3 rounded text-sm min-h-[44px] inline-flex items-center transition-colors focus:outline-none focus:ring-1 focus:ring-[#bddb73]" href="/personal-projects/">
+          Personal projects
+        </a>
+</div>
+</section>
+<!-- FEATURED RESEARCH ARTWORK (MAGraph) -->
+<section class="bg-[#14191c] border border-[#242c33] rounded-lg p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between text-[13px] text-[#b7c2bc] font-mono border-b border-[#1e262c] pb-2">
+<span>Opening Feature · Master's thesis</span>
+<span class="text-[#bddb73]">Academic research</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="font-semibold text-lg text-[#f0f3f1] hover:text-[#bddb73] transition-colors focus:outline-none" href="/projects/magraph/">
+          MAGraph
+        </a>
+<p class="text-[15px] text-[#b7c2bc] leading-normal">
+          Representing metagenomic gene neighbourhoods as graphs to investigate functional context.
+        </p>
+</div>
+<!-- Diagram Illustration Box -->
+<div class="bg-[#0c0f11] border border-[#1e262c] rounded p-3 my-1">
+<div class="text-[13px] font-mono text-[#b7c2bc] mb-2.5 flex items-center justify-between">
+<span>Gene-neighbourhood representation</span>
+<span class="text-[11px] text-[#8f9281]">Concept illustration</span>
+</div>
+<!-- Synteny & Graph topology schematic -->
+<div class="space-y-3 py-1"><div class="flex flex-col items-center justify-center gap-3 py-2"><div class="w-full flex items-center justify-center gap-2"><div class="h-5 flex-1 bg-[#252e35] rounded-sm border border-[#37444f]"></div><div class="h-5 flex-1 bg-[#bddb73] rounded-sm border border-[#bddb73]"></div><div class="h-5 flex-1 bg-[#252e35] rounded-sm border border-[#37444f]"></div><div class="h-5 flex-1 bg-[#1e262c] rounded-sm border border-[#252e35]"></div></div><div class="text-[#8f9281] flex justify-center"><span class="material-symbols-outlined text-[16px]">south</span></div><svg class="w-full h-16" fill="none" viewbox="0 0 280 60" xmlns="http://www.w3.org/2000/svg"><line stroke="#37444f" stroke-width="1.5" x1="50" x2="100" y1="30" y2="16"></line><line stroke="#37444f" stroke-width="1.5" x1="50" x2="100" y1="30" y2="44"></line><line stroke="#bddb73" stroke-dasharray="3 3" stroke-width="1.5" x1="100" x2="170" y1="16" y2="16"></line><line stroke="#37444f" stroke-width="1.5" x1="100" x2="170" y1="44" y2="44"></line><line stroke="#37444f" stroke-width="1.5" x1="170" x2="230" y1="16" y2="30"></line><line stroke="#37444f" stroke-width="1.5" x1="170" x2="230" y1="44" y2="30"></line><line stroke="#252e35" stroke-width="1" x1="100" x2="170" y1="16" y2="44"></line><circle cx="50" cy="30" fill="#252e35" r="5" stroke="#8f9281" stroke-width="1.5"></circle><circle cx="100" cy="16" fill="#bddb73" r="6"></circle><circle cx="100" cy="44" fill="#252e35" r="5" stroke="#8f9281" stroke-width="1.5"></circle><circle cx="170" cy="16" fill="#bddb73" r="6"></circle><circle cx="170" cy="44" fill="#252e35" r="5" stroke="#8f9281" stroke-width="1.5"></circle><circle cx="230" cy="30" fill="#252e35" r="5" stroke="#8f9281" stroke-width="1.5"></circle></svg></div></div>
+</div>
+<div class="pt-1">
+<a class="text-[#bddb73] hover:underline font-medium text-sm min-h-[44px] inline-flex items-center gap-1 focus:outline-none" href="/projects/magraph/">
+          Read project →
+        </a>
+</div>
+</section>
+<!-- SECTION 2: SELECTED RESEARCH -->
+<section class="flex flex-col">
+<div class="flex items-baseline justify-between border-b border-[#20272d] pb-3 mb-2">
+<h2 class="text-[22px] font-semibold text-[#f0f3f1] tracking-tight">Selected research</h2>
+<a class="text-[#bddb73] hover:underline text-sm font-medium focus:outline-none" href="/research/">All research →</a>
+</div>
+<div class="divide-y divide-[#20272d]">
+<!-- Row 1: Virtual Cell Challenge -->
+<article class="py-4 space-y-2">
+<div class="text-[13px] text-[#b7c2bc] font-mono">
+            Independent research · Experiments and evaluation
+          </div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+<a class="hover:text-[#bddb73] transition-colors focus:outline-none" href="/projects/virtual-cell-challenge/">
+              Virtual Cell Challenge 2026
+            </a>
+</h3>
+<p class="text-[15px] text-[#b7c2bc] leading-normal">
+            Developing and evaluating models of cellular responses across biological contexts.
+          </p>
+<!-- Diagram box -->
+<div class="bg-[#0c0f11] border border-[#1e262c] rounded p-3 my-2">
+<div class="text-[13px] font-mono text-[#b7c2bc] mb-2 flex items-center justify-between">
+<span>Model comparison and evaluation</span>
+<span class="text-[11px] text-[#8f9281]">Concept illustration</span>
+</div>
+<!-- Flowchart: Context -> Candidate models -> Evaluation -->
+<div class="grid grid-cols-5 items-center gap-1 text-center py-1"><div class="col-span-1 bg-[#15191c] border border-[#252e35] rounded p-2 text-[13px] font-mono text-[#f0f3f1] leading-tight">Biological context</div><div class="text-[#8f9281] flex justify-center text-sm">→</div><div class="col-span-1 bg-[#15191c] border border-[#bddb73] rounded p-2 text-[13px] font-mono text-[#bddb73] leading-tight">Candidate models</div><div class="text-[#8f9281] flex justify-center text-sm">→</div><div class="col-span-1 bg-[#15191c] border border-[#252e35] rounded p-2 text-[13px] font-mono text-[#f0f3f1] leading-tight">Evaluation</div></div>
+</div>
+<div class="pt-1">
+<a class="text-[#bddb73] hover:underline font-medium text-sm min-h-[44px] inline-flex items-center focus:outline-none" href="/projects/virtual-cell-challenge/">
+              Read project →
+            </a>
+</div>
+</article>
+<!-- Row 2: GenoMycAnalyzer -->
+<article class="py-4 space-y-2">
+<div class="text-[13px] text-[#b7c2bc] font-mono">
+            Team software · Published work
+          </div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+<a class="hover:text-[#bddb73] transition-colors focus:outline-none" href="/projects/genomycanalyzer/">
+              GenoMycAnalyzer
+            </a>
+</h3>
+<p class="text-[15px] text-[#b7c2bc] leading-normal">
+            Contributing pipelines and deployment work to reproducible sequencing-analysis software.
+          </p>
+<!-- Diagram box -->
+<div class="bg-[#0c0f11] border border-[#1e262c] rounded p-3 my-2">
+<div class="text-[13px] font-mono text-[#b7c2bc] mb-2 flex items-center justify-between">
+<span>Reproducible software workflow</span>
+<span class="text-[11px] text-[#8f9281]">Concept illustration</span>
+</div>
+<!-- Flowchart: Sequencing data -> Reproducible workflow -> Reviewable outputs -->
+<div class="grid grid-cols-5 items-center gap-1 text-center py-1"><div class="col-span-1 bg-[#15191c] border border-[#252e35] rounded p-2 text-[13px] font-mono text-[#f0f3f1] leading-tight">Sequencing data</div><div class="text-[#8f9281] flex justify-center text-sm">→</div><div class="col-span-1 bg-[#15191c] border border-[#bddb73] rounded p-2 text-[13px] font-mono text-[#bddb73] leading-tight">Reproducible workflow</div><div class="text-[#8f9281] flex justify-center text-sm">→</div><div class="col-span-1 bg-[#15191c] border border-[#252e35] rounded p-2 text-[13px] font-mono text-[#f0f3f1] leading-tight">Reviewable outputs</div></div>
+</div>
+<div class="pt-1">
+<a class="text-[#bddb73] hover:underline font-medium text-sm min-h-[44px] inline-flex items-center focus:outline-none" href="/projects/genomycanalyzer/">
+              Read project →
+            </a>
+</div>
+</article>
+</div>
+</section>
+<!-- SECTION 3: PERSONAL PROJECTS -->
+<section class="flex flex-col gap-3">
+<div class="flex items-baseline justify-between">
+<h2 class="text-[22px] font-semibold text-[#f0f3f1] tracking-tight">Personal projects</h2>
+<a class="text-[#bddb73] hover:underline text-sm font-medium focus:outline-none" href="/personal-projects/">All personal projects →</a>
+</div>
+<p class="text-[15px] text-[#b7c2bc] -mt-1">
+        Practical tools, built around everyday problems.
+      </p>
+<div class="space-y-4 pt-1">
+<!-- Card 1: Fridge Match -->
+<div class="bg-[#14191c] border border-[#242c33] rounded-lg p-4 space-y-3">
+<div class="text-[13px] text-[#b7c2bc] font-mono">Private prototype</div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+<a class="hover:text-[#bddb73] transition-colors focus:outline-none" href="/projects/fridge-match/">Fridge Match</a>
+</h3>
+<p class="text-[15px] text-[#b7c2bc] leading-normal">
+            An ingredient inventory and meal-planning prototype.
+          </p>
+<div class="bg-[#0c0f11] rounded p-3 border border-[#1e262c] font-mono text-xs space-y-2">
+<div class="text-[10px] text-[#8f9281] tracking-wider border-b border-[#1e262c] pb-1">
+              SAMPLE DATA · INTERFACE CONCEPT
+            </div>
+<div class="space-y-1 text-[#f0f3f1]">
+<div class="flex justify-between"><span>• Tofu</span><span class="text-[#8f9281]">(in stock)</span></div>
+<div class="flex justify-between"><span>• Rice</span><span class="text-[#8f9281]">(pantry)</span></div>
+<div class="flex justify-between"><span>• Mushrooms</span><span class="text-[#bddb73]">(fresh)</span></div>
+</div>
+<div class="pt-1 border-t border-[#1e262c] text-[11px] text-[#bddb73]">
+              Suggested meal: Stir-fried Tofu &amp; Mushrooms
+            </div>
+<div class="text-[11px] text-[#b7c2bc] pt-0.5">
+              Interface concept · sample data
+            </div>
+</div>
+<div>
+<a class="text-[#bddb73] hover:underline font-medium text-sm min-h-[44px] inline-flex items-center focus:outline-none" href="/projects/fridge-match/">
+              View prototype details →
+            </a>
+</div>
+</div>
+<!-- Card 2: Commute Log -->
+<div class="bg-[#14191c] border border-[#242c33] rounded-lg p-4 space-y-3">
+<div class="text-[13px] text-[#b7c2bc] font-mono">Local MVP</div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+<a class="hover:text-[#bddb73] transition-colors focus:outline-none" href="/projects/commute-log/">Commute Log</a>
+</h3>
+<p class="text-[15px] text-[#b7c2bc] leading-normal">
+            Exploring recorded journeys and departure windows with traceable source information.
+          </p>
+<div class="bg-[#0c0f11] rounded p-3 border border-[#1e262c] font-mono text-xs space-y-2">
+<div class="text-[10px] text-[#8f9281] tracking-wider border-b border-[#1e262c] pb-1">
+              SAMPLE DATA · INTERFACE CONCEPT
+            </div>
+<div class="text-[#f0f3f1] flex justify-between items-center">
+<span>Station A → Station B</span>
+<span class="text-[#bddb73]">08:20</span>
+</div>
+<div class="text-[11px] text-[#8f9281]">
+              Source: sample record
+            </div>
+<div class="text-[11px] text-[#b7c2bc] pt-0.5">
+              Interface concept · sample data
+            </div>
+</div>
+<div>
+<a class="text-[#bddb73] hover:underline font-medium text-sm min-h-[44px] inline-flex items-center focus:outline-none" href="/projects/commute-log/">
+              View MVP details →
+            </a>
+</div>
+</div>
+<!-- Card 3: Location Todo -->
+<div class="bg-[#14191c] border border-[#242c33] rounded-lg p-4 space-y-3">
+<div class="text-[13px] text-[#b7c2bc] font-mono">Prototype</div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+<a class="hover:text-[#bddb73] transition-colors focus:outline-none" href="/projects/location-todo/">Location Todo</a>
+</h3>
+<p class="text-[15px] text-[#b7c2bc] leading-normal">
+            A location-aware reminder prototype with native mobile implementations.
+          </p>
+<div class="bg-[#0c0f11] rounded p-3 border border-[#1e262c] font-mono text-xs space-y-2">
+<div class="text-[10px] text-[#8f9281] tracking-wider border-b border-[#1e262c] pb-1">
+              SAMPLE DATA · INTERFACE CONCEPT
+            </div>
+<div class="space-y-1 text-[#f0f3f1]">
+<div class="flex justify-between"><span>Library</span><span class="text-[#b7c2bc]">Return a book</span></div>
+<div class="flex justify-between"><span>Shop</span><span class="text-[#b7c2bc]">Collect an item</span></div>
+</div>
+<div class="text-[11px] text-[#b7c2bc] pt-0.5">
+              Interface concept · sample data
+            </div>
+</div>
+<div>
+<a class="text-[#bddb73] hover:underline font-medium text-sm min-h-[44px] inline-flex items-center focus:outline-none" href="/projects/location-todo/">
+              View prototype details →
+            </a>
+</div>
+</div>
+</div>
+<!-- JUNIOR Text Link -->
+<div class="pt-2">
+<a class="text-[#f0f3f1] hover:text-[#bddb73] text-sm py-2 block transition-colors focus:outline-none" href="/projects/junior/">
+          Exploring supervised research assistants with JUNIOR →
+        </a>
+</div>
+</section>
+<!-- SECTION 4: QUESTIONS I'M DRAWN TO -->
+<section class="flex flex-col">
+<h2 class="text-[22px] font-semibold text-[#f0f3f1] tracking-tight border-b border-[#20272d] pb-3 mb-1">
+        Questions I'm drawn to
+      </h2>
+<div class="divide-y divide-[#20272d]">
+<!-- Item 01 -->
+<div class="py-3.5 space-y-1">
+<div class="text-[13px] font-mono text-[#bddb73]">01 /</div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+            Multimodal representations of cellular states
+          </h3>
+<p class="text-[15px] text-[#b7c2bc] leading-relaxed">
+            Learning common representations from complementary biological measurements to understand cellular states.
+          </p>
+</div>
+<!-- Item 02 -->
+<div class="py-3.5 space-y-1">
+<div class="text-[13px] font-mono text-[#bddb73]">02 /</div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+            Spatial biology and computational pathology
+          </h3>
+<p class="text-[15px] text-[#b7c2bc] leading-relaxed">
+            Connecting tissue morphology, molecular measurements, and spatial context to biological questions.
+          </p>
+</div>
+<!-- Item 03 -->
+<div class="py-3.5 space-y-1">
+<div class="text-[13px] font-mono text-[#bddb73]">03 /</div>
+<h3 class="font-medium text-base text-[#f0f3f1]">
+            Protein structure, function, and molecular learning
+          </h3>
+<p class="text-[15px] text-[#b7c2bc] leading-relaxed">
+            Understanding molecular function and exploring how computational models can guide informative experiments.
+          </p>
+</div>
+</div>
+<p class="text-[14px] italic text-[#b7c2bc] mt-3">
+        Currently exploring virtual biological systems and learning from experimental feedback.
+      </p>
+</section>
+<!-- SECTION 5: SELECTED PUBLICATIONS -->
+<section class="flex flex-col">
+<div class="flex items-baseline justify-between border-b border-[#20272d] pb-3 mb-2">
+<h2 class="text-[22px] font-semibold text-[#f0f3f1] tracking-tight">Selected publications</h2>
+<a class="text-[#bddb73] hover:underline text-sm font-medium focus:outline-none" href="/cv/">Full CV →</a>
+</div>
+<div class="divide-y divide-[#20272d]">
+<!-- Publication 1 -->
+<article class="py-4 space-y-2">
+<div class="flex items-center justify-between text-xs font-mono text-[#b7c2bc]">
+<span>2026 · Journal of Microbiology</span>
+<span class="text-[#bddb73]">[Published]</span>
+</div>
+<h3 class="text-sm font-medium text-[#f0f3f1] leading-snug">
+            Genomic signatures associated with epidemiologically defined high-risk pathogenic Escherichia coli isolates identified by interpretable machine learning
+          </h3>
+<div>
+<a class="inline-flex items-center text-xs font-mono px-2.5 py-1.5 rounded bg-[#15191c] border border-[#252e35] text-[#bddb73] hover:border-[#bddb73] transition-colors min-h-[44px]" href="https://pubmed.ncbi.nlm.nih.gov/42687640/" rel="noopener noreferrer" target="_blank">
+              PubMed ↗
+            </a>
+</div>
+</article>
+<!-- Publication 2 -->
+<article class="py-4 space-y-2">
+<div class="flex items-center justify-between text-xs font-mono text-[#b7c2bc]">
+<span>2025 · bioRxiv</span>
+<span class="text-[#8f9281]">[Preprint]</span>
+</div>
+<h3 class="text-sm font-medium text-[#f0f3f1] leading-snug">
+            Gene-centric metagenomic analyses reveal microbiome functional insights into diseases
+          </h3>
+<div>
+<a class="inline-flex items-center text-xs font-mono px-2.5 py-1.5 rounded bg-[#15191c] border border-[#252e35] text-[#bddb73] hover:border-[#bddb73] transition-colors min-h-[44px]" href="https://doi.org/10.1101/2025.09.29.679262" rel="noopener noreferrer" target="_blank">
+              bioRxiv ↗
+            </a>
+</div>
+</article>
+<!-- Publication 3 -->
+<article class="py-4 space-y-2">
+<div class="flex items-center justify-between text-xs font-mono text-[#b7c2bc]">
+<span>2024 · BMC Genomics</span>
+<span class="text-[#bddb73]">[Published]</span>
+</div>
+<h3 class="text-sm font-medium text-[#f0f3f1] leading-snug">
+            GenoMycAnalyzer: a web-based tool for species and drug resistance prediction for Mycobacterium genomes
+          </h3>
+<div>
+<a class="inline-flex items-center text-xs font-mono px-2.5 py-1.5 rounded bg-[#15191c] border border-[#252e35] text-[#bddb73] hover:border-[#bddb73] transition-colors min-h-[44px]" href="https://doi.org/10.1186/s12864-024-10320-3" rel="noopener noreferrer" target="_blank">
+              BMC Genomics ↗
+            </a>
+</div>
+</article>
+</div>
+</section>
+<!-- SECTION 6: LET'S CONNECT -->
+<section class="bg-[#14191c] border border-[#242c33] rounded-lg p-5 flex flex-col gap-3">
+<p class="text-[15px] text-[#b7c2bc] leading-relaxed">
+        My experience spans metagenomic representations, protein-structure analysis, scientific software, and spatial imaging.
+      </p>
+<div class="pt-2">
+<h2 class="text-[22px] font-semibold text-[#f0f3f1] tracking-tight">Let's connect.</h2>
+<p class="text-[14px] text-[#b7c2bc]">
+          For research conversations, collaborations, and opportunities.
+        </p>
+</div>
+<!-- 2x2 Contact Grid with >=44px tap targets -->
+<div class="grid grid-cols-2 gap-2.5 pt-2">
+<a class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#0c0f11] border border-[#252e35] hover:border-[#bddb73] text-[#f0f3f1] hover:text-[#bddb73] rounded text-sm font-medium transition-colors focus:outline-none" href="mailto:wooyoung510@gmail.com">
+<span>Email</span>
+<span class="text-xs font-mono text-[#8f9281]">↗</span>
+</a>
+<a class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#0c0f11] border border-[#252e35] hover:border-[#bddb73] text-[#f0f3f1] hover:text-[#bddb73] rounded text-sm font-medium transition-colors focus:outline-none" href="https://github.com/EspressoTonic" rel="noopener noreferrer" target="_blank">
+<span>GitHub</span>
+<span class="text-xs font-mono text-[#8f9281]">↗</span>
+</a>
+<a class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#0c0f11] border border-[#252e35] hover:border-[#bddb73] text-[#f0f3f1] hover:text-[#bddb73] rounded text-sm font-medium transition-colors focus:outline-none" href="https://orcid.org/0009-0002-7227-3326" rel="noopener noreferrer" target="_blank">
+<span>ORCID</span>
+<span class="text-xs font-mono text-[#8f9281]">↗</span>
+</a>
+<a class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#0c0f11] border border-[#252e35] hover:border-[#bddb73] text-[#f0f3f1] hover:text-[#bddb73] rounded text-sm font-medium transition-colors focus:outline-none" href="/cv/">
+<span>View CV</span>
+<span class="text-xs font-mono text-[#8f9281]">↗</span>
+</a>
+</div>
+</section>
+</main>
+<!-- MOBILE FOOTER -->
+<footer class="w-full bg-[#0c0f11] border-t border-[#252e35] mt-10">
+<div class="max-w-[420px] mx-auto px-5 py-6 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<a class="text-sm font-semibold text-[#f0f3f1] hover:text-[#bddb73] transition-colors focus:outline-none min-h-[44px] flex items-center" href="/">
+          Woo Young Cho
+        </a>
+<!-- Plain horizontal footer links -->
+<nav aria-label="Footer Navigation" class="flex items-center gap-3">
+<a class="text-xs text-[#b7c2bc] hover:text-[#bddb73] transition-colors focus:outline-none min-h-[44px] flex items-center" href="/research/">
+            Research
+          </a>
+<span class="text-[#252e35]">·</span>
+<a class="text-xs text-[#b7c2bc] hover:text-[#bddb73] transition-colors focus:outline-none min-h-[44px] flex items-center" href="/personal-projects/">
+            Personal Projects
+          </a>
+<span class="text-[#252e35]">·</span>
+<a class="text-xs text-[#b7c2bc] hover:text-[#bddb73] transition-colors focus:outline-none min-h-[44px] flex items-center" href="/cv/">
+            CV
+          </a>
+</nav>
+</div>
+</div>
+</footer>
+</body></html>

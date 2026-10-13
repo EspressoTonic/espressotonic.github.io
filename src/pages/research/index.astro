@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PublicationList from '../../components/PublicationList.astro';
+import { projects, publications, profile } from '../../lib/content';
+import Icon from '../../components/Icon.astro';
+const items = await projects({ category: 'research' });
+const outputs = await publications();
+const p = await profile();
+---
+
+<BaseLayout
+  title="Research"
+  description="Academic and professional work in biological representations, omics analysis, and research software."
+>
+  <div class="wrap index-page">
+    <header class="page-intro">
+      <span class="eyebrow">Research &amp; professional work</span>
+      <h1>Research</h1>
+      <p>
+        My work spans metagenomic gene neighborhoods, sequence and structural analysis,
+        translational omics, and spatial imaging.
+      </p>
+    </header>
+    <section aria-labelledby="research-projects-title">
+      <div class="section-heading">
+        <h2 id="research-projects-title">Research projects</h2>
+      </div>
+      {items.map((project) => (
+        <ProjectCard
+          project={project}
+          variant={
+            project.data.cover || ['magraph', 'enzymematch'].includes(project.id) ? 'visual' : 'row'
+          }
+        />
+      ))}
+    </section>
+    <section class="research-interests" aria-labelledby="interests-title">
+      <h2 id="interests-title">Research interests</h2>
+      <div class="interest-grid">
+        {p.data.interests.map((interest) => (
+          <div>
+            <h3>{interest.title}</h3>
+            <p>{interest.description}</p>
+          </div>
+        ))}
+      </div>
+      {p.data.exploring && <p class="exploring">{p.data.exploring}</p>}
+    </section>
+    <section class="outputs-section" aria-labelledby="research-outputs-title">
+      <div class="section-heading">
+        <h2 id="research-outputs-title">Research outputs</h2>
+        <a class="text-link" href="/cv/">
+          View CV <Icon />
+        </a>
+      </div>
+      <PublicationList items={outputs} />
+    </section>
+  </div>
+</BaseLayout>

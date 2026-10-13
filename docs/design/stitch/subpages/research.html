@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Research — Woo Young Cho</title>
+<!-- Google Fonts: Sora & Inter & Space Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Sora:wght@400;500;600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#dce1ff",
+            "on-surface": "#edf3ff",
+            "on-surface-variant": "#adb9d0",
+            "secondary-container": "#3e4a5d",
+            "inverse-on-surface": "#2b303e",
+            "surface-variant": "#303443",
+            "surface-tint": "#8fa7ff",
+            "on-tertiary-fixed": "#241a00",
+            "background": "#101a2c",
+            "on-secondary": "#253143",
+            "surface": "#101a2c",
+            "primary-container": "#8fa7ff",
+            "on-primary-fixed": "#00164f",
+            "surface-container-lowest": "#090e1b",
+            "on-background": "#edf3ff",
+            "surface-bright": "#343948",
+            "tertiary-fixed": "#ffe08a",
+            "surface-container-highest": "#303443",
+            "inverse-primary": "#4059ab",
+            "secondary-fixed-dim": "#bbc7de",
+            "primary-fixed-dim": "#8fa7ff",
+            "on-tertiary-fixed-variant": "#574400",
+            "on-primary-container": "#1d398a",
+            "tertiary": "#ebc244",
+            "secondary": "#bbc7de",
+            "secondary-fixed": "#d7e3fb",
+            "on-secondary-fixed-variant": "#3c475a",
+            "on-tertiary-container": "#4f3d00",
+            "on-primary-fixed-variant": "#264192",
+            "on-secondary-container": "#adb9d0",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "primary": "#8fa7ff",
+            "on-primary": "#04287b",
+            "surface-dim": "#101a2c",
+            "surface-container-low": "#101a2c",
+            "tertiary-fixed-dim": "#ebc244",
+            "on-tertiary": "#3d2f00",
+            "outline-variant": "#444651",
+            "surface-container": "#101a2c",
+            "on-secondary-fixed": "#101c2d",
+            "tertiary-container": "#cda72a",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "surface-container-high": "#252a38",
+            "inverse-surface": "#edf3ff",
+            "outline": "#adb9d0"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin": "3rem",
+            "margin-mobile": "1.25rem",
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "label-sm": ["Space Mono"],
+            "headline-xl": ["Sora"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Sora"],
+            "headline-sm": ["Sora"],
+            "headline-lg-mobile": ["Sora"],
+            "label-md": ["Space Mono"],
+            "headline-lg": ["Sora"],
+            "headline-xl-mobile": ["Sora"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Technical hairline rules matching Design Guidance (#1b2844 / #1e293b) */
+    .hairline-border {
+      border-color: #1b2844;
+    }
+    .hairline-divide > * + * {
+      border-top: 1px solid #1b2844;
+    }
+    .custom-specular-glow {
+      box-shadow: 0 0 20px rgba(143, 167, 255, 0.08);
+    }
+    /* Monospace subtle numerals */
+    .font-mono-tight {
+      font-feature-settings: "tnum" 1, "zero" 1;
+    }
+  </style>
+<style id="review-polish">
+/* Local design-review refinements: selected D shell, readable type, open CV rows. */
+html {scroll-padding-top:108px;}
+body {background:#090e1b!important;color:#edf3ff!important;font-family:Inter,system-ui,sans-serif!important;}
+main {width:100%;max-width:1280px!important;margin-left:auto!important;margin-right:auto!important;}
+.review-header {background:#090e1b;border-bottom:1px solid #202b41;position:relative;z-index:50;width:100%;}
+.review-header-inner {max-width:1280px;min-height:80px;margin:auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.review-brand {font:600 24px/1.2 Sora,Inter,sans-serif;letter-spacing:-1px;color:#edf3ff;display:flex;align-items:center;min-height:44px;}
+.review-nav {display:flex;align-items:center;gap:36px;font:500 15px/1.5 Inter,sans-serif;}
+.review-nav a {min-height:44px;display:flex;align-items:center;color:#adb9d0;text-decoration:none;}
+.review-nav a:hover,.review-nav a[aria-current] {color:#8fa7ff;}
+.review-nav a[aria-current] {box-shadow:inset 0 -2px #8fa7ff;}
+.review-footer {border-top:1px solid #202b41;margin-top:64px;padding:32px 48px;color:#adb9d0;font:14px/1.6 Inter,sans-serif;}
+.review-footer-inner {max-width:1184px;margin:auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.review-footer nav {display:flex;gap:24px;flex-wrap:wrap;}
+.review-footer a {display:inline-flex;align-items:center;min-height:44px;color:#adb9d0;}
+.review-footer strong {font-family:Sora,Inter,sans-serif;color:#edf3ff;font-size:16px;}
+.review-skip {position:absolute;left:20px;top:-80px;background:#8fa7ff;color:#090e1b;padding:12px 18px;z-index:100;}
+.review-skip:focus {top:12px;}
+a:focus-visible,button:focus-visible {outline:2px solid #8fa7ff!important;outline-offset:4px!important;}
+main .font-mono,main .font-label-sm,main .font-label-md,main .code-font {font-family:Inter,system-ui,sans-serif!important;}
+main .text-label-sm,main .text-label-md,main .text-xs {font-size:13px!important;line-height:1.55!important;}
+main .text-outline,main .text-night-faint,main .text-text-muted,main .text-text-dim {color:#adb9d0!important;}
+main [class*="text-[10px]"],main [class*="text-[11px]"],main [class*="text-[12px]"] {font-size:13px!important;line-height:1.5!important;}
+main h1,main h2,main h3 {font-family:Sora,Inter,sans-serif!important;}
+main article p {line-height:1.7;}
+main section[id] {scroll-margin-top:28px;}
+main .specular-hover:hover {box-shadow:none!important;}
+main [class*="font-"] {overflow-wrap:break-word;}
+main figure {max-width:100%;}
+main figure span.w-12.shrink-0 {width:64px;white-space:nowrap;}
+main svg {max-width:100%;}
+.design-cv #outputs>ol>li,.design-cv #selected-projects>div>article {background:transparent!important;border:0!important;border-bottom:1px solid #202b41!important;border-radius:0!important;padding-left:0!important;padding-right:0!important;}
+.design-cv #capabilities h3 {font-family:Inter,sans-serif!important;text-transform:none!important;letter-spacing:0!important;font-size:16px!important;line-height:1.5!important;}
+.design-cv #capabilities h3>span[aria-hidden] {display:none;}
+.design-cv #outputs p {font-size:14px!important;line-height:1.7!important;}
+.design-cv #outputs li>div:first-child>span:first-child {background:transparent!important;border:0!important;padding-left:0!important;color:#8fa7ff!important;text-transform:none!important;}
+@media(max-width:767px) {
+ html {scroll-padding-top:16px;}
+ .review-header-inner {padding:16px 20px 8px;display:block;}
+ .review-brand {font-size:22px;margin-bottom:4px;}
+ .review-nav {gap:28px;font-size:14px;}
+ .review-footer {padding:28px 20px;margin-top:40px;}
+ .review-footer-inner {display:block;}
+ .review-footer nav {gap:22px;margin-top:12px;}
+ main {padding-left:20px!important;padding-right:20px!important;}
+ main h1 {font-size:34px!important;line-height:1.2!important;}
+ main .text-label-sm,main .text-label-md,main .text-xs {font-size:13px!important;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto!important;}* {transition:none!important;}}
+</style><link rel="stylesheet" href="/expansion/night-gallery.css"><style>.review-nav{gap:32px}@media(max-width:767px){.review-nav{gap:22px;font-size:13px;flex-wrap:wrap}}</style></head>
+<body class="bg-surface-container-lowest text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-surface-container-lowest" data-design-review="local">
+<a class="review-skip" href="#main-content">Skip to content</a>
+<!-- ========================================================================= -->
+<!-- Top Navigation Bar (Shared Component Architecture)                        -->
+<!-- ========================================================================= -->
+<header class="review-header"><div class="review-header-inner"><a class="review-brand" href="/homepage.html">Woo Young Cho</a><nav class="review-nav" aria-label="Main navigation"><a href="/research/" aria-current="page">Research</a><a href="/personal-projects/">Personal Projects</a><a href="/blog/">Blog</a><a href="/cv/">CV</a></nav></div></header>
+<!-- ========================================================================= -->
+<!-- Main Content Canvas                                                       -->
+<!-- ========================================================================= -->
+<main id="main-content" class="flex-grow w-full max-w-[1360px] mx-auto px-margin-mobile md:px-margin pt-10 md:pt-16 pb-24">
+<!-- Page Header / Intro Frame -->
+<section class="max-w-4xl mb-16 md:mb-24">
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-secondary-container">Research &amp; professional work</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mb-6">
+        Research
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-3xl">
+        My work spans metagenomic gene neighborhoods, sequence and structural analysis, translational omics, and spatial imaging.
+      </p>
+</section>
+<!-- ======================================================================= -->
+<!-- Section 1: Project Index (Supported Public Research Projects)           -->
+<!-- ======================================================================= -->
+<section class="mb-20 md:mb-28">
+<div class="flex items-baseline justify-between border-b hairline-border pb-4 mb-10">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm text-primary font-mono-tight">01 //</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Research projects</h2>
+</div>
+
+</div>
+<div class="research-additions"><article class="project-row"><div><span class="stage">Independent research · Experiments and evaluation</span><h3><a href="/projects/virtual-cell-challenge/">Virtual Cell Challenge 2026</a></h3><p>An independent investigation of how cellular-response models transfer across biological contexts. I compare simple baselines, biological priors and cell-state models while keeping development results, competition scores and biological claims distinct.</p><p class="role">Research design, model development &amp; evaluation</p><a class="text-action" href="/projects/virtual-cell-challenge/">Read project →</a></div><span class="arrow" aria-hidden="true">↗</span></article><article class="project-row"><div><span class="stage">Team software · Published work</span><h3><a href="/projects/genomycanalyzer/">MycoChase (published as GenoMycAnalyzer)</a></h3><p>My contributions to a team-developed genomics analysis system, connecting reproducible analysis workflows with reporting and operational deployment. The related GenoMycAnalyzer software paper was published in BMC Genomics in 2024.</p><p class="role">Pipeline development, tailored deployment &amp; operations</p><a class="text-action" href="/projects/genomycanalyzer/">Read project →</a></div><span class="arrow" aria-hidden="true">↗</span></article></div><div class="space-y-12">
+<!-- PROJECT 1: MAGraph (Asymmetric layout: Left generous diagram, Right narrative) -->
+<article class="bg-surface-container-low border hairline-border rounded-lg overflow-hidden transition-all duration-200 hover:border-primary/40">
+<div class="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
+<!-- Left Conceptual SVG Diagram Column (7 cols on Desktop) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-6 md:p-8 border-b lg:border-b-0 lg:border-r hairline-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-primary tracking-wide">
+                  FIG. 1.0 — CONCEPT SCHEMATIC
+                </span>
+<span class="font-label-sm text-label-sm text-outline">SYNTHESIS</span>
+</div>
+<!-- Vector Synteny / Gene-neighborhood graph SVG -->
+<div class="w-full h-56 md:h-64 rounded bg-surface-container-low/40 border hairline-border p-4 flex flex-col items-center justify-center relative overflow-hidden">
+<svg role="img" aria-label="Concept illustration: three gene-family nodes connected by observed proximity relationships" class="w-full h-full max-w-[500px]" viewBox="0 0 540 200" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="270" y="36" text-anchor="middle" fill="#adb9d0" font-family="Inter,sans-serif" font-size="16">Observed gene-neighbourhood context</text><path d="M146 105H220M320 105H394" stroke="#8fa7ff" stroke-width="2"/><g fill="#16233b" stroke="#8fa7ff" stroke-width="1.5"><rect x="46" y="76" width="100" height="58" rx="8"/><rect x="220" y="76" width="100" height="58" rx="8"/><rect x="394" y="76" width="100" height="58" rx="8"/></g><g fill="#edf3ff" font-family="Inter,sans-serif" font-size="16" text-anchor="middle"><text x="96" y="110">Family A</text><text x="270" y="110">Family B</text><text x="444" y="110">Family C</text></g><text x="270" y="176" text-anchor="middle" fill="#adb9d0" font-family="Inter,sans-serif" font-size="14">Illustrative families · edges show observed proximity</text></svg>
+</div>
+<figcaption class="mt-3 font-label-sm text-label-sm text-on-secondary-container">
+                Gene-neighbourhood representation · concept illustration
+              </figcaption>
+</div>
+<!-- Right Narrative Column (5 cols on Desktop) -->
+<div class="lg:col-span-5 p-6 md:p-8 flex flex-col justify-between">
+<div>
+<!-- Badges / Metadata -->
+<div class="flex flex-wrap items-center gap-2 mb-4">
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest border hairline-border font-label-sm text-label-sm text-primary">
+                    Completed · Academic · Dec 2022–Aug 2023
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+                    Thesis researcher &amp; primary MAGraph developer
+                  </span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-4">
+                  MAGraph
+                </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
+                  A graph-based representation that preserves gene-neighborhood context lost when metagenomic assemblies are reduced to gene catalogues. My thesis work combined representation design, implementation, and reproducible analysis.
+                </p>
+</div>
+<!-- Action Link -->
+<div class="pt-4 border-t hairline-border">
+<a class="group inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:underline focus:outline-none" href="/projects/magraph/">
+<span>View project case study</span>
+<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
+</a>
+</div>
+</div>
+</div>
+</article>
+<!-- PROJECT 2: EnzymeMatch (Varied proportions, smaller compact row) -->
+<article class="bg-surface-container-low border hairline-border rounded-lg overflow-hidden transition-all duration-200 hover:border-primary/40">
+<div class="grid grid-cols-1 lg:grid-cols-12 min-h-[300px]">
+<!-- Left Narrative Column (7 cols) -->
+<div class="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between order-2 lg:order-1">
+<div>
+<!-- Badges -->
+<div class="flex flex-wrap items-center gap-2 mb-4">
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest border hairline-border font-label-sm text-label-sm text-primary">
+                    Completed · Academic · Mar–Aug 2021
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+                    Bachelor's thesis development &amp; evaluation
+                  </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-3">
+                  EnzymeMatch
+                </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
+                  A structural-bioinformatics thesis project extending a database-dependent enzyme search tool. I developed and evaluated interaction matching, candidate ranking, and workflow improvements while examining computational tradeoffs.
+                </p>
+</div>
+<!-- Action Link -->
+<div class="pt-4 border-t hairline-border">
+<a class="group inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:underline focus:outline-none" href="/projects/enzymematch/">
+<span>View project overview</span>
+<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
+</a>
+</div>
+</div>
+<!-- Right Diagram Visual Column (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-6 md:p-8 border-b lg:border-b-0 lg:border-l hairline-border flex flex-col justify-between order-1 lg:order-2">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-primary tracking-wide">
+                  FIG. 2.0 — STRUCTURAL ABSTRACTION
+                </span>
+<span class="font-label-sm text-label-sm text-outline">GEOMETRY</span>
+</div>
+<!-- Abstract pocket/shape comparison conceptual diagram -->
+<div class="w-full h-44 md:h-52 rounded bg-surface-container-low/40 border hairline-border p-3 flex flex-col items-center justify-center relative overflow-hidden">
+<svg aria-label="Conceptual comparison of geometric interaction patterns; not an experimental structure" class="w-full h-full max-w-[320px]" fill="none" viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg">
+<!-- Active site binding cavity boundary representation -->
+<path d="M40 30 C 90 30, 90 120, 170 120 C 250 120, 250 30, 300 30" stroke="#3e4a5d" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<!-- Pocket Cavity Polyhedra (Abstract Geometric Shapes) -->
+<polygon fill="#101a2c" points="120,60 150,45 160,85 130,95" stroke="#8fa7ff" stroke-width="1.5"></polygon>
+<circle cx="140" cy="71" fill="#8fa7ff" r="2.5"></circle>
+<polygon fill="#101a2c" points="180,50 215,40 220,80 185,85" stroke="#bbc7de" stroke-width="1.25"></polygon>
+<circle cx="200" cy="65" fill="#bbc7de" r="2.5"></circle>
+<!-- Candidate docking schema vector links -->
+<path d="M140 71 L200 65" stroke="#8fa7ff" stroke-dasharray="2 2" stroke-width="1.25"></path>
+<path d="M160 85 L185 85" stroke="#444651" stroke-width="1"></path>
+<!-- Spatial boundary anchors -->
+<circle cx="65" cy="55" fill="#1b2844" r="3" stroke="#444651"></circle>
+<circle cx="275" cy="55" fill="#1b2844" r="3" stroke="#444651"></circle>
+<!-- Annotations -->
+<text fill="#adb9d0" font-family="Space Mono" font-size="9" text-anchor="middle" x="170" y="145">Interaction-pattern comparison</text>
+</svg>
+</div>
+<figcaption class="mt-3 font-label-sm text-label-sm text-on-secondary-container">
+                Interaction-pattern comparison · concept illustration; not evidence of binding or catalysis
+              </figcaption>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- Section 2: Research Interests                                           -->
+<!-- Open typographic entries with thin separators, zero boxiness            -->
+<!-- ======================================================================= -->
+<section class="mb-20 md:mb-28">
+<div class="flex items-baseline justify-between border-b hairline-border pb-4 mb-8">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm text-primary font-mono-tight">02 //</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Research interests</h2>
+</div>
+<span class="font-label-sm text-label-sm text-outline">CORE INQUIRIES</span>
+</div>
+<div class="divide-y hairline-border">
+<!-- Theme 1 -->
+<div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group">
+<div class="md:col-span-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-150">
+              Multimodal representations of cellular states
+            </h3>
+
+</div>
+<div class="md:col-span-8">
+<p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
+              Learning common representations from complementary biological measurements to understand cellular states.
+            </p>
+</div>
+</div>
+<!-- Theme 2 -->
+<div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group">
+<div class="md:col-span-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-150">
+              Spatial biology and computational pathology
+            </h3>
+
+</div>
+<div class="md:col-span-8">
+<p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
+              Connecting tissue morphology, molecular measurements, and spatial context to biological questions.
+            </p>
+</div>
+</div>
+<!-- Theme 3 -->
+<div class="py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group">
+<div class="md:col-span-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors duration-150">
+              Protein structure, function, and molecular learning
+            </h3>
+
+</div>
+<div class="md:col-span-8">
+<p class="font-body-lg text-body-lg text-on-surface-variant font-light leading-relaxed">
+              Understanding molecular function and exploring how computational models can guide informative experiments.
+            </p>
+</div>
+</div>
+</div>
+<p class="mt-8 font-body-sm text-body-sm text-on-surface-variant">Currently exploring virtual biological systems and learning from experimental feedback.</p>
+</section>
+<!-- ======================================================================= -->
+<!-- Section 3: Research Outputs (Exact 3 peer-reviewed / preprint records)   -->
+<!-- Strict preservation of Published vs Preprint status                     -->
+<!-- ======================================================================= -->
+<section>
+<div class="flex items-baseline justify-between border-b hairline-border pb-4 mb-8">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm text-primary font-mono-tight">03 //</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Research outputs</h2>
+</div>
+<span class="font-label-sm text-label-sm text-outline">PUBLICATIONS &amp; PREPRINTS</span>
+</div>
+<div class="space-y-6">
+<!-- RECORD 1: Published - Journal of Microbiology -->
+<article class="p-6 md:p-8 bg-surface-container-low border hairline-border rounded-lg transition-colors duration-150 hover:bg-surface-container">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<span class="px-2 py-0.5 rounded bg-primary text-surface-container-lowest font-label-sm text-label-sm font-bold tracking-wider">
+              PUBLISHED
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface font-mono-tight">
+              Journal of Microbiology 64(8), e2604011 · 2026-08-31
+            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-snug">
+            Genomic signatures associated with epidemiologically defined high-risk pathogenic Escherichia coli isolates identified by interpretable machine learning
+          </h3>
+<!-- Authors list with Woo Young Cho highlighted -->
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+            Yoojung Hwang, <strong class="text-on-surface font-semibold underline decoration-primary underline-offset-2">Woo Young Cho</strong>, Woojung Lee, Insun Joo, Jeong-Ih Shin, Mi-Ran Seo, Seung-Hun Shin, Kwan Soo Ko, Kun Taek Park, Yeun-Jun Chung, Seung-Hyun Jung.
+          </p>
+<!-- Archival Citation & Actions -->
+<div class="pt-4 border-t hairline-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="font-label-sm text-label-sm text-outline flex items-center gap-2">
+<span>DOI:</span>
+<span class="text-on-surface font-mono-tight">10.71150/jm.2604011</span>
+</div>
+<a class="font-label-sm text-label-sm text-primary hover:underline inline-flex items-center gap-1 focus:outline-none" href="https://pubmed.ncbi.nlm.nih.gov/42687640/" rel="noopener noreferrer" target="_blank">
+<span>PubMed Record</span>
+<span class="text-xs">↗</span>
+</a>
+</div>
+</article>
+<!-- RECORD 2: Published - BMC Genomics -->
+<article class="p-6 md:p-8 bg-surface-container-low border hairline-border rounded-lg transition-colors duration-150 hover:bg-surface-container">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<span class="px-2 py-0.5 rounded bg-primary text-surface-container-lowest font-label-sm text-label-sm font-bold tracking-wider">
+              PUBLISHED
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface font-mono-tight">
+              BMC Genomics 25, 387 · 2024-04-20
+            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-snug">
+            GenoMycAnalyzer: a web-based tool for species and drug resistance prediction for Mycobacterium genomes
+          </h3>
+<!-- Authors list with Woo Young Cho highlighted -->
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+            Doyoung Kim, Jeong-Ih Shin, In Young Yoo, Sungjin Jo, Jiyon Chu, <strong class="text-on-surface font-semibold underline decoration-primary underline-offset-2">Woo Young Cho</strong>, Seung-Hun Shin, Yeun-Jun Chung, Yeon-Joon Park, Seung-Hyun Jung.
+          </p>
+<!-- Archival Citation & Actions -->
+<div class="pt-4 border-t hairline-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="font-label-sm text-label-sm text-outline flex items-center gap-2">
+<span>DOI:</span>
+<span class="text-on-surface font-mono-tight">10.1186/s12864-024-10320-3</span>
+</div>
+<a class="font-label-sm text-label-sm text-primary hover:underline inline-flex items-center gap-1 focus:outline-none" href="https://doi.org/10.1186/s12864-024-10320-3" rel="noopener noreferrer" target="_blank">
+<span>Direct Journal Article</span>
+<span class="text-xs">↗</span>
+</a>
+</div>
+</article>
+<!-- RECORD 3: Preprint - bioRxiv -->
+<article class="p-6 md:p-8 bg-surface-container-low border hairline-border rounded-lg transition-colors duration-150 hover:bg-surface-container">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary-fixed font-label-sm text-label-sm font-bold tracking-wider border hairline-border">
+              PREPRINT
+            </span>
+<span class="font-label-sm text-label-sm text-on-surface font-mono-tight">
+              bioRxiv · 2025-09-29
+            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-snug">
+            Gene-centric metagenomic analyses reveal microbiome functional insights into diseases
+          </h3>
+<!-- Authors list with Woo Young Cho highlighted -->
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 leading-relaxed">
+            Shen Jin, Aurelie Cenier, Lea Eisenhard, Emilio Ríos, Daniela Wetzel, <strong class="text-on-surface font-semibold underline decoration-primary underline-offset-2">Woo Young Cho</strong>, Till R. Lesker, Tobias Eisen, Svenja Schorlemmer, Agnieszka Gaska, Tingting Zheng, Marilena Stamouli, Merianne Mohamad, Sudip Das, Vishal C. Patel, Till Strowig, Melanie Schirmer.
+          </p>
+<!-- Archival Citation & Actions -->
+<div class="pt-4 border-t hairline-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="font-label-sm text-label-sm text-outline flex items-center gap-2">
+<span>DOI:</span>
+<span class="text-on-surface font-mono-tight">10.1101/2025.09.29.679262</span>
+</div>
+<a class="font-label-sm text-label-sm text-primary hover:underline inline-flex items-center gap-1 focus:outline-none" href="https://doi.org/10.1101/2025.09.29.679262" rel="noopener noreferrer" target="_blank">
+<span>bioRxiv DOI</span>
+<span class="text-xs">↗</span>
+</a>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- Footer (Shared Component Architecture)                                    -->
+<!-- ========================================================================= -->
+<footer class="review-footer"><div class="review-footer-inner"><div><strong>Woo Young Cho</strong><p>Computational biology &amp; scientific software</p></div><nav aria-label="Contact"><a href="mailto:wooyoung510@gmail.com">Email</a><a href="https://github.com/EspressoTonic">GitHub</a><a href="https://orcid.org/0009-0002-7227-3326">ORCID</a><a href="/blog/">Blog</a><a href="/cv/">CV</a></nav></div><div class="footer-social"><span class="eyebrow">SNS</span><ul class="sns-labels" aria-label="Social platforms"><li><span>LinkedIn</span></li><li><span>Instagram</span></li><li><span>X</span></li><li><span>Threads</span></li></ul></div></footer>
+</body></html>

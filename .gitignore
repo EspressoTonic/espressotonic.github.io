@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.env*
+!.env.example
+playwright-report/
+test-results/
+.qa/
+.private/
+.DS_Store

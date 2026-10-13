@@ -1,0 +1,35 @@
+---
+{
+  'title': 'Gene-centric metagenomic analyses reveal microbiome functional insights into diseases',
+  'authors':
+    [
+      'Shen Jin',
+      'Aurelie Cenier',
+      'Lea Eisenhard',
+      'Emilio Ríos',
+      'Daniela Wetzel',
+      'Woo Young Cho',
+      'Till R. Lesker',
+      'Tobias Eisen',
+      'Svenja Schorlemmer',
+      'Agnieszka Gaska',
+      'Tingting Zheng',
+      'Marilena Stamouli',
+      'Merianne Mohamad',
+      'Sudip Das',
+      'Vishal C. Patel',
+      'Till Strowig',
+      'Melanie Schirmer',
+    ],
+  'ownerAuthorIndex': 5,
+  'year': 2025,
+  'date': '2025-09-29',
+  'venue': 'bioRxiv',
+  'type': 'preprint',
+  'status': 'preprint',
+  'doi': '10.1101/2025.09.29.679262',
+  'url': 'https://doi.org/10.1101/2025.09.29.679262',
+  'draft': false,
+  'updated': '2026-10-13',
+}
+---

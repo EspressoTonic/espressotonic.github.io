@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+interface Props {
+  items: CollectionEntry<'publications'>[];
+  variant?: 'full' | 'compact';
+}
+const { items, variant = 'full' } = Astro.props;
+const status = (value: string) =>
+  value === 'in-progress' ? 'In progress' : value[0].toUpperCase() + value.slice(1);
+---
+
+<ol class:list={['publication-list', { 'publication-compact': variant === 'compact' }]}>
+  {items.map((item) => (
+    <li>
+      <div class="publication-copy">
+        <div class="project-meta">
+          {item.data.year} · {item.data.venue} · <span>{status(item.data.status)}</span>
+        </div>
+        <h3>
+          {variant === 'full' && item.data.url ? (
+            <a href={item.data.url}>{item.data.title}</a>
+          ) : (
+            item.data.title
+          )}
+        </h3>
+        {variant === 'full' && (
+          <>
+            <p class="authors">
+              {item.data.authors.map((author, i) => (
+                <>
+                  {i > 0 ? ', ' : ''}
+                  {i === item.data.ownerAuthorIndex ? <strong>{author}</strong> : author}
+                </>
+              ))}
+              .
+            </p>
+            <p class="citation">
+              {item.data.type === 'preprint'
+                ? 'Preprint'
+                : item.data.type === 'paper'
+                  ? 'Paper'
+                  : status(item.data.type)}
+              {item.data.doi && (
+                <>
+                  {' '}
+                  · <a href={`https://doi.org/${item.data.doi}`}>DOI: {item.data.doi}</a>
+                </>
+              )}
+            </p>
+          </>
+        )}
+      </div>
+      {variant === 'compact' && item.data.url && (
+        <a class="publication-link" href={item.data.url}>
+          {item.data.url.includes('pubmed')
+            ? 'PubMed'
+            : item.data.type === 'preprint'
+              ? 'bioRxiv'
+              : (item.data.venue ?? 'Read output')}{' '}
+          <Icon name="external" />
+        </a>
+      )}
+    </li>
+  ))}
+</ol>

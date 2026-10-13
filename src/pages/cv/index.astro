@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CvSections from '../../components/CvSections.astro';
+import Icon from '../../components/Icon.astro';
+import { profile, cv, reviewDate } from '../../lib/content';
+const p = await profile();
+const c = await cv();
+const sections = [
+  { id: 'experience', title: 'Experience' },
+  { id: 'education', title: 'Education' },
+  { id: 'outputs', title: 'Research outputs' },
+  { id: 'selected-projects', title: 'Selected projects' },
+  { id: 'capabilities', title: 'Capabilities' },
+  ...(c.data.languages ? [{ id: 'languages', title: 'Languages' }] : []),
+];
+---
+
+<BaseLayout
+  title="CV"
+  description="Woo Young Cho’s experience, education, research outputs, and computational biology capabilities."
+  showSocial={false}
+>
+  <div class="wrap cv-page">
+    <header class="cv-header">
+      <div>
+        <div class="cv-heading-label">
+          <span class="eyebrow">Curriculum vitae</span>
+          <p class="review-date">
+            Updated {reviewDate(c.data.updated)}
+            {c.data.languages && (
+              <span class="print-languages"> · {c.data.languages.join(' · ')}</span>
+            )}
+          </p>
+        </div>
+        <h1>{p.data.name}</h1>
+        <p class="cv-subtitle">Computational biology &amp; bioinformatics</p>
+      </div>
+      <div class="cv-header-actions">
+        <a class="button download" href="/files/woo-young-cho-cv.pdf" download>
+          <Icon name="download" />
+          Download PDF
+        </a>
+        <p class="print-note">Print-friendly PDF</p>
+        <div class="cv-contact">
+          {p.data.email && <a href={`mailto:${p.data.email}`}>{p.data.email}</a>}
+          {p.data.links.map((link) => (
+            <a href={link.url}>{link.label}</a>
+          ))}
+        </div>
+      </div>
+    </header>
+    <div class="cv-layout">
+      <nav class="toc cv-toc" aria-label="CV sections">
+        <span class="eyebrow">CV index</span>
+        <div class="toc-links">
+          {sections.map((section) => (
+            <a href={`#${section.id}`}>{section.title}</a>
+          ))}
+        </div>
+      </nav>
+      <div class="cv-content">
+        <CvSections />
+      </div>
+    </div>
+  </div>
+</BaseLayout>

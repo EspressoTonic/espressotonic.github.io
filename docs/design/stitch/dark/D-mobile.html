@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>D — Night Gallery / Dark Mobile</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: '#090e1b',
+            'night-surface': '#101a2c',
+            'night-card': '#142036',
+            'night-border': '#1e2e4a',
+            'night-text': '#edf3ff',
+            'night-muted': '#adb9d0',
+            periwinkle: '#8fa7ff',
+            'periwinkle-hover': '#7b95f7',
+          },
+          fontFamily: {
+            sora: ['Sora', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #090e1b;
+      color: #edf3ff;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #8fa7ff;
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body class="bg-night text-night-text antialiased min-h-screen flex flex-col justify-between selection:bg-periwinkle/30 selection:text-white">
+<!-- TOP HEADER (No hamburger, plain visible links, >=44px tap targets) -->
+<header class="w-full border-b border-night-border/70 bg-[#090e1b]/95 sticky top-0 z-50 backdrop-blur-md">
+<div class="px-5 py-3.5 flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<a class="text-base font-semibold font-sora tracking-tight text-white hover:text-periwinkle transition-colors py-1" href="/">
+          Woo Young Cho
+        </a>
+</div>
+<nav aria-label="Main Navigation" class="flex items-center gap-5 text-[14px] font-medium text-night-muted border-t border-night-border/40 pt-2.5">
+<a class="py-1 hover:text-white transition-colors" href="/research/">Research</a>
+<a class="py-1 hover:text-white transition-colors" href="/personal-projects/">Personal Projects</a>
+<a class="py-1 hover:text-white transition-colors" href="/cv/">CV</a>
+</nav>
+</div>
+</header>
+<main class="w-full px-5 py-7 space-y-12">
+<!-- 1. OPENING / HERO SECTION -->
+<section class="space-y-6">
+<div class="space-y-4">
+<h1 class="text-[32px] leading-[1.2] font-sora font-bold text-white tracking-tight">
+          Understanding biology through its many measurements.
+        </h1>
+<p class="text-[16px] leading-[1.6] text-night-muted">
+          I'm Woo Young Cho, a bioinformatics researcher working across omics, spatial imaging, and scientific software. I'm interested in developing machine-learning methods that bring complementary measurements into a shared representation of cellular states.
+        </p>
+<p class="text-[15px] leading-[1.6] text-night-muted/90">
+          Alongside research, I build practical applications and explore how useful AI assistants should work.
+        </p>
+</div>
+<!-- Action Buttons (both compact, visible in initial viewport, min 44px tap target) -->
+<div class="flex flex-row items-center gap-3 pt-1">
+<a class="h-11 px-5 rounded-lg bg-periwinkle hover:bg-periwinkle-hover text-night font-semibold text-[14px] inline-flex items-center justify-center gap-2 transition-all shadow-sm" href="/research/">
+<span>Explore research</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="h-11 px-5 rounded-lg border border-night-border bg-night-surface/60 hover:bg-night-surface hover:text-white text-night-muted font-medium text-[14px] inline-flex items-center justify-center transition-colors" href="/personal-projects/">
+<span>Personal projects</span>
+</a>
+</div>
+<!-- FEATURED MAGRAPH (Horizontal unboxed gallery composition, directional gene bands + abstract graph) -->
+<div class="pt-3 space-y-3">
+<div class="bg-night-surface rounded-xl border border-night-border p-4 overflow-hidden shadow-md">
+<div class="flex items-center justify-between pb-3 border-b border-night-border/60">
+<span class="text-[13px] font-semibold text-periwinkle tracking-wide font-sora">Gene-neighbourhood representation</span>
+<span class="text-[12px] text-night-muted bg-night-card px-2.5 py-0.5 rounded-full border border-night-border/80">Academic research · Master's thesis</span>
+</div>
+<!-- MAGraph Visual: Large flat composition of colored directional gene bands connected to abstract graph -->
+<div class="py-5 flex flex-col items-center justify-center">
+<svg class="w-full max-w-[340px] h-32" fill="none" viewbox="0 0 340 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Directional Gene Bands (Clean / Unlabelled) -->
+<g id="gene-bands">
+<!-- Gene 1 -->
+<path d="M12 36 L48 36 L60 48 L48 60 L12 60 L20 48 Z" fill="#2d426a" stroke="#8fa7ff" stroke-width="1.5"></path>
+<!-- Gene 2 (Target / Core synteny block) -->
+<path d="M66 36 L108 36 L120 48 L108 60 L66 60 L74 48 Z" fill="#3b5998" stroke="#a5baff" stroke-width="2"></path>
+<!-- Gene 3 -->
+<path d="M126 36 L162 36 L174 48 L162 60 L126 60 L134 48 Z" fill="#223352" stroke="#6b87db" stroke-width="1.5"></path>
+</g>
+<!-- Connection lines from synteny block to Graph Representation -->
+<path d="M174 48 C 190 48, 195 30, 215 30" stroke="#8fa7ff" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<path d="M174 48 C 195 48, 200 68, 220 68" stroke="#8fa7ff" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<path d="M120 48 C 150 78, 190 92, 230 92" stroke="#8fa7ff" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<!-- Abstract Graph Representation -->
+<g id="graph-context">
+<line stroke="#48659e" stroke-width="1.5" x1="215" x2="265" y1="30" y2="40"></line>
+<line stroke="#48659e" stroke-width="1.5" x1="220" x2="265" y1="68" y2="40"></line>
+<line stroke="#48659e" stroke-width="1.5" x1="220" x2="275" y1="68" y2="76"></line>
+<line stroke="#48659e" stroke-width="1.5" x1="230" x2="275" y1="92" y2="76"></line>
+<line stroke="#8fa7ff" stroke-width="2" x1="265" x2="315" y1="40" y2="55"></line>
+<line stroke="#8fa7ff" stroke-width="2" x1="275" x2="315" y1="76" y2="55"></line>
+<!-- Nodes -->
+<circle cx="215" cy="30" fill="#142036" r="6" stroke="#8fa7ff" stroke-width="2"></circle>
+<circle cx="220" cy="68" fill="#142036" r="6" stroke="#8fa7ff" stroke-width="2"></circle>
+<circle cx="230" cy="92" fill="#142036" r="6" stroke="#8fa7ff" stroke-width="2"></circle>
+<circle cx="265" cy="40" fill="#2d426a" r="7" stroke="#a5baff" stroke-width="2"></circle>
+<circle cx="275" cy="76" fill="#2d426a" r="7" stroke="#a5baff" stroke-width="2"></circle>
+<!-- Focus Node -->
+<circle cx="315" cy="55" fill="#8fa7ff" r="9" stroke="#ffffff" stroke-width="2"></circle>
+</g>
+</svg>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-night-border/40 text-[13px] text-night-muted">
+<span class="inline-flex items-center gap-1.5 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-periwinkle"></span>
+              Concept illustration
+            </span>
+</div>
+</div>
+<!-- MAGraph Summary & Read Project Link -->
+<div class="space-y-2 pt-1 px-1">
+<h2 class="text-xl font-bold font-sora text-white">MAGraph</h2>
+<p class="text-[15px] leading-relaxed text-night-muted">
+            Representing metagenomic gene neighbourhoods as graphs to investigate functional context.
+          </p>
+<div class="pt-1">
+<a class="inline-flex items-center gap-1.5 text-[14px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/projects/magraph/">
+<span>Read project</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. SELECTED RESEARCH SECTION (Asymmetric open visual features with modest dividers) -->
+<section class="space-y-6 pt-4 border-t border-night-border">
+<div class="flex items-center justify-between">
+<h2 class="text-[20px] font-bold font-sora text-white tracking-tight">Selected research</h2>
+<a class="text-[13px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/research/">
+          All research →
+        </a>
+</div>
+<!-- Research Item 1: Virtual Cell Challenge 2026 -->
+<article class="space-y-3 pt-2">
+<div class="text-[12px] font-medium text-night-muted tracking-wide">
+          Independent research · Experiments and evaluation
+        </div>
+<h3 class="text-[18px] font-bold font-sora text-white">Virtual Cell Challenge 2026</h3>
+<p class="text-[15px] leading-relaxed text-night-muted">
+          Developing and evaluating models of cellular responses across biological contexts.
+        </p>
+<!-- Diagram: Model comparison and evaluation -->
+<div class="bg-night-surface rounded-xl border border-night-border p-4 my-2">
+<div class="text-[13px] font-semibold text-periwinkle pb-2.5 mb-3 border-b border-night-border/50 font-sora">
+            Model comparison and evaluation
+          </div>
+<!-- Clean non-colliding linear flow -->
+<div class="flex flex-col gap-2.5 py-1"><div class="bg-night-card border border-night-border/80 rounded-lg p-2.5 text-center">
+<span class="text-[13px] font-medium text-white block">Biological context</span>
+</div>
+<div class="flex justify-center text-periwinkle">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="bg-[#1b2b48] border border-periwinkle/40 rounded-lg p-2.5 text-center">
+<span class="text-[13px] font-semibold text-white block">Candidate models</span>
+</div>
+<div class="flex justify-center text-periwinkle">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="bg-night-card border border-night-border/80 rounded-lg p-2.5 text-center">
+<span class="text-[13px] font-medium text-white block">Evaluation</span>
+</div></div>
+<div class="pt-3 mt-3 border-t border-night-border/40 text-[13px] text-night-muted flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-periwinkle"></span>
+            Concept illustration
+          </div>
+</div>
+<div>
+<a class="inline-flex items-center gap-1.5 text-[14px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/projects/virtual-cell-challenge/">
+<span>Read project</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</article>
+<div class="border-t border-night-border/60"></div>
+<!-- Research Item 2: GenoMycAnalyzer -->
+<article class="space-y-3 pt-2">
+<div class="text-[12px] font-medium text-night-muted tracking-wide">
+          Team software · Published work
+        </div>
+<h3 class="text-[18px] font-bold font-sora text-white">GenoMycAnalyzer</h3>
+<p class="text-[15px] leading-relaxed text-night-muted">
+          Contributing pipelines and deployment work to reproducible sequencing-analysis software.
+        </p>
+<!-- Diagram: Reproducible software workflow -->
+<div class="bg-night-surface rounded-xl border border-night-border p-4 my-2">
+<div class="text-[13px] font-semibold text-periwinkle pb-2.5 mb-3 border-b border-night-border/50 font-sora">
+            Reproducible software workflow
+          </div>
+<!-- Clean workflow blocks -->
+<div class="flex flex-col gap-2.5 py-1"><div class="bg-night-card border border-night-border/80 rounded-lg p-2.5 text-center">
+<span class="text-[13px] font-medium text-white block">Sequencing data</span>
+</div>
+<div class="flex justify-center text-periwinkle">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="bg-[#1b2b48] border border-periwinkle/40 rounded-lg p-2.5 text-center">
+<span class="text-[13px] font-semibold text-white block">Reproducible workflow</span>
+</div>
+<div class="flex justify-center text-periwinkle">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="bg-night-card border border-night-border/80 rounded-lg p-2.5 text-center">
+<span class="text-[13px] font-medium text-white block">Reviewable outputs</span>
+</div></div>
+<div class="pt-3 mt-3 border-t border-night-border/40 text-[13px] text-night-muted flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-periwinkle"></span>
+            Concept illustration
+          </div>
+</div>
+<div>
+<a class="inline-flex items-center gap-1.5 text-[14px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/projects/genomycanalyzer/">
+<span>Read project</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</article>
+</section>
+<!-- 3. PERSONAL PROJECTS SECTION (Varied panel sizes & portrait Location Todo preview) -->
+<section class="space-y-6 pt-4 border-t border-night-border">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-[20px] font-bold font-sora text-white tracking-tight">Personal projects</h2>
+<p class="text-[14px] text-night-muted pt-0.5">Practical tools, built around everyday problems.</p>
+</div>
+<a class="text-[13px] font-semibold text-periwinkle hover:text-white transition-colors py-1 shrink-0" href="/personal-projects/">
+          All projects →
+        </a>
+</div>
+<div class="space-y-4">
+<!-- Fridge Match (Compact landscape card) -->
+<article class="bg-night-surface rounded-xl border border-night-border p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[12px] font-medium text-night-muted px-2 py-0.5 rounded bg-night-card border border-night-border">Private prototype</span>
+</div>
+<div>
+<h3 class="text-[17px] font-bold font-sora text-white">Fridge Match</h3>
+<p class="text-[15px] leading-relaxed text-night-muted pt-1">
+              An ingredient inventory and meal-planning prototype.
+            </p>
+</div>
+<!-- Fictional Sample Data Interface Preview -->
+<div class="bg-night-card border border-night-border/80 rounded-lg p-3 space-y-2">
+<div class="text-[12px] font-semibold text-periwinkle">Sample data · Interface concept</div>
+<div class="space-y-1.5 text-[13px] font-mono text-night-muted">
+<div class="flex justify-between py-0.5 border-b border-night-border/40">
+<span class="text-white">Tofu</span>
+<span>in stock</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-night-border/40">
+<span class="text-white">Rice</span>
+<span>pantry</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-night-border/40">
+<span class="text-white">Mushrooms</span>
+<span>fresh</span>
+</div>
+<div class="pt-1.5 text-xs text-night-muted/90 flex flex-col">
+<span class="text-night-muted text-[11px] uppercase tracking-wider font-sans font-semibold">Suggested meal</span>
+<span class="text-periwinkle font-medium font-sans text-[13px]">Stir-fried Tofu &amp; Mushrooms</span>
+</div>
+</div>
+<div class="text-[12px] text-night-muted/80 italic pt-1 border-t border-night-border/40">
+              Interface concept — replace with actual screenshot
+            </div>
+</div>
+<div>
+<a class="inline-flex items-center gap-1.5 text-[14px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/projects/fridge-match/">
+<span>View prototype details</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</article>
+<!-- Commute Log (Medium landscape card) -->
+<article class="bg-night-surface rounded-xl border border-night-border p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[12px] font-medium text-night-muted px-2 py-0.5 rounded bg-night-card border border-night-border">Local MVP</span>
+</div>
+<div>
+<h3 class="text-[17px] font-bold font-sora text-white">Commute Log</h3>
+<p class="text-[15px] leading-relaxed text-night-muted pt-1">
+              Exploring recorded journeys and departure windows with traceable source information.
+            </p>
+</div>
+<!-- Fictional Sample Data Interface Preview -->
+<div class="bg-night-card border border-night-border/80 rounded-lg p-3 space-y-2">
+<div class="text-[12px] font-semibold text-periwinkle">Sample data · Interface concept</div>
+<div class="p-2.5 rounded bg-night/60 border border-night-border/60 flex items-center justify-between">
+<div>
+<span class="text-[13px] font-medium text-white block">Station A to Station B</span>
+<span class="text-[11px] text-night-muted">Source: sample record</span>
+</div>
+<span class="text-[13px] font-mono text-periwinkle font-semibold bg-night-card px-2 py-1 rounded border border-night-border">08:20</span>
+</div>
+<div class="text-[12px] text-night-muted/80 italic pt-1">
+              Interface concept — replace with actual screenshot
+            </div>
+</div>
+<div>
+<a class="inline-flex items-center gap-1.5 text-[14px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/projects/commute-log/">
+<span>View MVP details</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</article>
+<!-- Location Todo (Portrait emphasis preview) -->
+<article class="bg-night-surface rounded-xl border border-periwinkle/30 p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[12px] font-medium text-periwinkle px-2 py-0.5 rounded bg-[#1b2b48] border border-periwinkle/40">Prototype · Portrait preview</span>
+</div>
+<div>
+<h3 class="text-[17px] font-bold font-sora text-white">Location Todo</h3>
+<p class="text-[15px] leading-relaxed text-night-muted pt-1">
+              A location-aware reminder prototype with native mobile implementations.
+            </p>
+</div>
+<!-- Portrait Device Simulation Preview -->
+<div class="bg-night-card border border-night-border/80 rounded-xl p-3.5 space-y-2.5 max-w-[280px] mx-auto shadow-inner">
+<div class="text-[12px] font-semibold text-periwinkle text-center">Sample data · Interface concept</div>
+<div class="space-y-2 pt-1">
+<div class="p-2 rounded bg-night border border-night-border/60 flex items-center justify-between">
+<div>
+<span class="text-[13px] font-medium text-white block">Library</span>
+<span class="text-[11px] text-night-muted">Return a book</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-periwinkle"></span>
+</div>
+<div class="p-2 rounded bg-night border border-night-border/60 flex items-center justify-between">
+<div>
+<span class="text-[13px] font-medium text-white block">Shop</span>
+<span class="text-[11px] text-night-muted">Collect an item</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-night-muted"></span>
+</div>
+</div>
+<div class="text-[11px] text-night-muted/80 text-center italic pt-1 border-t border-night-border/40">
+              Interface concept — replace with actual screenshot
+            </div>
+</div>
+<div>
+<a class="inline-flex items-center gap-1.5 text-[14px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/projects/location-todo/">
+<span>View prototype details</span>
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</article>
+</div>
+<!-- JUNIOR Link (Normal text link, no raw url printed) -->
+<div class="pt-2">
+<a class="inline-flex items-center gap-2 text-[14px] font-medium text-night-muted hover:text-white transition-colors py-1" href="/projects/junior/">
+<span>Exploring supervised research assistants with JUNIOR</span>
+<span class="text-periwinkle">→</span>
+</a>
+</div>
+</section>
+<!-- 4. QUESTIONS I'M DRAWN TO (Clean unboxed type section with modest dividers) -->
+<section class="space-y-5 pt-4 border-t border-night-border">
+<div>
+<h2 class="text-[20px] font-bold font-sora text-white tracking-tight">Questions I'm drawn to</h2>
+</div>
+<div class="space-y-4">
+<!-- Interest 1 -->
+<div class="py-2 space-y-1">
+<h3 class="text-[16px] font-semibold font-sora text-white">Multimodal representations of cellular states</h3>
+<p class="text-[15px] leading-relaxed text-night-muted">
+            Learning common representations from complementary biological measurements to understand cellular states.
+          </p>
+</div>
+<div class="border-t border-night-border/40"></div>
+<!-- Interest 2 -->
+<div class="py-2 space-y-1">
+<h3 class="text-[16px] font-semibold font-sora text-white">Spatial biology and computational pathology</h3>
+<p class="text-[15px] leading-relaxed text-night-muted">
+            Connecting tissue morphology, molecular measurements, and spatial context to biological questions.
+          </p>
+</div>
+<div class="border-t border-night-border/40"></div>
+<!-- Interest 3 -->
+<div class="py-2 space-y-1">
+<h3 class="text-[16px] font-semibold font-sora text-white">Protein structure, function, and molecular learning</h3>
+<p class="text-[15px] leading-relaxed text-night-muted">
+            Understanding molecular function and exploring how computational models can guide informative experiments.
+          </p>
+</div>
+</div>
+<!-- Restored exact sentence -->
+<p class="text-[14px] italic text-night-muted/90 pt-1">
+        Currently exploring virtual biological systems and learning from experimental feedback.
+      </p>
+</section>
+<!-- 5. SELECTED PUBLICATIONS (Clean unboxed rows with real URLs & >=44px tap targets) -->
+<section class="space-y-5 pt-4 border-t border-night-border">
+<div class="flex items-center justify-between">
+<h2 class="text-[20px] font-bold font-sora text-white tracking-tight">Selected publications</h2>
+<a class="text-[13px] font-semibold text-periwinkle hover:text-white transition-colors py-1" href="/cv/">
+          Full CV →
+        </a>
+</div>
+<div class="space-y-4">
+<!-- Publication 1 -->
+<article class="p-3.5 rounded-xl bg-night-surface border border-night-border space-y-2">
+<div class="flex items-center justify-between text-[12px]">
+<span class="font-mono text-night-muted">2026 · Journal of Microbiology</span>
+<span class="text-periwinkle bg-[#1b2b48] px-2 py-0.5 rounded font-medium">Published</span>
+</div>
+<h3 class="text-[15px] font-semibold leading-snug text-white">
+            Genomic signatures associated with epidemiologically defined high-risk pathogenic Escherichia coli isolates identified by interpretable machine learning
+          </h3>
+<div class="pt-1">
+<a class="h-11 px-3 rounded bg-night-card hover:bg-night-border border border-night-border/80 text-[13px] font-medium text-periwinkle hover:text-white inline-flex items-center gap-1.5 transition-colors" href="https://pubmed.ncbi.nlm.nih.gov/42687640/" rel="noopener noreferrer" target="_blank">
+<span>PubMed</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Publication 2 -->
+<article class="p-3.5 rounded-xl bg-night-surface border border-night-border space-y-2">
+<div class="flex items-center justify-between text-[12px]">
+<span class="font-mono text-night-muted">2025 · bioRxiv</span>
+<span class="text-night-muted bg-night-card px-2 py-0.5 rounded font-medium border border-night-border/60">Preprint</span>
+</div>
+<h3 class="text-[15px] font-semibold leading-snug text-white">
+            Gene-centric metagenomic analyses reveal microbiome functional insights into diseases
+          </h3>
+<div class="pt-1">
+<a class="h-11 px-3 rounded bg-night-card hover:bg-night-border border border-night-border/80 text-[13px] font-medium text-periwinkle hover:text-white inline-flex items-center gap-1.5 transition-colors" href="https://doi.org/10.1101/2025.09.29.679262" rel="noopener noreferrer" target="_blank">
+<span>bioRxiv</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Publication 3 -->
+<article class="p-3.5 rounded-xl bg-night-surface border border-night-border space-y-2">
+<div class="flex items-center justify-between text-[12px]">
+<span class="font-mono text-night-muted">2024 · BMC Genomics</span>
+<span class="text-periwinkle bg-[#1b2b48] px-2 py-0.5 rounded font-medium">Published</span>
+</div>
+<h3 class="text-[15px] font-semibold leading-snug text-white">
+            GenoMycAnalyzer: a web-based tool for species and drug resistance prediction for Mycobacterium genomes
+          </h3>
+<div class="pt-1">
+<a class="h-11 px-3 rounded bg-night-card hover:bg-night-border border border-night-border/80 text-[13px] font-medium text-periwinkle hover:text-white inline-flex items-center gap-1.5 transition-colors" href="https://doi.org/10.1186/s12864-024-10320-3" rel="noopener noreferrer" target="_blank">
+<span>BMC Genomics</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+</div>
+</section>
+<!-- 6. CONTACT & BIO FOOTER SECTION -->
+<section class="space-y-6 pt-4 border-t border-night-border">
+<div class="space-y-2">
+<h2 class="text-[20px] font-bold font-sora text-white tracking-tight">Let's connect.</h2>
+<p class="text-[15px] text-night-muted leading-relaxed">
+          For research conversations, collaborations, and opportunities.
+        </p>
+<p class="text-[14px] text-night-muted/80 pt-1">
+          My experience spans metagenomic representations, protein-structure analysis, scientific software, and spatial imaging.
+        </p>
+</div>
+<!-- Contact Links (min 44px tap height, 2-column mobile grid) -->
+<div class="grid grid-cols-2 gap-2.5">
+<a class="h-11 px-3.5 rounded-lg bg-night-surface border border-night-border hover:border-periwinkle/50 text-[13px] font-medium text-white flex items-center justify-between transition-colors" href="mailto:wooyoung510@gmail.com">
+<span>Email</span>
+<svg class="w-3.5 h-3.5 text-periwinkle" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="h-11 px-3.5 rounded-lg bg-night-surface border border-night-border hover:border-periwinkle/50 text-[13px] font-medium text-white flex items-center justify-between transition-colors" href="https://github.com/EspressoTonic" rel="noopener noreferrer" target="_blank">
+<span>GitHub</span>
+<svg class="w-3.5 h-3.5 text-periwinkle" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="h-11 px-3.5 rounded-lg bg-night-surface border border-night-border hover:border-periwinkle/50 text-[13px] font-medium text-white flex items-center justify-between transition-colors" href="https://orcid.org/0009-0002-7227-3326" rel="noopener noreferrer" target="_blank">
+<span>ORCID</span>
+<svg class="w-3.5 h-3.5 text-periwinkle" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="h-11 px-3.5 rounded-lg bg-night-surface border border-night-border hover:border-periwinkle/50 text-[13px] font-medium text-white flex items-center justify-between transition-colors" href="/cv/">
+<span>View CV</span>
+<svg class="w-3.5 h-3.5 text-periwinkle" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</section>
+</main>
+<!-- CLEAN FOOTER -->
+<footer class="w-full border-t border-night-border/70 py-6 px-5 mt-10 bg-night">
+<div class="flex flex-col gap-3">
+<a class="text-sm font-semibold font-sora text-white hover:text-periwinkle transition-colors" href="/">
+        Woo Young Cho
+      </a>
+<div class="flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-night-muted">
+<a class="hover:text-white transition-colors" href="/research/">Research</a>
+<a class="hover:text-white transition-colors" href="/personal-projects/">Personal Projects</a>
+<a class="hover:text-white transition-colors" href="/cv/">CV</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

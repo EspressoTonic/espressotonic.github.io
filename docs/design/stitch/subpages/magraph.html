@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAGraph — Research Case Study | Woo Young Cho</title>
+<!-- Typography & Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Sora:wght@400;500;600;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Verbatim Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed-variant": "#3c475a",
+            "background": "#101a2c",
+            "primary-container": "#8fa7ff",
+            "tertiary-container": "#cda72a",
+            "surface-dim": "#101a2c",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#090e1b",
+            "on-primary-fixed-variant": "#264192",
+            "outline": "#adb9d0",
+            "on-secondary-fixed": "#101c2d",
+            "on-tertiary-fixed-variant": "#574400",
+            "primary-fixed-dim": "#8fa7ff",
+            "on-background": "#edf3ff",
+            "on-secondary": "#253143",
+            "tertiary-fixed": "#ffe08a",
+            "on-tertiary-container": "#4f3d00",
+            "on-error-container": "#ffdad6",
+            "outline-variant": "#444651",
+            "surface-container-highest": "#303443",
+            "on-surface": "#edf3ff",
+            "on-primary": "#04287b",
+            "on-tertiary": "#3d2f00",
+            "secondary-fixed": "#d7e3fb",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#241a00",
+            "secondary": "#bbc7de",
+            "error-container": "#93000a",
+            "surface-tint": "#8fa7ff",
+            "secondary-container": "#3e4a5d",
+            "tertiary": "#ebc244",
+            "on-surface-variant": "#adb9d0",
+            "primary-fixed": "#dce1ff",
+            "on-primary-fixed": "#00164f",
+            "surface-variant": "#303443",
+            "on-primary-container": "#1d398a",
+            "inverse-primary": "#4059ab",
+            "surface-bright": "#343948",
+            "tertiary-fixed-dim": "#ebc244",
+            "surface-container-high": "#252a38",
+            "surface": "#101a2c",
+            "inverse-surface": "#edf3ff",
+            "inverse-on-surface": "#2b303e",
+            "surface-container-low": "#101a2c",
+            "on-secondary-container": "#adb9d0",
+            "surface-container": "#101a2c",
+            "secondary-fixed-dim": "#bbc7de",
+            "primary": "#8fa7ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-mobile": "1.25rem",
+            "space-sm": "0.5rem",
+            "margin": "3rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "headline-lg": ["Sora"],
+            "label-md": ["Space Mono"],
+            "headline-lg-mobile": ["Sora"],
+            "headline-sm": ["Sora"],
+            "headline-md": ["Sora"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Space Mono"],
+            "headline-xl-mobile": ["Sora"],
+            "headline-xl": ["Sora"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+            "headline-xl": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    /* Custom utility classes strictly honoring D — Night Gallery visual rules */
+    body {
+      background-color: #090e1b;
+      color: #edf3ff;
+      font-family: 'Inter', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .technical-border {
+      border: 1px solid #1b2844;
+    }
+    .technical-hairline-b {
+      border-bottom: 1px solid #1b2844;
+    }
+    .technical-hairline-t {
+      border-top: 1px solid #1b2844;
+    }
+    .specular-hover:hover {
+      box-shadow: 0 0 20px rgba(143, 167, 255, 0.12);
+    }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
+    /* Accessible focus ring */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #8fa7ff;
+      outline-offset: 2px;
+    }
+  </style>
+<style id="review-polish">
+/* Local design-review refinements: selected D shell, readable type, open CV rows. */
+html {scroll-padding-top:108px;}
+body {background:#090e1b!important;color:#edf3ff!important;font-family:Inter,system-ui,sans-serif!important;}
+main {width:100%;max-width:1280px!important;margin-left:auto!important;margin-right:auto!important;}
+.review-header {background:#090e1b;border-bottom:1px solid #202b41;position:relative;z-index:50;width:100%;}
+.review-header-inner {max-width:1280px;min-height:80px;margin:auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.review-brand {font:600 24px/1.2 Sora,Inter,sans-serif;letter-spacing:-1px;color:#edf3ff;display:flex;align-items:center;min-height:44px;}
+.review-nav {display:flex;align-items:center;gap:36px;font:500 15px/1.5 Inter,sans-serif;}
+.review-nav a {min-height:44px;display:flex;align-items:center;color:#adb9d0;text-decoration:none;}
+.review-nav a:hover,.review-nav a[aria-current] {color:#8fa7ff;}
+.review-nav a[aria-current] {box-shadow:inset 0 -2px #8fa7ff;}
+.review-footer {border-top:1px solid #202b41;margin-top:64px;padding:32px 48px;color:#adb9d0;font:14px/1.6 Inter,sans-serif;}
+.review-footer-inner {max-width:1184px;margin:auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.review-footer nav {display:flex;gap:24px;flex-wrap:wrap;}
+.review-footer a {display:inline-flex;align-items:center;min-height:44px;color:#adb9d0;}
+.review-footer strong {font-family:Sora,Inter,sans-serif;color:#edf3ff;font-size:16px;}
+.review-skip {position:absolute;left:20px;top:-80px;background:#8fa7ff;color:#090e1b;padding:12px 18px;z-index:100;}
+.review-skip:focus {top:12px;}
+a:focus-visible,button:focus-visible {outline:2px solid #8fa7ff!important;outline-offset:4px!important;}
+main .font-mono,main .font-label-sm,main .font-label-md,main .code-font {font-family:Inter,system-ui,sans-serif!important;}
+main .text-label-sm,main .text-label-md,main .text-xs {font-size:13px!important;line-height:1.55!important;}
+main .text-outline,main .text-night-faint,main .text-text-muted,main .text-text-dim {color:#adb9d0!important;}
+main [class*="text-[10px]"],main [class*="text-[11px]"],main [class*="text-[12px]"] {font-size:13px!important;line-height:1.5!important;}
+main h1,main h2,main h3 {font-family:Sora,Inter,sans-serif!important;}
+main article p {line-height:1.7;}
+main section[id] {scroll-margin-top:28px;}
+main .specular-hover:hover {box-shadow:none!important;}
+main [class*="font-"] {overflow-wrap:break-word;}
+main figure {max-width:100%;}
+main figure span.w-12.shrink-0 {width:64px;white-space:nowrap;}
+main svg {max-width:100%;}
+.design-cv #outputs>ol>li,.design-cv #selected-projects>div>article {background:transparent!important;border:0!important;border-bottom:1px solid #202b41!important;border-radius:0!important;padding-left:0!important;padding-right:0!important;}
+.design-cv #capabilities h3 {font-family:Inter,sans-serif!important;text-transform:none!important;letter-spacing:0!important;font-size:16px!important;line-height:1.5!important;}
+.design-cv #capabilities h3>span[aria-hidden] {display:none;}
+.design-cv #outputs p {font-size:14px!important;line-height:1.7!important;}
+.design-cv #outputs li>div:first-child>span:first-child {background:transparent!important;border:0!important;padding-left:0!important;color:#8fa7ff!important;text-transform:none!important;}
+@media(max-width:767px) {
+ html {scroll-padding-top:16px;}
+ .review-header-inner {padding:16px 20px 8px;display:block;}
+ .review-brand {font-size:22px;margin-bottom:4px;}
+ .review-nav {gap:28px;font-size:14px;}
+ .review-footer {padding:28px 20px;margin-top:40px;}
+ .review-footer-inner {display:block;}
+ .review-footer nav {gap:22px;margin-top:12px;}
+ main {padding-left:20px!important;padding-right:20px!important;}
+ main h1 {font-size:34px!important;line-height:1.2!important;}
+ main .text-label-sm,main .text-label-md,main .text-xs {font-size:13px!important;}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto!important;}* {transition:none!important;}}
+</style><link rel="stylesheet" href="/expansion/night-gallery.css"><style>.review-nav{gap:32px}@media(max-width:767px){.review-nav{gap:22px;font-size:13px;flex-wrap:wrap}}</style></head>
+<body class="bg-surface-container-lowest text-on-surface min-h-screen flex flex-col selection:bg-primary selection:text-surface-container-lowest" data-design-review="local">
+<a class="review-skip" href="#main-content">Skip to content</a>
+<!-- ========================================================================= -->
+<!-- Top Navigation Bar (Shared Component JSON Anchored)                      -->
+<!-- ========================================================================= -->
+<header class="review-header"><div class="review-header-inner"><a class="review-brand" href="/homepage.html">Woo Young Cho</a><nav class="review-nav" aria-label="Main navigation"><a href="/research/" aria-current="page">Research</a><a href="/personal-projects/">Personal Projects</a><a href="/blog/">Blog</a><a href="/cv/">CV</a></nav></div></header>
+<!-- ========================================================================= -->
+<!-- Main Content Canvas (Grid aligned to 1360px)                              -->
+<!-- ========================================================================= -->
+<main id="main-content" class="flex-grow w-full max-w-[1360px] mx-auto px-margin-mobile md:px-margin py-space-lg md:py-space-xl">
+<!-- Breadcrumb -->
+<div class="mb-space-lg">
+<a class="font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-space-xs min-h-[44px] text-left" href="/research/">
+<span aria-hidden="true" class="material-symbols-outlined text-base">arrow_back</span>
+        All research
+      </a>
+</div>
+<!-- Case Study Header Area -->
+<header class="mb-space-xl pb-space-lg technical-hairline-b">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-space-sm mb-space-sm">
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl tracking-tight text-[#edf3ff] font-semibold">
+          MAGraph
+        </h1>
+
+</div>
+<!-- Exact thesis summary statement -->
+<p class="font-body-lg text-body-lg text-[#adb9d0] max-w-4xl mb-space-lg leading-relaxed">
+        A graph-based representation that preserves gene-neighborhood context lost when metagenomic assemblies are reduced to gene catalogues. My thesis work combined representation design, implementation, and reproducible analysis.
+      </p>
+<!-- Compact Technical Metadata Cluster & Primary Action -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg pt-space-sm">
+<div class="flex flex-wrap items-center gap-x-space-lg gap-y-space-sm text-label-sm font-label-sm text-[#adb9d0]">
+<div class="flex items-center gap-1.5">
+<span class="text-outline uppercase">Context:</span>
+<span class="text-[#edf3ff]">Research · Academic</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline uppercase">Status:</span>
+<span class="text-primary font-medium">Completed</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline uppercase">Period:</span>
+<span class="text-[#edf3ff]">Dec 2022–Aug 2023</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline uppercase">Role:</span>
+<span class="text-[#edf3ff]">Thesis researcher &amp; primary MAGraph developer</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline uppercase">Topics:</span>
+<span class="text-[#edf3ff]">Metagenomics · Biological representations · Research software</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline uppercase">Reviewed:</span>
+<span class="text-[#adb9d0]">2026-10-13</span>
+</div>
+</div>
+<!-- Primary Action Button -->
+<div class="shrink-0 flex items-center">
+<a class="bg-[#8fa7ff] text-[#090e1b] font-body-md text-body-sm font-semibold px-space-lg py-space-sm rounded-lg hover:bg-[#b2c3ff] specular-hover transition-all duration-150 inline-flex items-center gap-2 min-h-[44px]" href="https://doi.org/10.1101/2025.09.29.679262" rel="noopener noreferrer" target="_blank">
+<span>Related preprint</span>
+<span aria-hidden="true" class="material-symbols-outlined text-sm font-bold">arrow_outward</span>
+</a>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- Concept Illustration Figure (Technical Schematic Blueprint)              -->
+<!-- ========================================================================= -->
+<figure class="mb-space-xl bg-[#101a2c] technical-border rounded-lg p-space-md md:p-space-lg">
+<div class="flex flex-col md:flex-row items-stretch justify-between gap-space-md py-space-sm">
+<!-- Stage 1 -->
+<div class="flex-1 bg-[#090e1b] technical-border p-space-md rounded flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase">Stage 01</span>
+<span class="font-label-sm text-label-sm text-outline">Assembly contigs</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-[#edf3ff] mb-space-sm">
+              Assembled neighbourhoods
+            </h2>
+<p class="font-body-sm text-body-sm text-[#adb9d0] mb-space-md leading-normal">
+              Gene-neighborhood information is observed on assembled metagenomic contigs.
+            </p>
+</div>
+<!-- Schematic Gene Bars -->
+<div class="bg-[#101a2c] technical-border p-3 rounded flex flex-col gap-2.5">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-[10px] text-outline w-12 shrink-0">Contig_α</span>
+<div class="flex-grow flex items-center gap-1">
+<span class="h-5 flex-1 bg-[#16233b] technical-border text-center text-[10px] font-label-sm text-[#adb9d0] flex items-center justify-center">gA₁</span>
+<span class="h-5 flex-1 bg-[#1b2844] technical-border text-center text-[10px] font-label-sm text-[#edf3ff] flex items-center justify-center">gB₁</span>
+<span class="h-5 flex-1 bg-[#16233b] technical-border text-center text-[10px] font-label-sm text-[#adb9d0] flex items-center justify-center">gC₁</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-[10px] text-outline w-12 shrink-0">Contig_β</span>
+<div class="flex-grow flex items-center gap-1">
+<span class="h-5 flex-1 bg-[#1b2844] technical-border text-center text-[10px] font-label-sm text-[#edf3ff] flex items-center justify-center">gB₂</span>
+<span class="h-5 flex-1 bg-[#16233b] technical-border text-center text-[10px] font-label-sm text-[#adb9d0] flex items-center justify-center">gD₁</span>
+<span class="h-5 flex-1 bg-[#16233b] technical-border text-center text-[10px] font-label-sm text-[#adb9d0] flex items-center justify-center">gE₁</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Connector Arrow 1 -> 2 -->
+<div class="flex md:flex-col items-center justify-center text-outline py-1 md:px-1">
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-xl hidden md:block">arrow_forward</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-xl md:hidden">arrow_downward</span>
+</div>
+<!-- Stage 2 -->
+<div class="flex-1 bg-[#090e1b] technical-border p-space-md rounded flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase">Stage 02</span>
+<span class="font-label-sm text-label-sm text-outline">Representation</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-[#edf3ff] mb-space-sm">
+              Gene families &amp; observed proximity
+            </h2>
+<p class="font-body-sm text-body-sm text-[#adb9d0] mb-space-md leading-normal">
+              Gene families are nodes; assembly-derived proximal gene relationships are edges.
+            </p>
+</div>
+<!-- Schematic Graph Nodes & Adjacency -->
+<div class="bg-[#101a2c] technical-border p-3 rounded flex items-center justify-around h-16 relative">
+<div class="w-8 h-8 rounded-full bg-[#16233b] technical-border flex items-center justify-center font-label-sm text-[11px] text-[#edf3ff] z-10">FamA</div>
+<div class="h-[1px] bg-[#8fa7ff] flex-1 mx-1 relative">
+<span class="absolute -top-3 left-1/2 -translate-x-1/2 font-label-sm text-[9px] text-[#8fa7ff]">adj</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-[#1b2844] border border-[#8fa7ff] flex items-center justify-center font-label-sm text-[11px] text-[#8fa7ff] z-10">FamB</div>
+<div class="h-[1px] bg-[#8fa7ff] flex-1 mx-1 relative">
+<span class="absolute -top-3 left-1/2 -translate-x-1/2 font-label-sm text-[9px] text-[#8fa7ff]">adj</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-[#16233b] technical-border flex items-center justify-center font-label-sm text-[11px] text-[#edf3ff] z-10">FamD</div>
+</div>
+</div>
+<!-- Connector Arrow 2 -> 3 -->
+<div class="flex md:flex-col items-center justify-center text-outline py-1 md:px-1">
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-xl hidden md:block">arrow_forward</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-xl md:hidden">arrow_downward</span>
+</div>
+<!-- Stage 3 -->
+<div class="flex-1 bg-[#090e1b] technical-border p-space-md rounded flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase">Stage 03</span>
+<span class="font-label-sm text-label-sm text-outline">Context</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-[#edf3ff] mb-space-sm">
+              Queryable context
+            </h2>
+<p class="font-body-sm text-body-sm text-[#adb9d0] mb-space-md leading-normal">
+              Observed neighborhoods and their annotations remain in a queryable representation.
+            </p>
+</div>
+<!-- Source-constrained conceptual record -->
+<div class="bg-[#101a2c] technical-border p-3 rounded text-[#adb9d0] flex flex-col gap-2" style="font-size:13px;line-height:1.5">
+<span class="text-[#edf3ff]">Gene families</span>
+<span>Observed relationships</span>
+<span>Annotations</span>
+</div>
+</div>
+</div>
+<!-- Exact Caption -->
+<figcaption class="mt-space-md pt-space-sm technical-hairline-t font-label-sm text-label-sm text-[#adb9d0] text-center">
+        Concept illustration of the thesis representation; not an experimental result.
+      </figcaption>
+</figure>
+<!-- ========================================================================= -->
+<!-- Two-Column Article Layout                                                 -->
+<!-- Desktop 1280px Grid: 4 cols sticky sidebar, 8 cols longform reading       -->
+<!-- Mobile 390px: Stacks naturally with accessible tap targets                -->
+<!-- ========================================================================= -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left Column: Anchor Navigation (Sticky on desktop) -->
+<aside aria-label="Article Table of Contents" class="lg:col-span-4">
+<div class="sticky top-24 bg-[#101a2c] technical-border rounded-lg p-space-md">
+<div class="flex items-center gap-2 mb-space-md technical-hairline-b pb-space-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-sm select-none">format_list_bulleted</span>
+<span class="font-label-sm text-label-sm text-[#8fa7ff] uppercase tracking-wider font-semibold">On this page</span>
+</div>
+<nav aria-label="Section shortcuts" class="flex flex-col gap-1">
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-[#edf3ff] hover:bg-[#16233b] px-space-sm py-2 rounded transition-colors duration-150 flex items-center min-h-[44px]" href="#problem-and-motivation">
+              01. Problem and motivation
+            </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-[#edf3ff] hover:bg-[#16233b] px-space-sm py-2 rounded transition-colors duration-150 flex items-center min-h-[44px]" href="#my-contribution">
+              02. My contribution
+            </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-[#edf3ff] hover:bg-[#16233b] px-space-sm py-2 rounded transition-colors duration-150 flex items-center min-h-[44px]" href="#approach-and-decisions">
+              03. Approach and decisions
+            </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-[#edf3ff] hover:bg-[#16233b] px-space-sm py-2 rounded transition-colors duration-150 flex items-center min-h-[44px]" href="#evidence-and-outputs">
+              04. Evidence and outputs
+            </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-[#edf3ff] hover:bg-[#16233b] px-space-sm py-2 rounded transition-colors duration-150 flex items-center min-h-[44px]" href="#limitations-and-stage">
+              05. Limitations and current stage
+            </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-[#edf3ff] hover:bg-[#16233b] px-space-sm py-2 rounded transition-colors duration-150 flex items-center min-h-[44px]" href="#lessons-learned">
+              06. Lessons learned
+            </a>
+</nav>
+</div>
+</aside>
+<!-- Right Column: Substantial, Readable Prose -->
+<div class="lg:col-span-8 flex flex-col gap-space-xl">
+<!-- Section 1 -->
+<section class="scroll-mt-24 technical-hairline-b pb-space-lg" id="problem-and-motivation">
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-space-xs">Section 01</div>
+<h2 class="font-headline-md text-headline-md text-[#edf3ff] mb-space-md">
+            Problem and motivation
+          </h2>
+<div class="space-y-4 font-body-md text-body-md text-[#adb9d0] leading-relaxed">
+<p>Gene catalogues make metagenomic cohorts manageable, but sequence-based clustering can flatten the positional information present on assembled contigs. Neighboring genes can provide useful context for functional modules and operon-level analysis. My master’s thesis investigated how to retain this neighborhood layer in a reusable computational representation.</p>
+</div>
+</section>
+<!-- Section 2 -->
+<section class="scroll-mt-24 technical-hairline-b pb-space-lg" id="my-contribution">
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-space-xs">Section 02</div>
+<h2 class="font-headline-md text-headline-md text-[#edf3ff] mb-space-md">
+            My contribution
+          </h2>
+<div class="space-y-4 font-body-md text-body-md text-[#adb9d0] leading-relaxed">
+<p>I designed and implemented the MAGraph component under supervision in AG Schirmer. The work combined Python package development, a graph-like data model, database-backed storage, annotation, and reproducible processing. My contribution is the thesis-derived representation and implementation; it should be distinguished from later team-wide MetaGEAR analyses and scale.</p>
+</div>
+</section>
+<!-- Section 3 -->
+<section class="scroll-mt-24 technical-hairline-b pb-space-lg" id="approach-and-decisions">
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-space-xs">Section 03</div>
+<h2 class="font-headline-md text-headline-md text-[#edf3ff] mb-space-md">
+            Approach and decisions
+          </h2>
+<div class="space-y-4 font-body-md text-body-md text-[#adb9d0] leading-relaxed">
+<p>MAGraph represents gene families as nodes and assembly-derived proximal gene relationships as edges. The representation retains information about observed neighborhoods and their annotations rather than treating a catalogue as an isolated list of sequences.</p>
+<p>I used Python, MongoDB, and Snakemake-supported workflows to connect assembly-derived information, gene families, and biological annotation. The project also examined how expression information could be attached to the representation. The central design decision was to preserve context in a queryable form that could support multiple downstream questions.</p>
+</div>
+</section>
+<!-- Section 4 -->
+<section class="scroll-mt-24 technical-hairline-b pb-space-lg" id="evidence-and-outputs">
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-space-xs">Section 04</div>
+<h2 class="font-headline-md text-headline-md text-[#edf3ff] mb-space-md">
+            Evidence and outputs
+          </h2>
+<div class="space-y-4 font-body-md text-body-md text-[#adb9d0] leading-relaxed">
+<p>The thesis implemented the representation and demonstrated operon-level analysis on two metagenomic cohorts. It combined a qualitative recovery task with evaluation of edge-classification approaches. The contribution is best understood through the representation, workflow, and analysis design rather than a single headline score.</p>
+<p>The related MetaGEAR work was reported as a 2025 bioRxiv preprint, on which I am a co-author. The preprint describes a broader framework and later analyses; its full scale and findings are not all personal thesis achievements.</p>
+</div>
+</section>
+<!-- Section 5 -->
+<section class="scroll-mt-24 technical-hairline-b pb-space-lg" id="limitations-and-stage">
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-space-xs">Section 05</div>
+<h2 class="font-headline-md text-headline-md text-[#edf3ff] mb-space-md">
+            Limitations and current stage
+          </h2>
+<div class="space-y-4 font-body-md text-body-md text-[#adb9d0] leading-relaxed">
+<p>A representation built from experimental assemblies depends on sequencing depth, assembly quality, and gene calling. Missing or fragmented neighborhoods can limit the observed relationships. An annotated edge is evidence of observed context, not proof of biological regulation or function.</p>
+<p>The thesis project is complete. Wider biological claims and direct comparisons to specialized predictors require their own evaluation context.</p>
+</div>
+</section>
+<!-- Section 6 -->
+<section class="scroll-mt-24 pb-space-lg" id="lessons-learned">
+<div class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-space-xs">Section 06</div>
+<h2 class="font-headline-md text-headline-md text-[#edf3ff] mb-space-md">
+            Lessons learned
+          </h2>
+<div class="space-y-4 font-body-md text-body-md text-[#adb9d0] leading-relaxed">
+<p>Useful biological software needs both a coherent representation and a reproducible path from data to that representation. Preserving what is known about the data—and what remains uncertain—matters as much as making the output easy to query.</p>
+</div>
+</section>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- Related Output Block (Preprint DOI callout)                               -->
+<!-- ========================================================================= -->
+<section aria-labelledby="related-output-heading" class="mt-space-xl pt-space-xl technical-hairline-t">
+<div class="bg-[#101a2c] technical-border p-space-lg rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md" id="metagear-2025">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-sm text-label-sm text-primary bg-[#16233b] px-2 py-0.5 rounded border border-[#1b2844] uppercase font-semibold">Preprint</span>
+<span class="font-label-sm text-label-sm text-outline">bioRxiv · 2025</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-[#edf3ff] mb-1" id="related-output-heading">
+            Gene-centric metagenomic analyses reveal microbiome functional insights into diseases
+          </h3>
+<p class="font-label-sm text-label-sm text-[#adb9d0] font-mono">
+            DOI: 10.1101/2025.09.29.679262
+          </p>
+</div>
+<div class="shrink-0 flex items-center">
+<a class="bg-transparent technical-border text-[#edf3ff] hover:bg-[#16233b] hover:border-primary font-body-md text-body-sm font-medium px-space-md py-space-sm rounded-lg transition-colors duration-150 inline-flex items-center gap-2 min-h-[44px]" href="https://doi.org/10.1101/2025.09.29.679262" rel="noopener noreferrer" target="_blank">
+<span>Read on bioRxiv</span>
+<span aria-hidden="true" class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Bottom Navigation & Contact Section                                       -->
+<!-- ========================================================================= -->
+<section class="mt-space-xl pt-space-lg technical-hairline-t flex flex-col md:flex-row justify-between items-start md:items-center gap-space-lg">
+<div>
+<a class="font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-1 min-h-[44px]" href="/research/">
+<span aria-hidden="true" class="material-symbols-outlined text-base">arrow_back</span>
+          All research
+        </a>
+</div>
+<!-- Direct Contact Channels -->
+<div class="flex flex-wrap items-center gap-space-md">
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-primary transition-colors flex items-center gap-1.5 min-h-[44px]" href="mailto:wooyoung510@gmail.com">
+<span aria-hidden="true" class="material-symbols-outlined text-base">mail</span>
+          Email
+        </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-primary transition-colors flex items-center gap-1.5 min-h-[44px]" href="https://github.com/EspressoTonic" rel="noopener noreferrer" target="_blank">
+<span aria-hidden="true" class="material-symbols-outlined text-base">code</span>
+          GitHub
+        </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-primary transition-colors flex items-center gap-1.5 min-h-[44px]" href="https://orcid.org/0009-0002-7227-3326" rel="noopener noreferrer" target="_blank">
+<span aria-hidden="true" class="material-symbols-outlined text-base">id_card</span>
+          ORCID
+        </a>
+<a class="font-label-sm text-label-sm text-[#adb9d0] hover:text-primary transition-colors flex items-center gap-1.5 min-h-[44px]" href="/files/woo-young-cho-cv.pdf">
+<span aria-hidden="true" class="material-symbols-outlined text-base">description</span>
+          CV PDF
+        </a>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- Footer (Shared Component JSON Anchored)                                   -->
+<!-- ========================================================================= -->
+<footer class="review-footer"><div class="review-footer-inner"><div><strong>Woo Young Cho</strong><p>Computational biology &amp; scientific software</p></div><nav aria-label="Contact"><a href="mailto:wooyoung510@gmail.com">Email</a><a href="https://github.com/EspressoTonic">GitHub</a><a href="https://orcid.org/0009-0002-7227-3326">ORCID</a><a href="/blog/">Blog</a><a href="/cv/">CV</a></nav></div><div class="footer-social"><span class="eyebrow">SNS</span><ul class="sns-labels" aria-label="Social platforms"><li><span>LinkedIn</span></li><li><span>Instagram</span></li><li><span>X</span></li><li><span>Threads</span></li></ul></div></footer>
+</body></html>

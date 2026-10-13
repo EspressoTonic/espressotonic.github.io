@@ -1,0 +1,32 @@
+@font-face {
+  font-family: Inter;
+  src: url('/fonts/inter-latin-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Sora;
+  src: url('/fonts/sora-latin-variable.woff2') format('woff2');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  color-scheme: dark;
+  --bg: #090e1b;
+  --surface: #101a2c;
+  --surface-raised: #16233b;
+  --ink: #edf3ff;
+  --muted: #adb9d0;
+  --accent: #8fa7ff;
+  --accent-hover: #b2c3ff;
+  --on-accent: #090e1b;
+  --border: #25314a;
+  --control-border: #4c6087;
+  --media: #101a2c;
+  --body-font:
+    Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic',
+    sans-serif;
+  --heading-font: Sora, Inter, system-ui, sans-serif;
+}

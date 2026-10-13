@@ -1,0 +1,200 @@
+---
+interface Props {
+  id: string;
+  context?: 'hero' | 'card' | 'detail';
+}
+const { id, context = 'card' } = Astro.props;
+const workflows: Record<string, string[]> = {
+  'virtual-cell-challenge': ['Biological context', 'Candidate models', 'Evaluation'],
+  genomycanalyzer: ['Sequencing data', 'Reproducible workflow', 'Reviewable outputs'],
+};
+const steps = workflows[id];
+---
+
+{id === 'magraph' && context === 'hero' && (
+  <div
+    class="illustration hero-illustration"
+    role="img"
+    aria-label="Concept illustration: assembled gene neighbourhoods become gene families connected by observed proximity relationships."
+  >
+    <svg viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="#16233b" stroke="#8fa7ff" stroke-width="1.8">
+        <path d="M40 70h110l25 25-25 25H40z" />
+        <path d="M185 70h120l25 25-25 25H185z" fill="#2a3d68" />
+        <path d="M340 70h110l25 25-25 25H340z" />
+        <path d="M475 95h115" fill="none" stroke-dasharray="4 4" />
+        <path
+          d="M650 95 740 45 850 65 930 95 850 125 750 145zM650 95l100 50M850 65v60"
+          fill="none"
+        />
+        <circle cx="650" cy="95" r="21" />
+        <circle cx="740" cy="45" r="19" />
+        <circle cx="750" cy="145" r="19" />
+        <circle cx="850" cy="65" r="23" fill="#2a3d68" />
+        <circle cx="850" cy="125" r="19" />
+        <circle cx="930" cy="95" r="19" />
+      </g>
+      <g fill="#edf3ff" font-family="Inter, sans-serif" font-size="15" text-anchor="middle">
+        <text x="100" y="101">
+          Gene A
+        </text>
+        <text x="250" y="101">
+          Gene B
+        </text>
+        <text x="400" y="101">
+          Gene C
+        </text>
+        <text x="650" y="101">
+          A
+        </text>
+        <text x="740" y="51">
+          B
+        </text>
+        <text x="750" y="151">
+          C
+        </text>
+        <text x="850" y="71">
+          D
+        </text>
+        <text x="850" y="131">
+          E
+        </text>
+        <text x="930" y="101">
+          F
+        </text>
+      </g>
+    </svg>
+    <span class="sr-only">
+      Illustrative gene families and assembly-derived relationships; this is not a result plot.
+    </span>
+  </div>
+)}
+{id === 'magraph' && context === 'detail' && (
+  <div class="magraph-stages">
+    <div>
+      <span class="eyebrow">Stage 01</span>
+      <h3>Assembled neighbourhoods</h3>
+      <p>Gene-neighbourhood information is observed on assembled metagenomic contigs.</p>
+      <div class="contig-lines" aria-hidden="true">
+        <span>Contig α</span>
+        <i>A</i>
+        <i>B</i>
+        <i>C</i>
+        <span>Contig β</span>
+        <i>B</i>
+        <i>D</i>
+        <i>E</i>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">Stage 02</span>
+      <h3>Gene families &amp; observed proximity</h3>
+      <p>Gene families are nodes; assembly-derived proximal gene relationships are edges.</p>
+      <div class="family-links" aria-hidden="true">
+        <span>A</span>
+        <i></i>
+        <span>B</span>
+        <i></i>
+        <span>D</span>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">Stage 03</span>
+      <h3>Queryable context</h3>
+      <p>Observed neighbourhoods and their annotations remain in a queryable representation.</p>
+      <ul class="diagram-notes">
+        <li>Gene families</li>
+        <li>Observed relationships</li>
+        <li>Annotations</li>
+      </ul>
+    </div>
+  </div>
+)}
+{id === 'magraph' && context === 'card' && (
+  <div
+    class="illustration compact-illustration"
+    role="img"
+    aria-label="Concept illustration: gene families connected by observed gene-neighbourhood proximity."
+  >
+    <svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="#16233b" stroke="#8fa7ff" stroke-width="1.5">
+        <rect x="46" y="76" width="100" height="58" rx="8" />
+        <rect x="220" y="76" width="100" height="58" rx="8" />
+        <rect x="394" y="76" width="100" height="58" rx="8" />
+        <path d="M146 105h74m100 0h74" />
+      </g>
+      <g fill="#edf3ff" font-family="Inter,sans-serif" font-size="16" text-anchor="middle">
+        <text x="96" y="110">
+          Family A
+        </text>
+        <text x="270" y="110">
+          Family B
+        </text>
+        <text x="444" y="110">
+          Family C
+        </text>
+      </g>
+    </svg>
+  </div>
+)}
+{id === 'enzymematch' && (
+  <div class="enzyme-concept">
+    <div class="diagram-header">
+      <span>From interaction requirements to candidates</span>
+      <span>Concept illustration</span>
+    </div>
+    <svg viewBox="0 0 1100 165" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g fill="none" stroke="#8fa7ff" stroke-width="1.8">
+        <rect x="80" y="38" width="145" height="92" rx="8" />
+        <path d="M118 59h80m-80 27h64m-64 25h76m-99-53 4 4 8-9m-12 28 4 4 8-9m-12 29 4 4 8-9" />
+        <path d="m468 105 24-50 66 13 35 67-66 20z" />
+        <path d="m497 105 23-50 64 12 34 69-65 16z" stroke="#95c5d0" stroke-dasharray="4 4" />
+        <rect x="870" y="32" width="170" height="28" rx="6" />
+        <rect x="870" y="72" width="170" height="28" rx="6" />
+        <rect x="870" y="112" width="170" height="28" rx="6" />
+        <path d="M908 46h102m-102 40h76m-76 40h90" />
+      </g>
+      <g fill="#8fa7ff">
+        <circle cx="103" cy="59" r="7" />
+        <circle cx="492" cy="55" r="5" />
+        <circle cx="558" cy="68" r="5" />
+        <circle cx="593" cy="135" r="5" />
+        <circle cx="527" cy="155" r="5" />
+        <circle cx="468" cy="105" r="5" />
+        <circle cx="890" cy="46" r="4" />
+        <circle cx="890" cy="86" r="4" />
+        <circle cx="890" cy="126" r="4" />
+      </g>
+    </svg>
+    <div class="enzyme-steps">
+      <div>
+        <h3>Interaction-type filtering</h3>
+        <p>Compare query requirements with annotated interaction types.</p>
+      </div>
+      <div>
+        <h3>Geometric comparison</h3>
+        <p>Examine the geometry of compatible interaction points.</p>
+      </div>
+      <div>
+        <h3>Candidate prioritization</h3>
+        <p>Rank candidates for further investigation, retaining computational limits.</p>
+      </div>
+    </div>
+  </div>
+)}
+{steps && (
+  <div class="workflow-illustration">
+    <div class="workflow-steps">
+      {steps.map((step, i) => (
+        <>
+          <span>{step}</span>
+          {i < steps.length - 1 && (
+            <span class="workflow-arrow" aria-hidden="true">
+              →
+            </span>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+)}

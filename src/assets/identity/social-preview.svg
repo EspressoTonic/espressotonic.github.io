@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#090e1b"/>
+<path d="M72 145h1056M72 510h1056" stroke="#25314a" stroke-width="2"/>
+<text x="72" y="102" fill="#edf3ff" font-family="Arial,sans-serif" font-size="34" font-weight="700">Woo Young Cho</text>
+<text x="72" y="244" fill="#edf3ff" font-family="Arial,sans-serif" font-size="54" font-weight="700" letter-spacing="-1">Understanding biology</text>
+<text x="72" y="312" fill="#edf3ff" font-family="Arial,sans-serif" font-size="54" font-weight="700" letter-spacing="-1">through its many measurements.</text>
+<text x="72" y="396" fill="#adb9d0" font-family="Arial,sans-serif" font-size="27">Computational biology · Scientific software · Personal projects</text>
+<text x="72" y="567" fill="#8fa7ff" font-family="Arial,sans-serif" font-size="25">espressotonic.github.io</text>
+<g fill="#16233b" stroke="#8fa7ff" stroke-width="2"><circle cx="955" cy="83" r="16"/><circle cx="1000" cy="60" r="12"/><circle cx="1045" cy="83" r="16"/></g><path d="m970 75 18-9m24 0 19 10" fill="none" stroke="#8fa7ff" stroke-width="2"/>
+</svg>

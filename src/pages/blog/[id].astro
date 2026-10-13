@@ -1,0 +1,58 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { posts, projects, projectUrl, reviewDate } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await posts()).map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const related = (await projects()).filter((project) =>
+  post.data.relatedProjectIds.includes(project.id),
+);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.excerpt}
+  language={post.data.language}
+  article={{ publishedDate: post.data.publishedDate, updated: post.data.updated }}
+>
+  <article class="wrap blog-article">
+    <a class="text-link back-link" href="/blog/">
+      <Icon name="back" /> Blog
+    </a>
+    <header>
+      <h1>{post.data.title}</h1>
+      <p class="project-summary">{post.data.excerpt}</p>
+      <div class="article-meta">
+        {post.data.publishedDate && (
+          <time datetime={post.data.publishedDate}>{reviewDate(post.data.publishedDate)}</time>
+        )}
+        {post.data.updated && <span>Updated {reviewDate(post.data.updated)}</span>}
+        <span>{post.data.language === 'ko' ? '한국어' : 'English'}</span>
+      </div>
+    </header>
+    {post.data.draft && <p class="draft-notice">Draft preview · Public wording awaits review.</p>}
+    <div class="prose">
+      <Content />
+    </div>
+    {related.length > 0 && (
+      <section class="related-projects">
+        <h2>{post.data.language === 'ko' ? '관련 프로젝트' : 'Related projects'}</h2>
+        <ul>
+          {related.map((project) => (
+            <li>
+              <a href={projectUrl(project.id)}>{project.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>

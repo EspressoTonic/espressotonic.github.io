@@ -1,0 +1,84 @@
+---
+import { cv, publications, projects, projectUrl } from '../lib/content';
+import PublicationList from './PublicationList.astro';
+const record = await cv();
+const d = record.data;
+const pub = await publications();
+const allProjects = await projects();
+const selectedOutputs = d.selectedPublicationIds.map((id) => {
+  const item = pub.find((p) => p.id === id);
+  if (!item) throw Error(`CV output unavailable: ${id}`);
+  return item;
+});
+const selectedProjects = d.selectedProjectIds.map((id) => {
+  const item = allProjects.find((p) => p.id === id);
+  if (!item) throw Error(`CV project unavailable: ${id}`);
+  return item;
+});
+---
+
+<section class="cv-section" aria-labelledby="experience">
+  <h2 id="experience">Experience</h2>
+  {d.experience.map((entry) => (
+    <article class="cv-entry">
+      <p class="date">{entry.period}</p>
+      <div class="cv-entry-copy">
+        <h3>{entry.role}</h3>
+        <p class="entry-subtitle">{entry.organization}</p>
+        <ul>
+          {entry.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  ))}
+</section>
+<section class="cv-section" aria-labelledby="education">
+  <h2 id="education">Education</h2>
+  {d.education.map((entry) => (
+    <article class="cv-entry education-entry">
+      <p class="date">{entry.period}</p>
+      <div class="cv-entry-copy">
+        <h3>{entry.degree}</h3>
+        <p class="entry-subtitle">{entry.institution}</p>
+        {entry.thesisTitle && <p>Thesis: {entry.thesisTitle}</p>}
+      </div>
+    </article>
+  ))}
+</section>
+<section class="cv-section" aria-labelledby="outputs">
+  <h2 id="outputs">Research outputs</h2>
+  <PublicationList items={selectedOutputs} />
+</section>
+<section class="cv-section" aria-labelledby="selected-projects">
+  <h2 id="selected-projects">Selected projects</h2>
+  <ul class="cv-projects">
+    {selectedProjects.map((project) => (
+      <li>
+        <a href={projectUrl(project.id)}>{project.data.title}</a> — {project.data.summary}
+      </li>
+    ))}
+  </ul>
+</section>
+<section class="cv-section" aria-labelledby="capabilities">
+  <h2 id="capabilities">Capabilities</h2>
+  <div class="skills-grid">
+    {d.skills.map((skill) => (
+      <div>
+        <h3>{skill.name}</h3>
+        <ul>
+          {skill.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>
+{d.languages && (
+  <section class="cv-section languages-section" aria-labelledby="languages">
+    <h2 id="languages">Languages</h2>
+    <p>{d.languages.join(' · ')}</p>
+  </section>
+)}

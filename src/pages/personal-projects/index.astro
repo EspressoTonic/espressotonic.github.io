@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { personalProjectGroups } from '../../lib/content';
+const groups = await personalProjectGroups();
+---
+
+<BaseLayout
+  title="Personal Projects"
+  description="Independent software projects, prototypes, and lessons from building practical tools."
+>
+  <div class="wrap index-page">
+    <header class="page-intro">
+      <span class="eyebrow">Independent projects</span>
+      <h1>Personal Projects</h1>
+      <p>Practical tools for everyday problems, and experiments in building useful software.</p>
+      <p>
+        Each project shows its current stage, the work behind it, and what remains to be tested.
+      </p>
+    </header>
+    {groups.map((group, i) => (
+      <section class="project-group" aria-labelledby={`group-${i}`}>
+        <h2 id={`group-${i}`}>{group.title}</h2>
+        {group.items.some((project) => project.data.cover) && (
+          <div class="feature-grid">
+            {group.items
+              .filter((project) => project.data.cover)
+              .map((project) => (
+                <ProjectCard project={project} variant="feature" />
+              ))}
+          </div>
+        )}
+        {group.items
+          .filter((project) => !project.data.cover)
+          .map((project) => (
+            <ProjectCard project={project} />
+          ))}
+      </section>
+    ))}
+  </div>
+</BaseLayout>

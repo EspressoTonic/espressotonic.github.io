@@ -1,0 +1,252 @@
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import { collection } from '../scripts/read-content.mjs';
+interface SourceProject {
+  id: string;
+  data: { draft: boolean; category: 'research' | 'personal' };
+}
+const records = (await collection('projects')) as SourceProject[];
+const released = records.filter((project) => !project.data.draft);
+const routes = [
+  '/',
+  '/research/',
+  '/personal-projects/',
+  '/blog/',
+  '/cv/',
+  ...released.map((project) => `/projects/${project.id}/`),
+];
+for (const route of routes)
+  test(`Page and accessibility: ${route}`, async ({ page }) => {
+    const errors: string[] = [];
+    const external: string[] = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error') errors.push(message.text());
+    });
+    page.on('requestfailed', (request) =>
+      errors.push(request.url() + ': ' + request.failure()?.errorText),
+    );
+    page.on('pageerror', (error) => errors.push(error.message));
+    page.on('request', (request) => {
+      if (new URL(request.url()).origin !== 'http://127.0.0.1:4322') external.push(request.url());
+    });
+    const response = await page.goto(route);
+    expect(response?.status()).toBe(200);
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page.locator('main h1')).toBeVisible();
+    await expect(page.locator('main h1')).toHaveCount(1);
+    expect(await page.title()).toContain('Woo Young Cho');
+    await expect(page.locator('main')).not.toBeEmpty();
+    await expect(page.locator('.draft-notice,.draft-label')).toHaveCount(0);
+    expect(errors).toEqual([]);
+    expect(external).toEqual([]);
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+      .analyze();
+    expect(
+      results.violations.map((violation) => ({
+        id: violation.id,
+        description: violation.description,
+        nodes: violation.nodes.map((node) => node.target),
+      })),
+    ).toEqual([]);
+  });
+for (const width of [360, 390, 768, 1280, 1440])
+  test(`Responsive layout ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1000 });
+    for (const route of routes) {
+      await page.goto(route);
+      await page.evaluate(() => document.fonts.ready);
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+        route,
+      ).toBeTruthy();
+      const nav = page.getByRole('navigation', { name: 'Main navigation' });
+      expect(await nav.getByRole('link').allTextContents()).toEqual([
+        'Research',
+        'Personal Projects',
+        'Blog',
+        'CV',
+      ]);
+      for (const link of await nav.getByRole('link').all()) {
+        await expect(link).toBeVisible();
+        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+      }
+    }
+    if (width === 390) {
+      await page.goto('/');
+      for (const action of await page.locator('.hero .actions a').all())
+        expect(
+          (await action.boundingBox())!.y + (await action.boundingBox())!.height,
+        ).toBeLessThanOrEqual(844);
+    }
+  });
+test('Research, personal projects, full inventory and back-links', async ({ page }) => {
+  await page.goto('/research/');
+  expect(await page.locator('[data-project-id]').count()).toBe(
+    released.filter((project) => project.data.category === 'research').length,
+  );
+  await page.getByRole('link', { name: 'MAGraph', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'MAGraph', exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Back to Research', exact: true }).click();
+  await expect(page).toHaveURL(/\/research\/$/);
+  await page.goto('/personal-projects/');
+  expect(await page.locator('[data-project-id]').count()).toBe(
+    released.filter((project) => project.data.category === 'personal').length,
+  );
+  await page.getByRole('link', { name: 'Location Todo', exact: true }).click();
+  await expect(
+    page.getByRole('link', { name: 'Back to Personal Projects', exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('.project-facts')).toContainText('full iOS build pending');
+});
+test('Homepage curation has one MAGraph feature and six secondary personal links', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.locator('.hero-feature')).toContainText('MAGraph');
+  await expect(page.locator('.hero-feature a[href="/projects/magraph/"]')).toHaveCount(1);
+  await expect(page.locator('.home-section [data-project-id="magraph"]')).toHaveCount(0);
+  expect(
+    await page
+      .locator('.personal-home [data-project-id]')
+      .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-project-id'))),
+  ).toEqual(['fridge-match', 'location-todo', 'commute-log']);
+  expect(
+    await page
+      .locator('.secondary-personal a')
+      .evaluateAll((links) => links.map((link) => link.getAttribute('href'))),
+  ).toEqual([
+    '/projects/junior/',
+    '/projects/lawgpt/',
+    '/projects/horse-racing/',
+    '/projects/tc-personal-agent/',
+    '/projects/nookcam/',
+    '/projects/ballet-pose-feedback/',
+  ]);
+});
+test('SNS labels stay noninteractive and CV keeps professional contacts only', async ({ page }) => {
+  for (const route of ['/', '/personal-projects/', '/blog/']) {
+    await page.goto(route);
+    for (const group of await page.locator('.social-group').all()) {
+      expect(await group.locator('.social-labels li').allTextContents()).toEqual([
+        'LinkedIn',
+        'Instagram',
+        'X',
+        'Threads',
+      ]);
+      await expect(group.locator('a,button,[role="link"],[tabindex],[onclick]')).toHaveCount(0);
+      for (const label of await group.locator('li span').all())
+        expect(await label.evaluate((span) => getComputedStyle(span).cursor)).toBe('default');
+    }
+  }
+  await page.goto('/cv/');
+  await expect(page.locator('.social-group')).toHaveCount(0);
+  await expect(page.locator('.cv-contact a')).toHaveCount(3);
+  await expect(
+    page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Blog' }),
+  ).toBeVisible();
+});
+test('Blog is a real zero-post route with no invented article links', async ({ page, request }) => {
+  await page.goto('/blog/');
+  await expect(page.getByRole('heading', { name: 'No posts yet.', exact: true })).toBeVisible();
+  await expect(page.locator('.blog-post-list')).toHaveCount(0);
+  await expect(page.locator('main a[href^="/blog/"]')).toHaveCount(0);
+  const missing = await request.get('/blog/no-such-post/');
+  expect(missing.status()).toBe(404);
+  const xml = await (await request.get('/sitemap.xml')).text();
+  expect(xml).toContain('https://espressotonic.github.io/blog/');
+  expect(xml).not.toMatch(/\/blog\/[^<]+/);
+});
+test('Unverified periods are omitted and prototype limits stay visible', async ({ page }) => {
+  for (const id of ['nookcam', 'junior', 'tc-personal-agent']) {
+    await page.goto(`/projects/${id}/`);
+    expect(await page.locator('.project-facts dt').allTextContents()).not.toContain('Period');
+  }
+  await page.goto('/projects/ballet-pose-feedback/');
+  await expect(page.locator('.project-facts')).toContainText('mock tracking');
+  await page.goto('/projects/lawgpt/');
+  await expect(page.locator('.project-facts')).toContainText('corpus audit');
+});
+test('TOC brings the actual source heading into view', async ({ page }) => {
+  await page.goto('/projects/magraph/');
+  const target = page
+    .getByRole('navigation', { name: 'On this page' })
+    .getByRole('link', { name: 'Limitations and current stage', exact: true });
+  await target.click();
+  await expect(
+    page.getByRole('heading', { name: 'Limitations and current stage', exact: true }),
+  ).toBeInViewport();
+});
+test('No JavaScript navigation and keyboard focus', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:4322/');
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
+  for (const [name, path] of [
+    ['Research', '/research/'],
+    ['Personal Projects', '/personal-projects/'],
+    ['Blog', '/blog/'],
+    ['CV', '/cv/'],
+  ]) {
+    await page
+      .getByRole('navigation', { name: 'Main navigation' })
+      .getByRole('link', { name, exact: true })
+      .click();
+    await expect(page).toHaveURL(`http://127.0.0.1:4322${path}`);
+  }
+  await expect(page.locator('h1')).toHaveText('Woo Young Cho');
+  await context.close();
+});
+test('CV selections remain authored and download is a real PDF', async ({ page }) => {
+  await page.goto('/cv/');
+  expect(await page.locator('.cv-projects a').allTextContents()).toEqual([
+    'MAGraph',
+    'EnzymeMatch',
+  ]);
+  await expect(page.locator('#outputs + .publication-list li')).toHaveCount(3);
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('link', { name: 'Download PDF', exact: true }).click(),
+  ]);
+  expect(download.suggestedFilename()).toBe('woo-young-cho-cv.pdf');
+  expect(await download.failure()).toBeNull();
+});
+test('Draft routes stay absent and missing paths return the custom 404', async ({ request }) => {
+  for (const project of records.filter((entry) => entry.data.draft))
+    expect((await request.get(`/projects/${project.id}/`)).status()).toBe(404);
+  const missing = await request.get('/no-such-page/');
+  expect(missing.status()).toBe(404);
+  expect(await missing.text()).toContain('This page isn’t here.');
+  const xml = await (await request.get('/sitemap.xml')).text();
+  for (const project of records.filter((entry) => entry.data.draft))
+    expect(xml).not.toContain(`/projects/${project.id}/`);
+});
+test('Zoom reflow remains readable at a narrow viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 640, height: 800 });
+  for (const route of ['/', '/cv/', '/projects/genomycanalyzer/', '/blog/']) {
+    await page.goto(route);
+    await page.evaluate(() => {
+      document.documentElement.style.zoom = '2';
+    });
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      route,
+    ).toBeTruthy();
+  }
+});
+
+test('Actual detail screenshots preserve readable square and portrait presentations', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/projects/fridge-match/');
+  const fridge = await page.locator('.personal-intro img').boundingBox();
+  expect(fridge!.width).toBeGreaterThan(400);
+  expect(fridge!.height / fridge!.width).toBeGreaterThan(0.98);
+  expect(fridge!.height / fridge!.width).toBeLessThan(1.04);
+  await page.goto('/projects/location-todo/');
+  const phone = await page.locator('.personal-intro img').boundingBox();
+  expect(phone!.width).toBeLessThanOrEqual(300);
+  expect(phone!.height / phone!.width).toBeGreaterThan(1.8);
+});

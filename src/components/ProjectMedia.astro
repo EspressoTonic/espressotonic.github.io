@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ProjectIllustration from './ProjectIllustration.astro';
+interface Props {
+  project: CollectionEntry<'projects'>;
+  context?: 'hero' | 'card' | 'detail';
+  loading?: 'eager' | 'lazy';
+}
+const { project, context = 'card', loading = 'lazy' } = Astro.props;
+const media = project.data.cover;
+const concept = ['magraph', 'enzymematch', 'virtual-cell-challenge', 'genomycanalyzer'].includes(
+  project.id,
+);
+const captions: Record<string, string> = {
+  magraph: 'Concept illustration of the thesis representation; not an experimental result.',
+  enzymematch:
+    'Concept illustration of filtering, geometric comparison and candidate prioritization; not evidence of binding or catalysis.',
+  'virtual-cell-challenge':
+    'Concept illustration of model comparison and evaluation; not a performance result.',
+  genomycanalyzer:
+    'Concept illustration of research-software integration; not a clinical validation result.',
+};
+---
+
+{(media || concept) && (
+  <figure
+    class:list={[
+      'project-media',
+      {
+        'screenshot-media': !!media,
+        'portrait-media': media && media.src.height / media.src.width > 1.2,
+      },
+      `media-${context}`,
+    ]}
+  >
+    {media ? (
+      <Image
+        src={media.src}
+        alt={media.alt}
+        width={context === 'detail' ? 1120 : 960}
+        widths={[360, 720, 1120]}
+        sizes={
+          context === 'detail'
+            ? '(max-width: 767px) calc(100vw - 40px), 50vw'
+            : '(max-width: 767px) calc(100vw - 80px), 50vw'
+        }
+        loading={loading}
+        decoding="async"
+      />
+    ) : (
+      <ProjectIllustration id={project.id} context={context} />
+    )}
+    <figcaption>{media?.caption ?? captions[project.id]}</figcaption>
+  </figure>
+)}
