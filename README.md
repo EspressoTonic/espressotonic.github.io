@@ -63,4 +63,4 @@ Night Gallery is implemented as a tested local release candidate. The release co
 - [Visual system](docs/design/DESIGN.md), [design gallery](docs/design/stitch/index.html), and [asset inventory](docs/design/ASSETS.md).
 - The current static release preview is `http://127.0.0.1:4326`; `npm run preview` uses 4321 when it is free. The separate design gallery can be reopened with `python3 docs/design/stitch/serve-preview.py` on 4324.
 
-The owner authorized committing and pushing `codex/cv-homepage` on 2026-10-14. Merge, Pages configuration and deployment remain separate release steps.
+The owner authorized committing/pushing and then merging to `main` and deploying to GitHub Pages on 2026-10-14. Publish through the validated, manually triggered Actions workflow; check the final deployment and live routes.

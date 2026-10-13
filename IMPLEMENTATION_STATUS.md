@@ -1,11 +1,11 @@
 # Implementation status
 
-- Current task: commit and push the completed Night Gallery implementation (owner-authorized 2026-10-14)
+- Current task: merge to main and deploy to GitHub Pages (owner-authorized 2026-10-14)
 - Last completed task: T10 (implementation diff review and local handoff)
 - Branch: codex/cv-homepage
 - Code: this separate projects repository
 - Local release preview: http://127.0.0.1:4326
-- Release state: validated implementation; branch commit/push authorized; deployment remains separate
+- Release state: branch pushed; release authorized; merge/deployment pending CI validation
 
 ## Initial v1 baseline — historical
 
@@ -33,12 +33,12 @@
 
 - Review biography, public email/ORCID choice, current employment and all public wording.
 - Spatial-omics stays excluded until its employer-facing wording is reviewed.
-- Commit/push authorized on 2026-10-14; obtain a separate release instruction for merge and Pages configuration/deployment.
-- GitHub Actions and public deep links remain unrun until publication.
+- Merge and GitHub Pages deployment authorized on 2026-10-14; validate CI and the live artifact.
+- Check the final GitHub Actions deployment and public deep links as part of release.
 
 ## Continue
 
-Read README.md and the actual working state. Night Gallery implementation T00–T10 is complete. The owner authorized commit/push on 2026-10-14; merge, Pages configuration and deployment remain separate. Prior v1 test counts below are history, not the redesign validation.
+Read README.md and the actual working state. Night Gallery implementation T00–T10 is complete. The owner authorized commit/push followed by merge and Pages deployment on 2026-10-14. Complete the CI and live checks; preserve the dated checkpoints below. Prior v1 test counts below are history, not the redesign validation.
 
 ## 2026-10-13 — Night Gallery design handoff
 
@@ -95,3 +95,10 @@ Local implementation is complete. No commit, push, merge or deployment occurred,
 ## 2026-10-14 — Commit and push authorization
 
 The owner requested committing and pushing the completed implementation to `origin` on `codex/cv-homepage`. Include the intended application source, content, tests, workflows, licensed assets and retained design references. Generated build output, dependency directories, browser reports and private scratch records remain ignored. The validation workflow runs on branch push; the Pages workflow requires a separate manual run on `main`. Historical local-only statements above describe their dated checkpoints.
+
+
+## 2026-10-14 — Release preparation and Linux PDF validation
+
+Implementation commit `e2dee33` was pushed to `codex/cv-homepage`; the owner then authorized merging to `main` and deploying to GitHub Pages. The existing Pages source is legacy `main` root publishing and must switch to the custom Actions build for Astro output.
+
+The first Linux CI release check falsely reported missing publication authors: PDF.js inserted spaces within positioned glyphs (for example `Yo o jung Hwang`). The retained two-page CI PDF was inspected and all 38 source author entries confirmed. Text comparison now tolerates extraction whitespace while preserving authored characters; a regression test rejects missing/misspelled entries. Local validation passed ten unit tests, the full release build/PDF check and thirty-four browser tests. The validation workflow retains its build artifact even on failure so future release failures are inspectable. Final CI, merge, deployment and live checks remain the next release steps.

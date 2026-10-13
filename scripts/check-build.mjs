@@ -3,6 +3,7 @@ import { resolve, join } from 'node:path';
 import { parseHTML } from 'linkedom';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { collection } from './read-content.mjs';
+import { pdfTextIncludes } from './pdf-text.mjs';
 async function files(dir) {
   const all = [];
   for (const name of await readdir(dir)) {
@@ -96,16 +97,16 @@ export async function checkBuild() {
         .join(' ') + '\n';
   }
   for (const required of ['Woo Young Cho', 'Arontier', 'Connectagen', 'M.Sc. Bioinformatics'])
-    if (!extracted.includes(required)) issues.push('PDF missing expected content: ' + required);
+    if (!pdfTextIncludes(extracted, required)) issues.push('PDF missing expected content: ' + required);
   const cv = (await collection('cv'))[0];
   for (const language of cv.data.languages ?? [])
-    if (!extracted.includes(language)) issues.push('PDF missing language: ' + language);
+    if (!pdfTextIncludes(extracted, language)) issues.push('PDF missing language: ' + language);
   for (const id of cv.data.selectedPublicationIds) {
     const output = (await collection('publications')).find((item) => item.id === id);
     if (!output) issues.push('PDF publication reference missing: ' + id);
     else
       for (const author of output.data.authors)
-        if (!extracted.includes(author)) issues.push('PDF missing source author: ' + author);
+        if (!pdfTextIncludes(extracted, author)) issues.push('PDF missing source author: ' + author);
   }
   const pdfLinks = [];
   for (let i = 1; i <= document.numPages; i++)
