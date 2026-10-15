@@ -357,3 +357,24 @@ test('Recent additions navigate through the right indexes and keep evidence limi
   await page.getByRole('link', { name: 'JUNIOR', exact: true }).click();
   await expect(page.locator('h1')).toHaveText('JUNIOR');
 });
+
+test('SNS brand marks are local decorative SVGs with visible noninteractive labels', async ({
+  page,
+}) => {
+  for (const route of ['/', '/personal-projects/', '/blog/', '/projects/ai-usage-bar/']) {
+    await page.goto(route);
+    for (const group of await page.locator('.social-group').all()) {
+      const marks = group.locator('.social-brand-icon');
+      await expect(marks).toHaveCount(4);
+      for (const mark of await marks.all()) {
+        await expect(mark).toHaveAttribute('aria-hidden', 'true');
+        await expect(mark.locator('svg')).toHaveCount(1);
+        expect((await mark.boundingBox())!.width).toBe(20);
+        expect((await mark.boundingBox())!.height).toBe(20);
+      }
+      await expect(group.locator('a,button,[role=link],[tabindex]')).toHaveCount(0);
+    }
+  }
+  await page.goto('/cv/');
+  await expect(page.locator('.social-brand-icon')).toHaveCount(0);
+});
