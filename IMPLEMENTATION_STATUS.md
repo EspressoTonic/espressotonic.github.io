@@ -1,11 +1,11 @@
 # Implementation status
 
-- Current task: release complete; GitHub Pages live and verified
-- Last completed task: main merge, Actions deployment and live verification (2026-10-14)
-- Branch: main (portfolio merged from codex/cv-homepage)
+- Current implementation: Night Gallery portfolio with scoped horse-racing results integration
+- Latest implementation checkpoint: horse-racing integration (2026-10-15; publication status below)
+- Review branch: codex/horse-racing-integration
 - Code: this separate projects repository
 - Local release preview: http://127.0.0.1:4326
-- Release state: deployed site code `3bea82e`; https://espressotonic.github.io/
+- Public site: https://espressotonic.github.io/; see dated release checkpoints below
 
 ## Initial v1 baseline — historical
 
@@ -33,7 +33,7 @@
 
 - Review biography, public email/ORCID choice, current employment and all public wording.
 - Spatial-omics stays excluded until its employer-facing wording is reviewed.
-- Publish subsequent changes through the manually triggered main-only Actions workflow after validation.
+- Publish code/content changes manually on main after validation; bounded horse-racing snapshot-only updates use the fully validated automatic path.
 - Latest deployment and live deep-link verification passed; repeat these checks for subsequent releases.
 
 ## Continue
@@ -109,3 +109,29 @@ The first Linux CI release check falsely reported missing publication authors: P
 Corrected branch validation [38485685583](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38485685583) passed all ten unit tests, the nineteen-page release build/two-page CV PDF validation, and thirty-four Chromium tests. `main` was fast-forwarded to site code `3bea82e` and pushed. Pages was switched from legacy root publishing to custom workflow publishing. The manually dispatched [deployment 38485870488](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38485870488) passed both build and deploy jobs.
 
 The live site is https://espressotonic.github.io/. Live Chromium checks passed all eighteen public content routes, canonical URLs, loaded images and zero page/console errors. Desktop (1280×800) and phone (390×844) screenshots were inspected; representative phone routes had no horizontal overflow. Research → MAGraph → CV → actual PDF download worked; all four primary navigation links and keyboard skip worked without JavaScript. The downloaded PDF contains two pages, all 38 author entries, all three languages and no localhost annotations. Unknown routes return the custom 404 and the employer draft remains excluded from routes and sitemap. Live-check scripts, downloaded PDFs and screenshots are retained only in temporary storage outside the repository/vault. This documentation checkpoint does not change the deployed site code.
+
+
+## 2026-10-15 — Horse-racing integration verified locally
+
+Preserved the Astro case-study route and added a self-contained Night Gallery demo
+at `/demos/horse-racing/`. The native evidence summary and React app use the same
+verified display JSON. Model dropdowns read saved results; no model service,
+credentials or training data are shipped. Paper comparisons retain cohort limits,
+weekly replay remains distinct from prospective evidence, and historical losses
+remain visible. Static fallback landmarks and no-JavaScript navigation pass the
+ordinary checker; no blanket HTML-check exemption was added.
+
+Source release `b1fc95290888f57e`, model-project source `f5462cc`. Fourteen unit and
+boundary tests, the complete 20-HTML-page release/PDF build, and all 37 browser tests
+pass. Tests cover existing content/CV contracts plus both 390/1440 dashboard flows,
+all five model choices, hash reload, no-JS fallback, one JSON fetch, no external
+runtime requests and axe accessibility. A mobile keyboard-scroll accessibility
+issue was found and corrected in the source before import. Actual desktop/mobile
+screenshots were inspected outside Git; Browser plugin unavailable, Playwright used.
+
+Added a verified public-bundle importer and approved source hashes, with data-only
+publication gated by every changed path and all existing release checks. The
+compute-host publisher uses an isolated worktree, noninteractive SSH and ordinary
+fast-forward pushes. Authentication succeeded from a systemd user job. Code/asset
+changes require review. See `docs/HORSE_RACING_INTEGRATION.md` for contracts, failure
+behavior and rollback. This checkpoint precedes the initial integration deployment.
