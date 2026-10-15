@@ -1,7 +1,7 @@
 # Implementation status
 
-- Current task: release complete; GitHub Pages live and verified
-- Last completed task: main merge, Actions deployment and live verification (2026-10-14)
+- Current task: three project additions complete and validated; publication pending
+- Last completed task: three case studies, homepage/index integration and local verification (2026-10-15)
 - Branch: main (portfolio merged from codex/cv-homepage)
 - Code: this separate projects repository
 - Local release preview: http://127.0.0.1:4326
@@ -109,3 +109,12 @@ The first Linux CI release check falsely reported missing publication authors: P
 Corrected branch validation [38485685583](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38485685583) passed all ten unit tests, the nineteen-page release build/two-page CV PDF validation, and thirty-four Chromium tests. `main` was fast-forwarded to site code `3bea82e` and pushed. Pages was switched from legacy root publishing to custom workflow publishing. The manually dispatched [deployment 38485870488](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38485870488) passed both build and deploy jobs.
 
 The live site is https://espressotonic.github.io/. Live Chromium checks passed all eighteen public content routes, canonical URLs, loaded images and zero page/console errors. Desktop (1280×800) and phone (390×844) screenshots were inspected; representative phone routes had no horizontal overflow. Research → MAGraph → CV → actual PDF download worked; all four primary navigation links and keyboard skip worked without JavaScript. The downloaded PDF contains two pages, all 38 author entries, all three languages and no localhost annotations. Unknown routes return the custom 404 and the employer draft remains excluded from routes and sitemap. Live-check scripts, downloaded PDFs and screenshots are retained only in temporary storage outside the repository/vault. This documentation checkpoint does not change the deployed site code.
+
+
+## 2026-10-15 — Three project additions
+
+Added source-backed case studies for AI Usage Bar, Codex Account Switcher and GeNeDis Multi-Omics. The two native/CLI tools are public-source prototypes with remaining integration gates; GeNeDis is data acquisition and QC/pipeline design, without a completed model, selected endpoint or submission claim. Verified public code links for the two tools; omitted the unavailable GeNeDis repository link. Added cross-links between the tools and from GeNeDis to JUNIOR.
+
+The source now has sixteen public projects (five research/eleven personal), plus the excluded employer draft. Recently added homepage rows use concise summaries; personal tools have their own index group. Full original case-study and CV content remains unchanged. Work is isolated on `codex/portfolio-additions`; Horse-Racing content/assets are outside this change. Playwright uses an optional per-worktree port and the dependency-free JavaScript config so simultaneous local checks can avoid port collisions.
+
+Verification: eleven unit tests, twenty-two-page release build and shared two-page CV validation, thirty-eight Chromium tests including all twenty-one ordinary routes, accessibility, five widths and new project navigation. Desktop and phone captures were inspected. Browser plugin/skill is absent, so the existing Playwright workflow provides browser verification. Screenshots and scratch files stay outside Git and the vault. Commit/publication status is recorded by Git and the release handoff.
