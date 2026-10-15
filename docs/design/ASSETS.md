@@ -14,4 +14,6 @@ Implemented 2026-10-13 from the selected references. Source assets remain separa
 | `public/favicon.svg` | Code-native dark/periwinkle mark for this portfolio | Scalable site identity, no invented institutional logo. |
 | `src/assets/identity/social-preview.svg` → `public/social-preview.png` | Code-native site identity/share illustration using actual selected name/headline/domain | 1200×630 dark raster for existing social metadata; no model performance, portrait or third-party logo. |
 
+| `src/assets/social/{linkedin,instagram,x-twitter,threads}.svg` | Unmodified Font Awesome Free Brands, pinned to `14c65a3747d0f3b751f15831fc719236aea8729d`; upstream license and source attribution retained alongside assets | 20px local monochrome SVGs; visible platform labels, decorative marks hidden from assistive technology, no invented URLs or icon CDN. |
+
 Review-only HTML/PNG files in `docs/design/stitch/` are composition and provenance evidence. They are not shipped as site UI. Implementation review captures are temporary local QA artifacts outside the repository; no signed URLs, raw Canvas responses or private note paths are needed by the app.

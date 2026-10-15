@@ -1,0 +1,18 @@
+---
+import linkedIn from '../assets/social/linkedin.svg?raw';
+import instagram from '../assets/social/instagram.svg?raw';
+import x from '../assets/social/x-twitter.svg?raw';
+import threads from '../assets/social/threads.svg?raw';
+interface Props {
+  label: string;
+}
+const icons = new Map([
+  ['LinkedIn', linkedIn],
+  ['Instagram', instagram],
+  ['X', x],
+  ['Threads', threads],
+]);
+const icon = icons.get(Astro.props.label);
+---
+
+{icon && <span class="social-brand-icon" aria-hidden="true" set:html={icon} />}

@@ -176,3 +176,10 @@ systemd succeeded without a duplicate commit. Offline host/network delays update
 failed validation preserves the prior Pages deployment. Source/asset changes need
 a reviewed import and manual publication. No training artifacts or credentials
 are public; statistical and prototype caveats remain unchanged.
+
+
+## 2026-10-15 — Unlinked SNS brand marks
+
+Added local Font Awesome brand SVGs for LinkedIn, Instagram, X and Threads, pinned to an upstream revision with original attribution and license retained. Visible names remain noninteractive labels; profile URLs are absent and CV/PDF continue to omit the inactive social group. No project record, visibility flag, homepage curation or Horse-Racing source/asset changed.
+
+Local verification passed 15 unit tests, the release/PDF check and 42 Chromium tests, including mark geometry, decorative semantics and absence of interactive SNS elements. Desktop/phone icon wrapping was inspected. The private content/visual audit inspected all 21 live portfolio routes and recommends future editorial changes; those recommendations are not applied by this commit. The audit and its screenshots remain outside the public repository.

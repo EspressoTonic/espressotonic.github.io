@@ -43,7 +43,9 @@ The actual Blog collection starts with zero posts. `src/content/blog/.gitkeep` p
 
 To add a reviewed article, create `src/content/blog/<stable-id>.md` with `title`, `excerpt`, `language: en | ko`, `draft: true`, optional `publishedDate`/`updated` (`YYYY-MM-DD`), optional `relatedProjectIds`, and a real Markdown body starting at H2. Only public-safe copy belongs in the repository, even in a draft. Set `draft: false` only with a real nonfuture publication date and public related-project IDs; run the release checks. The route is `/blog/<stable-id>/`, with the correct document language. Korean layout was exercised in an isolated temporary build, not by adding a fake article here.
 
-Profile `socialProfiles` contains LinkedIn, Instagram, X and Threads with all URL fields absent. They render as noninteractive text in the homepage and footer; CV/PDF omit the inactive SNS group. Later profile activation requires the owner's public HTTPS URL and corresponding review of the current no-link acceptance checks. Existing email/GitHub/ORCID links stay separate.
+Profile `socialProfiles` contains LinkedIn, Instagram, X and Threads with all URL fields absent. They render as noninteractive labels with local brand SVGs in the homepage and footer; CV/PDF omit the inactive SNS group. Later profile activation requires the owner's public HTTPS URL and corresponding review of the current no-link acceptance checks. Existing email/GitHub/ORCID links stay separate.
+
+SNS marks use four pinned Font Awesome Free SVGs with their license and attribution in `src/assets/social/`; no icon CDN or runtime package is required.
 
 Typography is self-hosted Inter/Sora; licenses and source information are in `public/fonts/`. Reviewed source images and diagram classifications are in `docs/design/ASSETS.md`. The dark social preview has a vector source at `src/assets/identity/social-preview.svg` and its PNG at `public/social-preview.png`.
 
