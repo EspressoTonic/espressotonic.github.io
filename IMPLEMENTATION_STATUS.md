@@ -1,11 +1,11 @@
 # Implementation status
 
-- Current task: three project additions complete and validated; publication pending
-- Last completed task: three case studies, homepage/index integration and local verification (2026-10-15)
-- Branch: main (portfolio merged from codex/cv-homepage)
+- Current implementation: Night Gallery portfolio with three added case studies and horse-racing results integration
+- Latest implementation checkpoint: horse-racing integration (2026-10-15; publication status below)
+- Review branch: codex/horse-racing-integration
 - Code: this separate projects repository
 - Local release preview: http://127.0.0.1:4326
-- Release state: deployed site code `3bea82e`; https://espressotonic.github.io/
+- Public site: https://espressotonic.github.io/; see dated release checkpoints below
 
 ## Initial v1 baseline — historical
 
@@ -33,7 +33,7 @@
 
 - Review biography, public email/ORCID choice, current employment and all public wording.
 - Spatial-omics stays excluded until its employer-facing wording is reviewed.
-- Publish subsequent changes through the manually triggered main-only Actions workflow after validation.
+- Publish code/content changes manually on main after validation; bounded horse-racing snapshot-only updates use the fully validated automatic path.
 - Latest deployment and live deep-link verification passed; repeat these checks for subsequent releases.
 
 ## Continue
@@ -118,3 +118,37 @@ Added source-backed case studies for AI Usage Bar, Codex Account Switcher and Ge
 The source now has sixteen public projects (five research/eleven personal), plus the excluded employer draft. Recently added homepage rows use concise summaries; personal tools have their own index group. Full original case-study and CV content remains unchanged. Work is isolated on `codex/portfolio-additions`; Horse-Racing content/assets are outside this change. Playwright uses an optional per-worktree port and the dependency-free JavaScript config so simultaneous local checks can avoid port collisions.
 
 Verification: eleven unit tests, twenty-two-page release build and shared two-page CV validation, thirty-eight Chromium tests including all twenty-one ordinary routes, accessibility, five widths and new project navigation. Desktop and phone captures were inspected. Browser plugin/skill is absent, so the existing Playwright workflow provides browser verification. Screenshots and scratch files stay outside Git and the vault. Commit/publication status is recorded by Git and the release handoff.
+
+
+## 2026-10-15 — Horse-racing integration verified locally
+
+Preserved the Astro case-study route and added a self-contained Night Gallery demo
+at `/demos/horse-racing/`. The native evidence summary and React app use the same
+verified display JSON. Model dropdowns read saved results; no model service,
+credentials or training data are shipped. Paper comparisons retain cohort limits,
+weekly replay remains distinct from prospective evidence, and historical losses
+remain visible. Static fallback landmarks and no-JavaScript navigation pass the
+ordinary checker; no blanket HTML-check exemption was added.
+
+Source release `b1fc95290888f57e`, model-project source `f5462cc`. Fourteen unit and
+boundary tests, the complete 20-HTML-page release/PDF build, and all 37 browser tests
+pass. Tests cover existing content/CV contracts plus both 390/1440 dashboard flows,
+all five model choices, hash reload, no-JS fallback, one JSON fetch, no external
+runtime requests and axe accessibility. A mobile keyboard-scroll accessibility
+issue was found and corrected in the source before import. Actual desktop/mobile
+screenshots were inspected outside Git; Browser plugin unavailable, Playwright used.
+
+Added a verified public-bundle importer and approved source hashes, with data-only
+publication gated by every changed path and all existing release checks. The
+compute-host publisher uses an isolated worktree, noninteractive SSH and ordinary
+fast-forward pushes. Authentication succeeded from a systemd user job. Code/asset
+changes require review. See `docs/HORSE_RACING_INTEGRATION.md` for contracts, failure
+behavior and rollback. This checkpoint precedes the initial integration deployment.
+
+### Combined-main verification
+
+Merged the concurrent `3d011f1` additions into the horse-racing branch, preserving
+all three case studies, their homepage/index changes, test assertions and configurable
+Playwright port. The combined artifact passes fifteen unit tests, the complete
+23-HTML-page release/two-page PDF validation, and all 41 Chromium tests on port 4329.
+The earlier 20-page/37-test checkpoint describes the pre-merge portfolio.

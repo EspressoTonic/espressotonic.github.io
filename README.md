@@ -49,13 +49,13 @@ Typography is self-hosted Inter/Sora; licenses and source information are in `pu
 
 ## Release
 
-PRs run validation and upload a review artifact; they do not deploy. The manual deployment workflow only permits `main`, builds and checks one artifact, and deploys that exact artifact. Configure GitHub Pages to use GitHub Actions when publication is authorized. No personal token is needed.
+PRs run validation and upload a review artifact; they do not deploy. The deployment workflow permits only `main`, builds and checks one artifact, and deploys that exact artifact. Interface/content releases are manual; bounded horse-racing data/release-only pushes may publish automatically after the same full checks. Configure GitHub Pages to use GitHub Actions when publication is authorized. No personal token is needed.
 
 Before releasing, review public copy, contact details, current employment, output status, and image permissions. Spatial-omics wording is initially an editorial draft excluded from production. After deployment, check root/nested URLs, PDF, and 404 handling. Roll back by reverting or redeploying a known-good commit; do not force-push.
 
 ## Current implementation
 
-Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The current source contains five research and eleven personal projects, both indexes, homepage, Blog, CV and custom 404: twenty-two HTML pages, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
+Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The current source contains five research and eleven personal projects, both indexes, homepage, Blog, CV and custom 404: twenty-three HTML pages including the horse-racing dashboard, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
 
 - [Implementation status](IMPLEMENTATION_STATUS.md) — completed slices, checks, source preservation and fidelity ledger.
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md) — retained task sequence and contracts.
@@ -63,10 +63,19 @@ Night Gallery is published at [espressotonic.github.io](https://espressotonic.gi
 - [Visual system](docs/design/DESIGN.md), [design gallery](docs/design/stitch/index.html), and [asset inventory](docs/design/ASSETS.md).
 - The current static release preview is `http://127.0.0.1:4326`; `npm run preview` uses 4321 when it is free. The separate design gallery can be reopened with `python3 docs/design/stitch/serve-preview.py` on 4324.
 
-The owner authorized committing/pushing and then merging to `main` and deploying to GitHub Pages on 2026-10-14. Publish through the validated, manually triggered Actions workflow; check the final deployment and live routes.
+The owner authorized committing/pushing and then merging to `main` and deploying to GitHub Pages on 2026-10-14. Publish reviewed interface changes through the validated manual Actions workflow. Horse-racing data-only updates use the bounded automatic path; check the final deployment and live routes.
 
 
 The first release was merged into `main` and deployed successfully on 2026-10-14 from site code `3bea82e`. GitHub Pages uses the custom Actions workflow. CI release checks and subsequent live-route, phone-layout, navigation, CV-download and custom-404 checks passed; see the latest implementation-status checkpoint.
 
+
+## Horse-racing results
+
+The case study at `/projects/horse-racing/` links to `/demos/horse-racing/`. Both
+read headline evidence from the same saved JSON. The dashboard offers precomputed
+model choices, forecasts, results, historical paper comparisons and a bankroll
+replay, with no browser model service. See
+[the integration contract](docs/HORSE_RACING_INTEGRATION.md) for source approvals,
+verified imports, the compute-host delivery schedule and rollback.
 
 The 2026-10-15 additions are implemented in an isolated worktree to permit a separate Horse-Racing update. Set `SITE_TEST_PORT=4329 npm run test:site` to run browser tests on a different local port; `playwright.config.mjs` defaults to 4322. Source descriptions distinguish implemented prototypes from unimplemented research designs. GeNeDis has no public code link because public repository access was not confirmed.

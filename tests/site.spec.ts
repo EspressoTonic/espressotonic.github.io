@@ -251,6 +251,75 @@ test('Actual detail screenshots preserve readable square and portrait presentati
   expect(phone!.height / phone!.width).toBeGreaterThan(1.8);
 });
 
+test('Horse research summary works without JavaScript', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto(`${baseURL}/projects/horse-racing/`);
+  await expect(page.locator('.horse-evidence')).toContainText('Historical winner hit rate');
+  await page.getByRole('link', { name: 'Explore results', exact: true }).click();
+  await expect(page.locator('main h1')).toHaveText('Pferderennen research dashboard');
+  await page.getByRole('link', { name: 'Back to case study' }).click();
+  await expect(page.locator('.horse-evidence')).toBeVisible();
+  await context.close();
+});
+for (const width of [390, 1440])
+  test(`Horse dashboard integration ${width}px`, async ({ page, baseURL }) => {
+    await page.setViewportSize({ width, height: 950 });
+    const errors: string[] = [];
+    const dataRequests: string[] = [];
+    const external: string[] = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    page.on('console', (message) => {
+      if (message.type() === 'error') errors.push(message.text());
+    });
+    page.on('request', (request) => {
+      if (request.url().includes('dashboard.json')) dataRequests.push(request.url());
+      if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
+    });
+    await page.goto('/projects/horse-racing/');
+    await page.getByRole('link', { name: 'Explore results', exact: true }).click();
+    await expect(page).toHaveTitle('Pferderennen — Woo Young Cho');
+    await expect(page.getByLabel('Model', { exact: true })).toBeVisible();
+    const choices = await page
+      .locator('#model-choice option')
+      .evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value));
+    expect(choices.length).toBe(5);
+    for (const choice of choices) {
+      await page.getByLabel('Model', { exact: true }).selectOption(choice);
+      await page.getByRole('button', { name: 'Results', exact: true }).click();
+      await expect(page.locator('main h1')).toHaveCount(1);
+      await page.getByRole('button', { name: 'Forecasts', exact: true }).click();
+    }
+    for (const tab of ['Research', 'Simulation', 'Method']) {
+      await page.getByRole('button', { name: tab, exact: true }).click();
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      ).toBeTruthy();
+      const violations = (
+        await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()
+      ).violations;
+      expect(violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) }))).toEqual(
+        [],
+      );
+      if (tab === 'Simulation') {
+        await page.getByRole('button', { name: 'Start', exact: true }).click();
+        await expect(page.getByTestId('replay-balance')).toHaveText('₩1,000,000');
+        await page.getByRole('button', { name: 'End', exact: true }).click();
+        await expect(page.getByTestId('replay-balance')).not.toHaveText('₩1,000,000');
+      }
+    }
+    expect(dataRequests).toHaveLength(1);
+    expect(external).toEqual([]);
+    expect(errors).toEqual([]);
+    await page.reload();
+    await expect(page.getByRole('button', { name: 'Method', exact: true })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    await page.getByRole('link', { name: 'Back to case study' }).click();
+    await expect(page.locator('.horse-evidence')).toBeVisible();
+  });
+
 test('Recent additions navigate through the right indexes and keep evidence limits visible', async ({
   page,
 }) => {

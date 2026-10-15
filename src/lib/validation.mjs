@@ -39,3 +39,14 @@ export function postIssues(post, projects, today = new Date().toISOString().slic
   }
   return issues;
 }
+
+// Only project navigation may be relative. Profile/publication links stay HTTPS.
+export function projectLinkURL(value) {
+  if (typeof value !== 'string') return false;
+  if (/^\/(?:[a-z0-9-]+\/)+$/.test(value)) return true;
+  try {
+    return new URL(value).protocol === 'https:' && value.startsWith('https://');
+  } catch {
+    return false;
+  }
+}

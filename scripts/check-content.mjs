@@ -1,4 +1,9 @@
-import { validDate, socialProfileIssues, postIssues } from '../src/lib/validation.mjs';
+import {
+  validDate,
+  socialProfileIssues,
+  postIssues,
+  projectLinkURL,
+} from '../src/lib/validation.mjs';
 import { collection } from './read-content.mjs';
 import { access } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
@@ -46,7 +51,7 @@ for (const p of projects) {
     if (!image.alt?.trim()) issues.push(`${p.id}: missing image alt`);
   }
   for (const link of p.data.links ?? [])
-    if (!/^https:\/\//.test(link.url) || !link.label?.trim())
+    if (!projectLinkURL(link.url) || !link.label?.trim())
       issues.push(`${p.id}: invalid public link`);
 }
 for (const p of publications) {
