@@ -181,3 +181,19 @@ test('Article publication requires real dates, body, language and available proj
   assert.equal(validDate('2026-02-30'), false);
   assert.equal(validDate('2024-02-29'), true);
 });
+
+import { projectLinkURL } from '../src/lib/validation.mjs';
+test('Only project links allow bounded local routes', () => {
+  assert.equal(projectLinkURL('/demos/horse-racing/'), true);
+  assert.equal(projectLinkURL('https://example.org/path'), true);
+  for (const value of [
+    '//example.org/',
+    '/../../private/',
+    '/%2e%2e/',
+    '/demos\\evil/',
+    'javascript:alert(1)',
+    'http://example.org',
+    '/demos/?url=https://example.org',
+  ])
+    assert.equal(projectLinkURL(value), false, value);
+});

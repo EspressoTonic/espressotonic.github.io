@@ -11,6 +11,7 @@ const mime = {
   '.avif': 'image/avif',
   '.svg': 'image/svg+xml',
   '.pdf': 'application/pdf',
+  '.json': 'application/json',
   '.xml': 'application/xml',
   '.txt': 'text/plain',
   '.woff2': 'font/woff2',

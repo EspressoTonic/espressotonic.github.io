@@ -1,0 +1,95 @@
+---
+import { verifyInstalled } from '../../scripts/horse-racing-release.mjs';
+const { data } = await verifyInstalled();
+const fixed = data.research.rows.find((row: { id: string }) => row.id === 'fixed');
+const weekly = data.weekly.models.find(
+  (model: { id: string }) => model.id === data.weekly.default_model,
+);
+const rate = (value: number) => `${(value * 100).toFixed(1)}%`;
+const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
+  timeZone: 'Asia/Seoul',
+  dateStyle: 'medium',
+  timeStyle: 'short',
+});
+---
+
+<section class="horse-evidence" aria-labelledby="snapshot-evidence">
+  <h2 id="snapshot-evidence">Snapshot evidence</h2>
+  <p class="evidence-date">Updated {snapshot} KST · from the dashboard's saved data</p>
+  <dl>
+    <div>
+      <dt>Historical winner hit rate</dt>
+      <dd>{rate(fixed.metrics.win_hit)}</dd>
+    </div>
+    <div>
+      <dt>Historical paid-place hit rate</dt>
+      <dd>{rate(fixed.metrics.place_hit)}</dd>
+    </div>
+    <div>
+      <dt>Historical scoring / payout races</dt>
+      <dd>
+        {data.research.scoring_races.toLocaleString('en')} /{' '}
+        {data.research.payout_races.toLocaleString('en')}
+      </dd>
+    </div>
+  </dl>
+  <p>
+    Fixed horse/jockey LSTM · {data.research.years.join('–')} · means across{' '}
+    {data.research.seeds.length} seeds. Paid place means one selected horse finishes in a paying
+    position.
+  </p>
+  <p>
+    <strong>Weekly fixed-model replay:</strong> {rate(weekly.backtest.calibrated.winner_hit)} winner
+    hits on {weekly.backtest.calibrated.races} held-out races. This is retrospective evidence,
+    separate from the historical study.
+  </p>
+  <p>
+    <strong>Genuine pre-race record for this model family:</strong> {weekly.prospective.recorded}{' '}
+    captured / {weekly.prospective.evaluated} scored. Upcoming predictions are not scored as losses.
+  </p>
+  <p>
+    Historical hit rates exceed the Korean 2025 paper's reported values on seven tasks; different
+    datasets and validation prevent a direct superiority claim. All historical equal-stake pools
+    lose money.
+  </p>
+  <a class="text-link" href="/demos/horse-racing/">
+    Inspect models, forecasts and comparisons →
+  </a>
+</section>
+<style>
+  .horse-evidence {
+    border-block: 1px solid #62769b;
+    padding-block: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .horse-evidence h2 {
+    margin-top: 0;
+  }
+  .evidence-date {
+    color: #adb9d0;
+    font-size: 0.85rem;
+  }
+  dl {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+  dt {
+    color: #adb9d0;
+    font-size: 0.85rem;
+  }
+  dd {
+    font:
+      600 1.5rem Sora,
+      sans-serif;
+    margin: 0.6rem 0 0;
+    color: #edf3ff;
+  }
+  @media (max-width: 600px) {
+    dl {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

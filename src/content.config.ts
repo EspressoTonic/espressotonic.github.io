@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
+import { projectLinkURL } from './lib/validation.mjs';
 const id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 const period = z.string().regex(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/);
@@ -94,7 +95,13 @@ const projects = defineCollection({
           .array(cover.extend({ id, caption: z.string(), attribution: z.string().optional() }))
           .default([]),
         links: z
-          .array(link.extend({ kind: z.enum(['code', 'paper', 'demo', 'write-up']) }))
+          .array(
+            z.object({
+              label: z.string().min(1),
+              url: z.string().refine(projectLinkURL, 'Use HTTPS or a safe site-relative path'),
+              kind: z.enum(['code', 'paper', 'demo', 'write-up']),
+            }),
+          )
           .default([]),
         publicationIds: z.array(id).default([]),
         updated: date,

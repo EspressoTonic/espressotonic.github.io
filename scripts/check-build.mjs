@@ -3,6 +3,7 @@ import { resolve, join } from 'node:path';
 import { parseHTML } from 'linkedom';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { collection } from './read-content.mjs';
+import { verifyInstalled } from './horse-racing-release.mjs';
 import { pdfTextIncludes } from './pdf-text.mjs';
 async function files(dir) {
   const all = [];
@@ -15,6 +16,9 @@ async function files(dir) {
 }
 export async function checkBuild() {
   const root = resolve('dist');
+  const { manifest } = await verifyInstalled();
+  const { verifyRelease } = await import('./horse-racing-release.mjs');
+  await verifyRelease(join(root, 'demos/horse-racing'), manifest, { exact: true });
   const all = await files(root);
   const html = all.filter((p) => p.endsWith('.html'));
   const issues = [];
@@ -97,7 +101,8 @@ export async function checkBuild() {
         .join(' ') + '\n';
   }
   for (const required of ['Woo Young Cho', 'Arontier', 'Connectagen', 'M.Sc. Bioinformatics'])
-    if (!pdfTextIncludes(extracted, required)) issues.push('PDF missing expected content: ' + required);
+    if (!pdfTextIncludes(extracted, required))
+      issues.push('PDF missing expected content: ' + required);
   const cv = (await collection('cv'))[0];
   for (const language of cv.data.languages ?? [])
     if (!pdfTextIncludes(extracted, language)) issues.push('PDF missing language: ' + language);
@@ -106,7 +111,8 @@ export async function checkBuild() {
     if (!output) issues.push('PDF publication reference missing: ' + id);
     else
       for (const author of output.data.authors)
-        if (!pdfTextIncludes(extracted, author)) issues.push('PDF missing source author: ' + author);
+        if (!pdfTextIncludes(extracted, author))
+          issues.push('PDF missing source author: ' + author);
   }
   const pdfLinks = [];
   for (let i = 1; i <= document.numPages; i++)
