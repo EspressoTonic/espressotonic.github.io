@@ -38,11 +38,11 @@ Dataset manifests select source versions rather than concatenating overlapping a
 
 The neural model encodes each horse's prior runs and each jockey's activity across distinct days, then scores runners within a race. A fixed ranking head is the retained research baseline. Position-specific and conditional heads test richer interactions; they have not established a reliable gain on the matched historical experiment. CatBoost provides a separate tree-based comparison.
 
-The weekly recipe separates weight training, model selection, probability calibration and the final held-out week. Saved weekly versions are distinct from the historical study. The dropdown changes which saved results a visitor reads; training and prediction happen on the compute host.
+Scheduled batch retraining uses rolling chronological windows and prospective evaluation. The weekly recipe separates weight training, model selection, probability calibration and the final held-out week. Saved weekly versions are distinct from the historical study. The dropdown changes which saved results a visitor reads; training and prediction happen on the compute host.
 
 ## Prospective evidence
 
-Last-week replay results are retrospective, using revised starter information, even though their labels were excluded from fitting. Genuine prospective evidence begins with immutable forecasts captured before a race starts. Each race keeps its earliest eligible forecast and exact model version. Pending outcomes remain pending, and a refreshed model does not rewrite its predecessors' record.
+Last-week replay results are retrospective, using revised starter information, even though their labels were excluded from fitting. Genuine prospective evidence begins with immutable forecasts captured before a race starts. The original earliest forecast remains intact. A separately registered procedure selects the first eligible capture after the Wednesday refresh, using its exact model version. Family results and selected-version results remain distinct. Published and raw win probabilities receive log loss, race-sum Brier and reliability checks after verified outcomes arrive; matched comparisons use identical captured fields. A frozen reference bundle receives the same fresh history as the refreshed model. Pending outcomes remain pending, and a refreshed model does not rewrite its predecessors' record.
 
 ## Published-study context
 

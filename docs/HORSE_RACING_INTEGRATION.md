@@ -75,3 +75,18 @@ requires reviewing a previous bundle and invoking a main-only manual publication
 - Snapshot/code mismatch, failed audits or CI, missing credentials, network errors
   and concurrent pushes fail closed. Source changes require reviewed reapproval.
 - GitHub retains deploy history; keep old source packages for reproducible rollback.
+
+## Prospective evidence correction — October 15
+
+The next reviewed dashboard release adds actual prospective loss/Brier/reliability,
+weekly scores and same-capture paired comparisons, with separate registered
+procedure, exact-version and original-earliest scopes. Existing legacy probability
+coverage is 88 races/two weeks, distinct from the 143-race ranking cohort. New weekly
+outcomes remain pending. Raw probabilities are scored only when actually archived.
+The native summary uses the registered procedure and reports pending probability
+scores when no outcomes exist. Method copy identifies scheduled batch retraining
+with rolling chronological windows; it does not claim active learning or automatic
+performance gains. The compute project owns the forward-only protocol, fresh shared
+history, frozen reference and independent audit gate. The confirmatory horizon and
+power target, independent schedule denominator, and matched market study remain
+open. Interface/source changes require a reviewed approved-source import.

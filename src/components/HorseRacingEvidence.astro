@@ -5,6 +5,8 @@ const fixed = data.research.rows.find((row: { id: string }) => row.id === 'fixed
 const weekly = data.weekly.models.find(
   (model: { id: string }) => model.id === data.weekly.default_model,
 );
+const prospective = weekly.evaluation?.procedure || weekly.prospective;
+const loss = prospective.probabilities?.methods?.calibrated;
 const rate = (value: number) => `${(value * 100).toFixed(1)}%`;
 const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
   timeZone: 'Asia/Seoul',
@@ -44,8 +46,19 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
     separate from the historical study.
   </p>
   <p>
-    <strong>Genuine pre-race record for this model family:</strong> {weekly.prospective.recorded}{' '}
-    captured / {weekly.prospective.evaluated} scored. Upcoming predictions are not scored as losses.
+    <strong>Registered prospective updating procedure:</strong> {prospective.recorded} captured /{' '}
+    {prospective.evaluated} scored. Upcoming predictions are not scored as losses.
+  </p>
+  <p>
+    <strong>Prospective probability scores:</strong>{' '}
+    {loss
+      ? `win log loss ${loss.log_loss.toFixed(4)}, Brier ${loss.brier.toFixed(4)} on ${loss.races} races`
+      : 'pending verified outcomes'}
+    . Lower scores indicate better probability forecasts.
+  </p>
+  <p>
+    Models use scheduled batch retraining with rolling chronological windows. Future results
+    evaluate the updating procedure and each exact version separately.
   </p>
   <p>
     Historical hit rates exceed the Korean 2025 paper's reported values on seven tasks; different
