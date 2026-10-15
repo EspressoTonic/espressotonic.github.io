@@ -8,7 +8,7 @@
   "statusDetail": "Prototype history · Vault-centered redesign",
   "role": "Personal workflow, memory architecture & system direction",
   "featured": false,
-  "draft": false,
+  "draft": true,
   "topics": [
     "Personal knowledge",
     "Memory architecture",

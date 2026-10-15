@@ -273,7 +273,7 @@ li {
   padding-bottom: 40px;
 }
 .hero {
-  padding-bottom: 80px;
+  padding-bottom: var(--section-space);
   border-bottom: 1px solid var(--border);
 }
 .hero-grid {
@@ -284,7 +284,7 @@ li {
 }
 .hero h1 {
   font-size: clamp(34px, 3.45vw, 44px);
-  line-height: 40px;
+  line-height: 1.2;
   letter-spacing: -0.025em;
   font-weight: 700;
   max-width: 800px;
@@ -390,7 +390,7 @@ li {
   max-height: 220px;
 }
 .home-section {
-  padding-block: 80px;
+  padding-block: var(--section-space);
   border-bottom: 1px solid var(--border);
 }
 .section-heading {
@@ -398,10 +398,10 @@ li {
   justify-content: space-between;
   align-items: baseline;
   gap: 24px;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 .section-heading h2 {
-  font-size: 30px;
+  font-size: 28px;
 }
 .section-heading .text-link {
   font-size: 14px;
@@ -417,6 +417,99 @@ li {
 .project-card :is(h2, h3) {
   margin: 10px 0 16px;
   font-size: 24px;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: stretch;
+}
+.research-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.project-tile {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+.project-tile .project-card-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--card-padding);
+}
+.project-tile .project-meta {
+  min-height: 3.3em;
+}
+.project-tile :is(h2, h3) {
+  font-size: 22px;
+  min-height: 2.44em;
+  margin: 12px 0 16px;
+}
+.project-tile .project-alias {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.project-tile .text-link {
+  margin-top: auto;
+  align-self: flex-start;
+}
+.project-tile .card-media {
+  padding: 16px 16px 0;
+}
+.project-tile .project-media > :first-child {
+  height: var(--card-media-height);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-tile .project-media > img {
+  width: 100%;
+  object-fit: contain;
+  background: var(--bg);
+}
+.project-tile .project-media figcaption {
+  min-height: 3.3em;
+  margin-top: 12px;
+}
+.project-tile .workflow-steps {
+  flex-direction: row;
+  gap: 6px;
+  width: 100%;
+}
+.project-tile .workflow-steps > span:not(.workflow-arrow) {
+  width: auto;
+  min-width: 0;
+  min-height: 112px;
+  font-size: 13px;
+  padding: 8px 6px;
+}
+.project-tile .workflow-arrow {
+  flex: 0 0 auto;
+  transform: none;
+}
+.hero-feature > .project-media {
+  margin-top: 24px;
+}
+.hero-feature .hero-illustration {
+  padding: 12px;
+}
+.hero-feature .hero-illustration svg text {
+  display: none;
+}
+.hero-feature-bottom {
+  margin-top: 20px;
+}
+.home-updates {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
 }
 .project-alias {
   display: block;
@@ -533,7 +626,7 @@ li {
 .interest-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 48px;
+  gap: var(--grid-gap);
 }
 .interest-grid h3 {
   font-size: 18px;
@@ -546,7 +639,7 @@ li {
   margin: 0;
 }
 .exploring {
-  margin: 40px 0 0;
+  margin: 24px 0 0;
   padding-top: 24px;
   border-top: 1px solid var(--border);
   font-size: 15px;
@@ -620,15 +713,14 @@ li {
   font-size: 13px;
   white-space: nowrap;
 }
-.blog-preview {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: 72px;
+.blog-preview p {
+  max-width: 62ch;
 }
 .blog-preview h2,
 .social-section h2 {
   margin-top: 16px;
-  font-size: 30px;
+  font-size: 24px;
+  margin-bottom: 16px;
 }
 .blog-preview p {
   margin-bottom: 8px;
@@ -639,16 +731,16 @@ li {
 .background-contact {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 48px;
-  padding-block: 80px;
+  gap: var(--grid-gap);
+  padding-block: var(--section-space);
 }
 .background-contact h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 .contact-panel {
-  padding: 32px;
-  border-radius: 10px;
+  padding: var(--card-padding);
+  border-radius: var(--card-radius);
   background: var(--surface);
   border: 1px solid var(--border);
 }
@@ -661,7 +753,7 @@ li {
 .contact-links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
   margin-top: 24px;
 }
 .contact-links a {
@@ -690,7 +782,7 @@ li {
 }
 .page-intro {
   max-width: 850px;
-  margin-bottom: 64px;
+  margin-bottom: var(--section-space);
 }
 .page-intro h1 {
   margin: 20px 0 24px;
@@ -731,8 +823,9 @@ li {
   color: var(--muted);
 }
 .research-interests,
+.research-in-progress,
 .outputs-section {
-  margin-top: 80px;
+  margin-top: var(--section-space);
 }
 .research-interests h2 {
   margin-bottom: 32px;
@@ -1448,6 +1541,10 @@ li {
   margin-bottom: 24px;
 }
 @media (max-width: 1023px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .wrap {
     padding-inline: 32px;
   }
@@ -1493,6 +1590,24 @@ li {
   }
 }
 @media (max-width: 767px) {
+  :root {
+    --section-space: 40px;
+    --card-padding: 20px;
+    --grid-gap: 20px;
+  }
+  .project-grid,
+  .home-updates {
+    grid-template-columns: 1fr;
+  }
+  .project-tile .project-meta,
+  .project-tile :is(h2, h3),
+  .project-tile .project-media figcaption {
+    min-height: 0;
+  }
+  .home-updates {
+    gap: 32px;
+  }
+
   .wrap {
     padding-inline: 20px;
   }
@@ -1528,7 +1643,7 @@ li {
     padding-top: 36px;
   }
   .hero {
-    padding-bottom: 48px;
+    padding-bottom: var(--section-space);
   }
   .hero h1 {
     font-size: 34px;
@@ -1558,7 +1673,7 @@ li {
     padding-inline: 20px;
   }
   .home-section {
-    padding-block: 48px;
+    padding-block: var(--section-space);
   }
   .section-heading {
     flex-wrap: wrap;
@@ -1614,13 +1729,13 @@ li {
   }
   .blog-preview h2,
   .social-section h2 {
-    font-size: 26px;
+    font-size: 24px;
   }
   .background-contact {
-    padding-block: 48px;
+    padding-block: var(--section-space);
   }
   .contact-panel {
-    padding: 24px;
+    padding: var(--card-padding);
   }
   .contact-links {
     grid-template-columns: 1fr;
@@ -1646,8 +1761,9 @@ li {
     padding: 24px;
   }
   .research-interests,
+  .research-in-progress,
   .outputs-section {
-    margin-top: 48px;
+    margin-top: var(--section-space);
   }
   .detail-page {
     padding-top: 28px;

@@ -93,13 +93,13 @@ test('Research, personal projects, full inventory and back-links', async ({ page
   expect(await page.locator('[data-project-id]').count()).toBe(
     released.filter((project) => project.data.category === 'personal').length,
   );
-  await page.getByRole('link', { name: 'Location Todo', exact: true }).click();
+  await page.getByRole('link', { name: 'AI Usage Bar', exact: true }).click();
   await expect(
     page.getByRole('link', { name: 'Back to Personal Projects', exact: true }),
   ).toBeVisible();
-  await expect(page.locator('.project-facts')).toContainText('full iOS build pending');
+  await expect(page.locator('.project-facts')).toContainText('Integration validation ongoing');
 });
-test('Homepage curation has one MAGraph feature and six secondary personal links', async ({
+test('Homepage leads with publications and selects three inspectable personal projects', async ({
   page,
 }) => {
   await page.goto('/');
@@ -110,19 +110,17 @@ test('Homepage curation has one MAGraph feature and six secondary personal links
     await page
       .locator('.personal-home [data-project-id]')
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-project-id'))),
-  ).toEqual(['fridge-match', 'location-todo', 'commute-log']);
-  expect(
-    await page
-      .locator('.secondary-personal a')
-      .evaluateAll((links) => links.map((link) => link.getAttribute('href'))),
-  ).toEqual([
-    '/projects/junior/',
-    '/projects/lawgpt/',
-    '/projects/horse-racing/',
-    '/projects/tc-personal-agent/',
-    '/projects/nookcam/',
-    '/projects/ballet-pose-feedback/',
-  ]);
+  ).toEqual(['ai-usage-bar', 'codex-account-switcher', 'horse-racing']);
+  await expect(page.getByRole('region', { name: 'Recently added', exact: true })).toHaveCount(0);
+  await expect(
+    page
+      .getByRole('region', { name: 'Selected research', exact: true })
+      .locator('[data-project-id]'),
+  ).toHaveCount(3);
+  const output = await page.locator('#publications-title').boundingBox();
+  const research = await page.locator('#research-title').boundingBox();
+  expect(output!.y).toBeLessThan(research!.y);
+  expect(output!.y).toBeLessThan(1600);
 });
 test('SNS labels stay noninteractive and CV keeps professional contacts only', async ({ page }) => {
   for (const route of ['/', '/personal-projects/', '/blog/']) {
@@ -157,15 +155,12 @@ test('Blog is a real zero-post route with no invented article links', async ({ p
   expect(xml).toContain('https://espressotonic.github.io/blog/');
   expect(xml).not.toMatch(/\/blog\/[^<]+/);
 });
-test('Unverified periods are omitted and prototype limits stay visible', async ({ page }) => {
-  for (const id of ['nookcam', 'junior', 'tc-personal-agent']) {
-    await page.goto(`/projects/${id}/`);
-    expect(await page.locator('.project-facts dt').allTextContents()).not.toContain('Period');
+test('Held projects have no links anywhere in the public collection', async ({ page }) => {
+  for (const route of routes) {
+    await page.goto(route);
+    for (const project of records.filter((record) => record.data.draft))
+      await expect(page.locator(`a[href="/projects/${project.id}/"]`)).toHaveCount(0);
   }
-  await page.goto('/projects/ballet-pose-feedback/');
-  await expect(page.locator('.project-facts')).toContainText('mock tracking');
-  await page.goto('/projects/lawgpt/');
-  await expect(page.locator('.project-facts')).toContainText('corpus audit');
 });
 test('TOC brings the actual source heading into view', async ({ page }) => {
   await page.goto('/projects/magraph/');
@@ -236,19 +231,46 @@ test('Zoom reflow remains readable at a narrow viewport', async ({ page }) => {
   }
 });
 
-test('Actual detail screenshots preserve readable square and portrait presentations', async ({
+test('Project cards share equal tracks, spacing and media sizes without clipping', async ({
   page,
 }) => {
-  await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('/projects/fridge-match/');
-  const fridge = await page.locator('.personal-intro img').boundingBox();
-  expect(fridge!.width).toBeGreaterThan(400);
-  expect(fridge!.height / fridge!.width).toBeGreaterThan(0.98);
-  expect(fridge!.height / fridge!.width).toBeLessThan(1.04);
-  await page.goto('/projects/location-todo/');
-  const phone = await page.locator('.personal-intro img').boundingBox();
-  expect(phone!.width).toBeLessThanOrEqual(300);
-  expect(phone!.height / phone!.width).toBeGreaterThan(1.8);
+  for (const width of [390, 768, 1280, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    for (const route of ['/', '/research/', '/personal-projects/']) {
+      await page.goto(route);
+      await page.evaluate(() => document.fonts.ready);
+      for (const grid of await page.locator('.project-grid').all()) {
+        const cards = await grid.locator('.project-tile').evaluateAll((nodes) =>
+          nodes.map((node) => {
+            const rect = node.getBoundingClientRect();
+            const copy = node.querySelector('.project-card-copy')!;
+            return {
+              x: rect.x,
+              y: rect.y,
+              width: rect.width,
+              height: rect.height,
+              padding: getComputedStyle(copy).padding,
+              clipped: node.scrollHeight > node.clientHeight + 1,
+            };
+          }),
+        );
+        for (const card of cards) {
+          expect(card.clipped, `${width} ${route}`).toBe(false);
+          expect(card.padding).toBe(cards[0].padding);
+          expect(Math.abs(card.width - cards[0].width)).toBeLessThan(1);
+          for (const peer of cards.filter((peer) => Math.abs(peer.y - card.y) < 1))
+            expect(Math.abs(peer.height - card.height)).toBeLessThan(1);
+        }
+        if (width === 390) expect(new Set(cards.map((card) => card.x)).size).toBe(1);
+      }
+      const media = await page
+        .locator('.project-tile .project-media > :first-child')
+        .evaluateAll((nodes) => nodes.map((node) => node.getBoundingClientRect().height));
+      expect(new Set(media).size).toBeLessThanOrEqual(1);
+      for (const link of await page.locator('.project-tile .text-link').all())
+        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    }
+  }
 });
 
 test('Horse research summary works without JavaScript', async ({ browser, baseURL }) => {
@@ -320,16 +342,16 @@ for (const width of [390, 1440])
     await expect(page.locator('.horse-evidence')).toBeVisible();
   });
 
-test('Recent additions navigate through the right indexes and keep evidence limits visible', async ({
+test('Selected software navigates through the right indexes and keeps evidence limits visible', async ({
   page,
 }) => {
   await page.goto('/');
-  const recent = page.getByRole('region', { name: 'Recently added', exact: true });
+  const recent = page.getByRole('region', { name: 'Selected software & experiments', exact: true });
   expect(
     await recent
       .locator('[data-project-id]')
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-project-id'))),
-  ).toEqual(['ai-usage-bar', 'codex-account-switcher', 'genedis']);
+  ).toEqual(['ai-usage-bar', 'codex-account-switcher', 'horse-racing']);
   await recent.getByRole('link', { name: 'AI Usage Bar', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'AI Usage Bar', exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveAttribute(
@@ -341,7 +363,7 @@ test('Recent additions navigate through the right indexes and keep evidence limi
   await expect(page.locator('h1')).toHaveText('Codex Account Switcher');
   await expect(page.locator('main')).toContainText('Live account validation pending');
   await page.getByRole('link', { name: 'Back to Personal Projects', exact: true }).click();
-  const tools = page.getByRole('region', { name: 'Developer tools', exact: true });
+  const tools = page.getByRole('region', { name: 'Selected tools & experiments', exact: true });
   await expect(tools.getByRole('link', { name: 'AI Usage Bar', exact: true })).toBeVisible();
   await expect(
     tools.getByRole('link', { name: 'Codex Account Switcher', exact: true }),
@@ -354,8 +376,8 @@ test('Recent additions navigate through the right indexes and keep evidence limi
   await expect(page.locator('h1')).toHaveText('GeNeDis Multi-Omics');
   await expect(page.locator('main')).toContainText('No final endpoint, trained model');
   await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveCount(0);
-  await page.getByRole('link', { name: 'JUNIOR', exact: true }).click();
-  await expect(page.locator('h1')).toHaveText('JUNIOR');
+  await expect(page.locator('main')).toContainText('JUNIOR');
+  await expect(page.getByRole('link', { name: 'JUNIOR', exact: true })).toHaveCount(0);
 });
 
 test('Probability evidence keeps legacy and registered cohorts separate', async ({ page }) => {

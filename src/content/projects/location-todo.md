@@ -11,7 +11,7 @@
   'sortDate': '2026-10-07',
   'featured': true,
   'featuredOrder': 2,
-  'draft': false,
+  'draft': true,
   'topics': ['Mobile software', 'Local-first data', 'Product design'],
   'cover':
     {

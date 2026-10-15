@@ -8,7 +8,7 @@
   "statusDetail": "Archive-backed local MVP",
   "role": "Product direction, data interpretation & prototype verification",
   "featured": true,
-  "draft": false,
+  "draft": true,
   "topics": [
     "Everyday tools",
     "Data provenance",

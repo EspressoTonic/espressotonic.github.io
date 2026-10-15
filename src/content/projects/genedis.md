@@ -37,7 +37,7 @@ General data quality is distinct from analysis eligibility: a sample can pass a 
 
 ## A possible JUNIOR application
 
-The project is also a proposed concrete setting for [JUNIOR](/projects/junior/): a question-to-analysis copilot that produces a reviewable plan, uses explicit input and method contracts, and grounds its report in actual workflow artifacts. A fixed QC release would constrain the data available to that loop.
+The project is also a proposed concrete setting for JUNIOR: a question-to-analysis copilot that produces a reviewable plan, uses explicit input and method contracts, and grounds its report in actual workflow artifacts. A fixed QC release would constrain the data available to that loop.
 
 The copilot integration has not been implemented or evaluated. It should not be described as an autonomous discovery system or as an improvement over a fixed analysis workflow.
 

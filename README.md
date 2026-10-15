@@ -1,6 +1,6 @@
 # Woo Young Cho — personal portfolio
 
-A static Astro portfolio in the selected D — Night Gallery design, with sixteen project case studies, Research and Personal Projects indexes, an initially empty Blog, and a shared web/PDF CV. Source content is curated public Markdown. No backend, account, or runtime content API is required.
+A static Astro portfolio in the selected D — Night Gallery design, with eight public project entries, Research and Personal Projects indexes, an initially empty Blog, and a shared web/PDF CV. Source content is curated public Markdown. No backend, account, or runtime content API is required.
 
 ## Local workflow
 
@@ -34,7 +34,7 @@ Records are Markdown in `src/content/{profile,cv,projects,publications,blog}` wi
 - **Change status:** update the badge, qualification, prose tense, and limitations together. Do not use a badge to hide an overclaimed result.
 - **Missing links/images:** omit the field. Never use `#`, fake demo URLs, or invented screenshots.
 - **Unknown project periods:** omit `dateLabel` and `sortDate` when unsupported. Dated indexes sort newest first, then undated IDs deterministically; the personal index uses the curated groups in `src/lib/policy.mjs`.
-- **Homepage curation:** profile `heroProjectId` identifies MAGraph; research excludes the hero before limiting features. Fridge Match/Location Todo use actual screenshots, followed by Commute Log and six compact public-only links. A separate Recently added section links AI Usage Bar, Codex Account Switcher and GeNeDis; the two tools also have a Developer tools group in the personal index.
+- **Homepage curation:** profile `heroProjectId` identifies MAGraph. Publications follow the introduction; three selected research cards exclude the hero. AI Usage Bar, Codex Account Switcher and Horse-Racing form the selected software/experiments grid. GeNeDis remains a compact research-in-progress entry on the Research index. All listings filter drafts before rendering.
 - **Stable URLs:** avoid renaming released project filenames. Category changes do not alter `/projects/<id>/`.
 
 ## Writing and social profiles
@@ -57,7 +57,7 @@ Before releasing, review public copy, contact details, current employment, outpu
 
 ## Current implementation
 
-Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The current source contains five research and eleven personal projects, both indexes, homepage, Blog, CV and custom 404: twenty-three HTML pages including the horse-racing dashboard, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
+Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The public collection contains five research and three personal projects, both indexes, homepage, Blog, CV and custom 404: fifteen HTML pages including the horse-racing dashboard, zero Blog articles, and a two-page CV PDF. Eight personal projects are held as drafts with source/assets preserved; the employer-specific spatial-omics record also remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
 
 - [Implementation status](IMPLEMENTATION_STATUS.md) — completed slices, checks, source preservation and fidelity ledger.
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md) — retained task sequence and contracts.

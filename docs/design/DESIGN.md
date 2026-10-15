@@ -80,3 +80,15 @@ The current reference set is eighteen visitor-page mockups: homepage, thirteen p
 - Blog page: eyebrow “Blog / Coming later”, H1 “Notes from the work.”, scope “A place for research notes, project write-ups, and things I learn along the way.”, empty-state heading “No posts yet.” Three topic rows describe intended scope, not existing article titles. No fake posts, newsletter, counters, feed, search or loading placeholders.
 - Homepage social: eyebrow “SNS”, heading “Elsewhere”, followed by LinkedIn, Instagram, X and Threads in an ordinary list. Each name has a 20px local Font Awesome brand SVG; the SVG is decorative and hidden from assistive technology. The exact four names remain noninteractive spans: no href, guessed handles, disabled buttons, tab stops or pointer cursor. Existing professional contact links remain separate and functional. No SNS route is needed.
 - Final production styles must not copy the external CSS/CDN loading strategy of these design references. Keep ordinary Astro CSS and self-hosted licensed fonts as already planned.
+
+
+## Current curation and sizing contract — 2026-10-15
+
+This owner-requested revision supersedes the older expanded-gallery/homepage composition above. Preserve the Night Gallery colors, typography, real case-study content and professional CV.
+
+- Public personal selection: AI Usage Bar, Codex Account Switcher and Horse-Racing. The eight audited holds are drafts, with source/assets retained and no production routes/links/sitemap entries.
+- Homepage: introduction with a compact MAGraph concept feature, publications, three selected research cards, three software/experiment cards, interests, compact Blog/SNS and contact. EnzymeMatch is among the selected research; GeNeDis has a smaller research-in-progress entry on the Research index.
+- Shared cards use equal-width tracks and equal height within a row. Content remains intrinsic and fully readable: no clipped title or summary, no line clamp. Read-project actions align to the bottom. Card padding is 24px desktop/20px phone, gap 24px/20px, radius 10px; conceptual media frames are 176px. Descriptive captions remain outside the fixed media frame.
+- Homepage/personal grids: three columns at desktop, two below 1024px and one below 768px. Research: two columns above 768px. Never stretch a lone experimental entry into a different card treatment.
+- Main section spacing: 56px desktop/40px phone; section H2 is 28px/26px and card H3 is 22px. Inputs and navigation retain 44px minimum touch targets. Detail prose and CV keep their existing readable widths and full text.
+- SNS remains four local decorative SVG marks with readable names and no URLs. Blog remains a zero-post route. No model, product or scientific result is fabricated to fill a visual gap.

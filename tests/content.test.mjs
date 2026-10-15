@@ -61,28 +61,27 @@ test('Unknown periods sort after dated projects with stable ID order', () => {
     ['dated', 'a-undated', 'z-undated'],
   );
 });
-test('Homepage excludes the hero before limiting research and filters every curated link', () => {
+test('Homepage excludes the hero before limiting research and filters held personal work', () => {
   const items = [
     entry('magraph', { featuredOrder: 1 }),
     entry('vcc', { featuredOrder: 2 }),
     entry('gma', { featuredOrder: 3 }),
-    entry('lawgpt', { category: 'personal', draft: true }),
-    entry('junior', { category: 'personal' }),
-    entry('commute-log', { category: 'personal' }),
+    entry('enzymematch', { featuredOrder: 4 }),
+    entry('other-research', { featuredOrder: 5 }),
+    entry('ai-usage-bar', { category: 'personal' }),
+    entry('codex-account-switcher', { category: 'personal', draft: true }),
+    entry('horse-racing', { category: 'personal' }),
+    entry('fridge-match', { category: 'personal', draft: true }),
   ];
   const home = selectHomepageProjects(items, { heroProjectId: 'magraph' });
   assert.equal(home.hero.id, 'magraph');
   assert.deepEqual(
     home.research.map((p) => p.id),
-    ['vcc', 'gma'],
+    ['vcc', 'gma', 'enzymematch'],
   );
   assert.deepEqual(
     home.personal.map((p) => p.id),
-    ['commute-log'],
-  );
-  assert.deepEqual(
-    home.secondaryPersonal.map((p) => p.id),
-    ['junior'],
+    ['ai-usage-bar', 'horse-racing'],
   );
 });
 test('Personal groups preserve curation and never lose new public records', () => {
@@ -198,30 +197,29 @@ test('Only project links allow bounded local routes', () => {
     assert.equal(projectLinkURL(value), false, value);
 });
 
-test('Recent additions exclude drafts and preserve existing homepage selections', () => {
-  const items = [
-    entry('magraph', { featuredOrder: 1 }),
-    entry('genedis', { featured: false }),
-    entry('ai-usage-bar', { category: 'personal', featured: false }),
-    entry('codex-account-switcher', { category: 'personal', featured: false, draft: true }),
-    entry('horse-racing', { category: 'personal', featured: false }),
+test('Actual public collection excludes the eight held projects without deleting their source', async () => {
+  const { collection } = await import('../scripts/read-content.mjs');
+  const projects = await collection('projects');
+  const held = [
+    'fridge-match',
+    'location-todo',
+    'commute-log',
+    'junior',
+    'tc-personal-agent',
+    'lawgpt',
+    'nookcam',
+    'ballet-pose-feedback',
   ];
-  const home = selectHomepageProjects(items, { heroProjectId: 'magraph' });
+  for (const id of held) {
+    const record = projects.find((project) => project.id === id);
+    assert.ok(record?.body.trim(), `${id}: preserve source narrative`);
+    assert.equal(record.data.draft, true, `${id}: held from publication`);
+  }
   assert.deepEqual(
-    home.recent.map((p) => p.id),
-    ['ai-usage-bar', 'genedis'],
+    selectProjects(projects, { category: 'personal' })
+      .map((project) => project.id)
+      .sort(),
+    ['ai-usage-bar', 'codex-account-switcher', 'horse-racing'],
   );
-  assert.deepEqual(
-    home.secondaryPersonal.map((p) => p.id),
-    ['horse-racing'],
-  );
-  assert.equal(
-    home.research.some((p) => p.id === 'genedis'),
-    false,
-  );
-  const developerTools = groupPersonalProjects(selectProjects(items, { category: 'personal' }));
-  assert.deepEqual(
-    developerTools[0].items.map((p) => p.id),
-    ['ai-usage-bar'],
-  );
+  assert.equal(selectProjects(projects, { category: 'research' }).length, 5);
 });

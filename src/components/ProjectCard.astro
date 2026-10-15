@@ -7,7 +7,7 @@ interface Props {
   project: CollectionEntry<'projects'>;
   headingLevel?: 2 | 3;
   compact?: boolean;
-  variant?: 'row' | 'feature' | 'visual' | 'home-research';
+  variant?: 'row' | 'feature' | 'visual' | 'home-research' | 'tile';
 }
 const { project, headingLevel = 3, variant = 'row', compact = false } = Astro.props;
 const d = project.data;
@@ -16,9 +16,12 @@ const showMedia =
   variant !== 'row' &&
   (!!d.cover ||
     ['magraph', 'enzymematch', 'virtual-cell-challenge', 'genomycanalyzer'].includes(project.id));
-const summary = compact || variant === 'home-research' ? (d.shortSummary ?? d.summary) : d.summary;
+const summary =
+  compact || variant === 'home-research' || variant === 'tile'
+    ? (d.shortSummary ?? d.summary)
+    : d.summary;
 const titleParts =
-  project.id === 'genomycanalyzer' && variant === 'home-research'
+  project.id === 'genomycanalyzer' && ['home-research', 'tile'].includes(variant)
     ? d.title.split(' (published as ')
     : undefined;
 ---
@@ -27,7 +30,7 @@ const titleParts =
   class:list={['project-card', `project-${variant}`, d.category, { 'has-media': showMedia }]}
   data-project-id={project.id}
 >
-  {variant === 'visual' && showMedia && (
+  {['visual', 'tile'].includes(variant) && showMedia && (
     <div class="card-media">
       <ProjectMedia project={project} />
     </div>
