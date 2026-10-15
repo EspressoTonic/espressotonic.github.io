@@ -17,7 +17,7 @@ import {
 } from '../lib/content';
 const p = await profile();
 const { Content } = await render(p);
-const { hero, research, personal, secondaryPersonal } = await homepageProjects();
+const { hero, research, personal, secondaryPersonal, recent } = await homepageProjects();
 const outputs = (await publications()).sort((a, b) => b.data.year - a.data.year);
 const blog = await posts();
 const screenshotFeatures = personal.filter((project) => !!project.data.cover);
@@ -81,6 +81,16 @@ const textFeatures = personal.filter((project) => !project.data.cover);
         </div>
         {research.map((project) => (
           <ProjectCard project={project} variant="home-research" />
+        ))}
+      </section>
+    )}
+    {recent.length > 0 && (
+      <section class="home-section recent-projects" aria-labelledby="recent-projects-title">
+        <div class="section-heading">
+          <h2 id="recent-projects-title">Recently added</h2>
+        </div>
+        {recent.map((project) => (
+          <ProjectCard project={project} compact />
         ))}
       </section>
     )}

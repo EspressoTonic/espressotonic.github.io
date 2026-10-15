@@ -16,7 +16,7 @@ const routes = [
   ...released.map((project) => `/projects/${project.id}/`),
 ];
 for (const route of routes)
-  test(`Page and accessibility: ${route}`, async ({ page }) => {
+  test(`Page and accessibility: ${route}`, async ({ page, baseURL }) => {
     const errors: string[] = [];
     const external: string[] = [];
     page.on('console', (message) => {
@@ -27,7 +27,7 @@ for (const route of routes)
     );
     page.on('pageerror', (error) => errors.push(error.message));
     page.on('request', (request) => {
-      if (new URL(request.url()).origin !== 'http://127.0.0.1:4322') external.push(request.url());
+      if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
     });
     const response = await page.goto(route);
     expect(response?.status()).toBe(200);
@@ -177,10 +177,10 @@ test('TOC brings the actual source heading into view', async ({ page }) => {
     page.getByRole('heading', { name: 'Limitations and current stage', exact: true }),
   ).toBeInViewport();
 });
-test('No JavaScript navigation and keyboard focus', async ({ browser }) => {
+test('No JavaScript navigation and keyboard focus', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4322/');
+  await page.goto(baseURL! + '/');
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
   for (const [name, path] of [
@@ -193,7 +193,7 @@ test('No JavaScript navigation and keyboard focus', async ({ browser }) => {
       .getByRole('navigation', { name: 'Main navigation' })
       .getByRole('link', { name, exact: true })
       .click();
-    await expect(page).toHaveURL(`http://127.0.0.1:4322${path}`);
+    await expect(page).toHaveURL(`${baseURL}${path}`);
   }
   await expect(page.locator('h1')).toHaveText('Woo Young Cho');
   await context.close();
@@ -249,4 +249,42 @@ test('Actual detail screenshots preserve readable square and portrait presentati
   const phone = await page.locator('.personal-intro img').boundingBox();
   expect(phone!.width).toBeLessThanOrEqual(300);
   expect(phone!.height / phone!.width).toBeGreaterThan(1.8);
+});
+
+test('Recent additions navigate through the right indexes and keep evidence limits visible', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const recent = page.getByRole('region', { name: 'Recently added', exact: true });
+  expect(
+    await recent
+      .locator('[data-project-id]')
+      .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-project-id'))),
+  ).toEqual(['ai-usage-bar', 'codex-account-switcher', 'genedis']);
+  await recent.getByRole('link', { name: 'AI Usage Bar', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'AI Usage Bar', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveAttribute(
+    'href',
+    'https://github.com/EspressoTonic/ai_usage_bar',
+  );
+  await expect(page.locator('main')).toContainText('not a broadly validated binary release');
+  await page.getByRole('link', { name: 'Codex Account Switcher', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Codex Account Switcher');
+  await expect(page.locator('main')).toContainText('Live account validation pending');
+  await page.getByRole('link', { name: 'Back to Personal Projects', exact: true }).click();
+  const tools = page.getByRole('region', { name: 'Developer tools', exact: true });
+  await expect(tools.getByRole('link', { name: 'AI Usage Bar', exact: true })).toBeVisible();
+  await expect(
+    tools.getByRole('link', { name: 'Codex Account Switcher', exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole('navigation', { name: 'Main navigation' })
+    .getByRole('link', { name: 'Research', exact: true })
+    .click();
+  await page.getByRole('link', { name: 'GeNeDis Multi-Omics', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('GeNeDis Multi-Omics');
+  await expect(page.locator('main')).toContainText('No final endpoint, trained model');
+  await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveCount(0);
+  await page.getByRole('link', { name: 'JUNIOR', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('JUNIOR');
 });
