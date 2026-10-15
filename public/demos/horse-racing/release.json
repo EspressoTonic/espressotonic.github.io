@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "source_release": "b1fc95290888f57e",
-  "source_manifest_sha256": "ef6c20ccc322deb8592710b77b1176671e2b413f6180e2cfc1cf0c56860a22de",
-  "source_commit": "f5462ccc3ead24be339721ff85059bed518b92d2",
-  "exported_at": "2026-10-15T05:38:17.986124+00:00",
+  "source_release": "0f90ecd21b7a58a7",
+  "source_manifest_sha256": "7a952d1918b1b71f5f53430d210508ff9180ba52de805c920dc72715b50f1c65",
+  "source_commit": "5703cc4b8da3048a57169c68a672d1eb04aef153",
+  "exported_at": "2026-10-15T05:41:26.970791+00:00",
   "research_run": "e6462b99e8e507ff",
   "weekly_run": "f6ba14c6a904b15b",
   "source_files": {
@@ -46,7 +46,7 @@
     "assets/index-DpUF31el.css": "316c89dc8129f6821b7a348cc325893f43c6bef3e2a43f9cf51848ec09e590ce",
     "assets/inter-latin-variable-8kRkwJBP.woff2": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
     "assets/sora-latin-variable-5v9NviDD.woff2": "3902474d3ece89c8580d5ef3325cf58753e6e45a86f9957b4dacc4fce2e7fde1",
-    "data/dashboard.json": "57b9196bb6e4cce3f4e0337429caef59d704f3983dfc9f5ce1292d9804109f3e",
+    "data/dashboard.json": "cfe129d4a857082502b9b08890e2dfa88ae33799882f1cb0ff353c2c89fd9670",
     "index.html": "58781236bc08b4869976f183941d0c9d54edc12e137be1c8300469aca4275d9a"
   }
 }
