@@ -1,8 +1,8 @@
 # Implementation status
 
 - Current implementation: Night Gallery portfolio with three added case studies and horse-racing results integration
-- Latest implementation checkpoint: horse-racing integration (2026-10-15; publication status below)
-- Review branch: codex/horse-racing-integration
+- Latest completed task: horse-racing publication and live verification (2026-10-15)
+- Branch: main; integration merged from codex/horse-racing-integration
 - Code: this separate projects repository
 - Local release preview: http://127.0.0.1:4326
 - Public site: https://espressotonic.github.io/; see dated release checkpoints below
@@ -152,3 +152,27 @@ all three case studies, their homepage/index changes, test assertions and config
 Playwright port. The combined artifact passes fifteen unit tests, the complete
 23-HTML-page release/two-page PDF validation, and all 41 Chromium tests on port 4329.
 The earlier 20-page/37-test checkpoint describes the pre-merge portfolio.
+
+
+## 2026-10-15 — Horse-racing results published and verified
+
+Portfolio PR2 merged after current-main integration and successful CI. The compute
+publisher delivered release `0f90ecd21b7a58a7` in data-only commit `68fc722`;
+[Pages run 38688583560](https://github.com/EspressoTonic/espressotonic.github.io/actions/runs/38688583560)
+passed gate, full release validation and deployment. Separate main validation
+passed. This supersedes the earlier integration checkpoint's pending publication.
+
+Both `/projects/horse-racing/` and `/demos/horse-racing/` are live. Live Chromium
+checks verified all 21 ordinary content routes, CV download, all eight demo files
+against release hashes, five model choices, all views, simulation controls, hash
+reload, desktop 1440×1000 and phone 390×844, and no-JavaScript summary/fallback.
+There were zero page/console errors and external runtime requests, with one JSON
+fetch on the first dashboard load. Actual live screenshots were inspected outside
+Git. The complete build remains 23 HTML pages, 15 unit tests and 41 browser tests.
+
+Wednesday 12:00 KST model refresh and Mon/Thu–Sun 08:00 forecast captures now deliver
+verified data through the compute host's systemd services. A full repeat under
+systemd succeeded without a duplicate commit. Offline host/network delays updates;
+failed validation preserves the prior Pages deployment. Source/asset changes need
+a reviewed import and manual publication. No training artifacts or credentials
+are public; statistical and prototype caveats remain unchanged.
