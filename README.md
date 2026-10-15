@@ -1,6 +1,6 @@
 # Woo Young Cho — personal portfolio
 
-A static Astro portfolio in the selected D — Night Gallery design, with thirteen project case studies, Research and Personal Projects indexes, an initially empty Blog, and a shared web/PDF CV. Source content is curated public Markdown. No backend, account, or runtime content API is required.
+A static Astro portfolio in the selected D — Night Gallery design, with sixteen project case studies, Research and Personal Projects indexes, an initially empty Blog, and a shared web/PDF CV. Source content is curated public Markdown. No backend, account, or runtime content API is required.
 
 ## Local workflow
 
@@ -34,7 +34,7 @@ Records are Markdown in `src/content/{profile,cv,projects,publications,blog}` wi
 - **Change status:** update the badge, qualification, prose tense, and limitations together. Do not use a badge to hide an overclaimed result.
 - **Missing links/images:** omit the field. Never use `#`, fake demo URLs, or invented screenshots.
 - **Unknown project periods:** omit `dateLabel` and `sortDate` when unsupported. Dated indexes sort newest first, then undated IDs deterministically; the personal index uses the curated groups in `src/lib/policy.mjs`.
-- **Homepage curation:** profile `heroProjectId` identifies MAGraph; research excludes the hero before limiting features. Fridge Match/Location Todo use actual screenshots, followed by Commute Log and six compact public-only links.
+- **Homepage curation:** profile `heroProjectId` identifies MAGraph; research excludes the hero before limiting features. Fridge Match/Location Todo use actual screenshots, followed by Commute Log and six compact public-only links. A separate Recently added section links AI Usage Bar, Codex Account Switcher and GeNeDis; the two tools also have a Developer tools group in the personal index.
 - **Stable URLs:** avoid renaming released project filenames. Category changes do not alter `/projects/<id>/`.
 
 ## Writing and social profiles
@@ -55,7 +55,7 @@ Before releasing, review public copy, contact details, current employment, outpu
 
 ## Current implementation
 
-Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The release contains four research and nine personal projects, both indexes, homepage, Blog, CV and custom 404: twenty HTML pages including the horse-racing dashboard, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
+Night Gallery is published at [espressotonic.github.io](https://espressotonic.github.io/). The current source contains five research and eleven personal projects, both indexes, homepage, Blog, CV and custom 404: twenty-three HTML pages including the horse-racing dashboard, zero Blog articles, and a two-page CV PDF. The employer-specific spatial-omics record remains excluded. A project page documents the work and its limits; it does not establish that its prototype is publicly deployed.
 
 - [Implementation status](IMPLEMENTATION_STATUS.md) — completed slices, checks, source preservation and fidelity ledger.
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md) — retained task sequence and contracts.
@@ -77,3 +77,5 @@ model choices, forecasts, results, historical paper comparisons and a bankroll
 replay, with no browser model service. See
 [the integration contract](docs/HORSE_RACING_INTEGRATION.md) for source approvals,
 verified imports, the compute-host delivery schedule and rollback.
+
+The 2026-10-15 additions are implemented in an isolated worktree to permit a separate Horse-Racing update. Set `SITE_TEST_PORT=4329 npm run test:site` to run browser tests on a different local port; `playwright.config.mjs` defaults to 4322. Source descriptions distinguish implemented prototypes from unimplemented research designs. GeNeDis has no public code link because public repository access was not confirmed.

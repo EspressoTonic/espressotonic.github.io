@@ -1,6 +1,6 @@
 # Implementation status
 
-- Current implementation: Night Gallery portfolio with scoped horse-racing results integration
+- Current implementation: Night Gallery portfolio with three added case studies and horse-racing results integration
 - Latest implementation checkpoint: horse-racing integration (2026-10-15; publication status below)
 - Review branch: codex/horse-racing-integration
 - Code: this separate projects repository
@@ -111,6 +111,15 @@ Corrected branch validation [38485685583](https://github.com/EspressoTonic/espre
 The live site is https://espressotonic.github.io/. Live Chromium checks passed all eighteen public content routes, canonical URLs, loaded images and zero page/console errors. Desktop (1280×800) and phone (390×844) screenshots were inspected; representative phone routes had no horizontal overflow. Research → MAGraph → CV → actual PDF download worked; all four primary navigation links and keyboard skip worked without JavaScript. The downloaded PDF contains two pages, all 38 author entries, all three languages and no localhost annotations. Unknown routes return the custom 404 and the employer draft remains excluded from routes and sitemap. Live-check scripts, downloaded PDFs and screenshots are retained only in temporary storage outside the repository/vault. This documentation checkpoint does not change the deployed site code.
 
 
+## 2026-10-15 — Three project additions
+
+Added source-backed case studies for AI Usage Bar, Codex Account Switcher and GeNeDis Multi-Omics. The two native/CLI tools are public-source prototypes with remaining integration gates; GeNeDis is data acquisition and QC/pipeline design, without a completed model, selected endpoint or submission claim. Verified public code links for the two tools; omitted the unavailable GeNeDis repository link. Added cross-links between the tools and from GeNeDis to JUNIOR.
+
+The source now has sixteen public projects (five research/eleven personal), plus the excluded employer draft. Recently added homepage rows use concise summaries; personal tools have their own index group. Full original case-study and CV content remains unchanged. Work is isolated on `codex/portfolio-additions`; Horse-Racing content/assets are outside this change. Playwright uses an optional per-worktree port and the dependency-free JavaScript config so simultaneous local checks can avoid port collisions.
+
+Verification: eleven unit tests, twenty-two-page release build and shared two-page CV validation, thirty-eight Chromium tests including all twenty-one ordinary routes, accessibility, five widths and new project navigation. Desktop and phone captures were inspected. Browser plugin/skill is absent, so the existing Playwright workflow provides browser verification. Screenshots and scratch files stay outside Git and the vault. Commit/publication status is recorded by Git and the release handoff.
+
+
 ## 2026-10-15 — Horse-racing integration verified locally
 
 Preserved the Astro case-study route and added a self-contained Night Gallery demo
@@ -135,3 +144,11 @@ compute-host publisher uses an isolated worktree, noninteractive SSH and ordinar
 fast-forward pushes. Authentication succeeded from a systemd user job. Code/asset
 changes require review. See `docs/HORSE_RACING_INTEGRATION.md` for contracts, failure
 behavior and rollback. This checkpoint precedes the initial integration deployment.
+
+### Combined-main verification
+
+Merged the concurrent `3d011f1` additions into the horse-racing branch, preserving
+all three case studies, their homepage/index changes, test assertions and configurable
+Playwright port. The combined artifact passes fifteen unit tests, the complete
+23-HTML-page release/two-page PDF validation, and all 41 Chromium tests on port 4329.
+The earlier 20-page/37-test checkpoint describes the pre-merge portfolio.

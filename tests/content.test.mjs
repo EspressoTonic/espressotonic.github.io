@@ -197,3 +197,31 @@ test('Only project links allow bounded local routes', () => {
   ])
     assert.equal(projectLinkURL(value), false, value);
 });
+
+test('Recent additions exclude drafts and preserve existing homepage selections', () => {
+  const items = [
+    entry('magraph', { featuredOrder: 1 }),
+    entry('genedis', { featured: false }),
+    entry('ai-usage-bar', { category: 'personal', featured: false }),
+    entry('codex-account-switcher', { category: 'personal', featured: false, draft: true }),
+    entry('horse-racing', { category: 'personal', featured: false }),
+  ];
+  const home = selectHomepageProjects(items, { heroProjectId: 'magraph' });
+  assert.deepEqual(
+    home.recent.map((p) => p.id),
+    ['ai-usage-bar', 'genedis'],
+  );
+  assert.deepEqual(
+    home.secondaryPersonal.map((p) => p.id),
+    ['horse-racing'],
+  );
+  assert.equal(
+    home.research.some((p) => p.id === 'genedis'),
+    false,
+  );
+  const developerTools = groupPersonalProjects(selectProjects(items, { category: 'personal' }));
+  assert.deepEqual(
+    developerTools[0].items.map((p) => p.id),
+    ['ai-usage-bar'],
+  );
+});

@@ -46,6 +46,7 @@ export function selectPosts(entries, preview = false) {
     );
 }
 export const personalGroups = [
+  { title: 'Developer tools', ids: ['ai-usage-bar', 'codex-account-switcher'] },
   { title: 'Everyday tools', ids: ['fridge-match', 'location-todo', 'commute-log'] },
   { title: 'Agents & knowledge', ids: ['junior', 'tc-personal-agent', 'lawgpt'] },
   { title: 'Vision & data experiments', ids: ['nookcam', 'ballet-pose-feedback', 'horse-racing'] },
@@ -92,5 +93,6 @@ export function selectHomepageProjects(entries, { preview = false, heroProjectId
   ]
     .map(find)
     .filter(Boolean);
-  return { hero, research, personal, secondaryPersonal };
+  const recent = ['ai-usage-bar', 'codex-account-switcher', 'genedis'].map(find).filter(Boolean);
+  return { hero, research, personal, secondaryPersonal, recent };
 }
