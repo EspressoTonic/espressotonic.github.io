@@ -8,7 +8,7 @@
   "statusDetail": "Early prototype · mock tracking",
   "role": "Independent prototype development & pipeline design",
   "featured": false,
-  "draft": false,
+  "draft": true,
   "topics": [
     "Computer vision",
     "Movement feedback",

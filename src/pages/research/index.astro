@@ -6,6 +6,8 @@ import { projects, publications, profile } from '../../lib/content';
 import Icon from '../../components/Icon.astro';
 const items = await projects({ category: 'research' });
 const outputs = await publications();
+const selected = await projects({ category: 'research', featured: true });
+const ongoing = items.filter((project) => !project.data.featured);
 const p = await profile();
 ---
 
@@ -26,15 +28,22 @@ const p = await profile();
       <div class="section-heading">
         <h2 id="research-projects-title">Research projects</h2>
       </div>
-      {items.map((project) => (
-        <ProjectCard
-          project={project}
-          variant={
-            project.data.cover || ['magraph', 'enzymematch'].includes(project.id) ? 'visual' : 'row'
-          }
-        />
-      ))}
+      <div class="project-grid research-grid">
+        {selected.map((project) => (
+          <ProjectCard project={project} variant="tile" />
+        ))}
+      </div>
     </section>
+    {ongoing.length > 0 && (
+      <section class="research-in-progress" aria-labelledby="ongoing-research-title">
+        <div class="section-heading">
+          <h2 id="ongoing-research-title">Research in progress</h2>
+        </div>
+        {ongoing.map((project) => (
+          <ProjectCard project={project} compact />
+        ))}
+      </section>
+    )}
     <section class="research-interests" aria-labelledby="interests-title">
       <h2 id="interests-title">Research interests</h2>
       <div class="interest-grid">

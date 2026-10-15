@@ -62,8 +62,6 @@ export async function homepageProjects() {
     hero?: CollectionEntry<'projects'>;
     research: CollectionEntry<'projects'>[];
     personal: CollectionEntry<'projects'>[];
-    secondaryPersonal: CollectionEntry<'projects'>[];
-    recent: CollectionEntry<'projects'>[];
   };
 }
 export async function personalProjectGroups() {

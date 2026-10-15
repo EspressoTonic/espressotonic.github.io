@@ -8,7 +8,7 @@
   "statusDetail": "Early prototype · corpus audit",
   "role": "Independent project direction & prototype development",
   "featured": false,
-  "draft": false,
+  "draft": true,
   "topics": [
     "Retrieval",
     "Source provenance",

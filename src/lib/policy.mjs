@@ -81,18 +81,9 @@ export function selectHomepageProjects(entries, { preview = false, heroProjectId
     featured: true,
   })
     .filter((p) => p.id !== hero?.id)
-    .slice(0, 2);
-  const personal = ['fridge-match', 'location-todo', 'commute-log'].map(find).filter(Boolean);
-  const secondaryPersonal = [
-    'junior',
-    'lawgpt',
-    'horse-racing',
-    'tc-personal-agent',
-    'nookcam',
-    'ballet-pose-feedback',
-  ]
+    .slice(0, 3);
+  const personal = ['ai-usage-bar', 'codex-account-switcher', 'horse-racing']
     .map(find)
     .filter(Boolean);
-  const recent = ['ai-usage-bar', 'codex-account-switcher', 'genedis'].map(find).filter(Boolean);
-  return { hero, research, personal, secondaryPersonal, recent };
+  return { hero, research, personal };
 }

@@ -137,7 +137,22 @@ const steps = workflows[id];
     </svg>
   </div>
 )}
-{id === 'enzymematch' && (
+{id === 'enzymematch' && context === 'card' && (
+  <div class="workflow-illustration">
+    <div class="workflow-steps">
+      <span>Interaction filtering</span>
+      <span class="workflow-arrow" aria-hidden="true">
+        →
+      </span>
+      <span>Geometric comparison</span>
+      <span class="workflow-arrow" aria-hidden="true">
+        →
+      </span>
+      <span>Candidate ranking</span>
+    </div>
+  </div>
+)}
+{id === 'enzymematch' && context !== 'card' && (
   <div class="enzyme-concept">
     <div class="diagram-header">
       <span>From interaction requirements to candidates</span>

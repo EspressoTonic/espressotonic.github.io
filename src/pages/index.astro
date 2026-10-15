@@ -17,11 +17,9 @@ import {
 } from '../lib/content';
 const p = await profile();
 const { Content } = await render(p);
-const { hero, research, personal, secondaryPersonal, recent } = await homepageProjects();
+const { hero, research, personal } = await homepageProjects();
 const outputs = (await publications()).sort((a, b) => b.data.year - a.data.year);
 const blog = await posts();
-const screenshotFeatures = personal.filter((project) => !!project.data.cover);
-const textFeatures = personal.filter((project) => !project.data.cover);
 ---
 
 <BaseLayout>
@@ -37,8 +35,8 @@ const textFeatures = personal.filter((project) => !project.data.cover);
             <a class="button" href="/research/">
               Explore research <Icon />
             </a>
-            <a class="button button-outline" href="/personal-projects/">
-              Personal projects
+            <a class="button button-outline" href="/cv/">
+              View CV <Icon />
             </a>
           </div>
         </div>
@@ -52,6 +50,7 @@ const textFeatures = personal.filter((project) => !project.data.cover);
               <h2 id="hero-project-title">{hero.data.title}</h2>
               <p>{hero.data.shortSummary ?? hero.data.summary}</p>
             </div>
+            <ProjectMedia project={hero} context="hero" loading="eager" />
             <div class="hero-feature-bottom">
               <span>{hero.data.context === 'academic' ? 'Academic research' : 'Research'}</span>
               <a class="text-link" href={projectUrl(hero.id)}>
@@ -61,15 +60,15 @@ const textFeatures = personal.filter((project) => !project.data.cover);
           </aside>
         )}
       </div>
-      {hero && (
-        <div class="hero-media">
-          <div class="diagram-header">
-            <span>Gene-neighbourhood representation</span>
-            <span>Concept illustration</span>
-          </div>
-          <ProjectMedia project={hero} context="hero" loading="eager" />
-        </div>
-      )}
+    </section>
+    <section class="home-section" aria-labelledby="publications-title">
+      <div class="section-heading">
+        <h2 id="publications-title">Selected publications</h2>
+        <a class="text-link" href="/cv/">
+          Full CV <Icon />
+        </a>
+      </div>
+      <PublicationList items={outputs} variant="compact" />
     </section>
     {research.length > 0 && (
       <section class="home-section" aria-labelledby="research-title">
@@ -79,54 +78,28 @@ const textFeatures = personal.filter((project) => !project.data.cover);
             All research <Icon />
           </a>
         </div>
-        {research.map((project) => (
-          <ProjectCard project={project} variant="home-research" />
-        ))}
-      </section>
-    )}
-    {recent.length > 0 && (
-      <section class="home-section recent-projects" aria-labelledby="recent-projects-title">
-        <div class="section-heading">
-          <h2 id="recent-projects-title">Recently added</h2>
-        </div>
-        {recent.map((project) => (
-          <ProjectCard project={project} compact />
-        ))}
-      </section>
-    )}
-    <section class="home-section personal-home" aria-labelledby="personal-title">
-      <div class="section-heading">
-        <h2 id="personal-title">Personal projects</h2>
-        <a class="text-link" href="/personal-projects/">
-          All personal projects <Icon />
-        </a>
-      </div>
-      {screenshotFeatures.length > 0 && (
-        <div class="feature-grid">
-          {screenshotFeatures.map((project) => (
-            <ProjectCard project={project} variant="feature" />
+        <div class="project-grid">
+          {research.map((project) => (
+            <ProjectCard project={project} variant="tile" />
           ))}
         </div>
-      )}
-      {textFeatures.map((project) => (
-        <ProjectCard project={project} />
-      ))}
-      {secondaryPersonal.length > 0 && (
-        <div class="secondary-personal">
-          <span class="eyebrow">More projects &amp; experiments</span>
-          <ul class="project-link-list">
-            {secondaryPersonal.map((project) => (
-              <li>
-                <a href={projectUrl(project.id)}>
-                  {project.data.title}
-                  <Icon name="external" />
-                </a>
-              </li>
-            ))}
-          </ul>
+      </section>
+    )}
+    {personal.length > 0 && (
+      <section class="home-section personal-home" aria-labelledby="personal-title">
+        <div class="section-heading">
+          <h2 id="personal-title">Selected software &amp; experiments</h2>
+          <a class="text-link" href="/personal-projects/">
+            All personal projects <Icon />
+          </a>
         </div>
-      )}
-    </section>
+        <div class="project-grid">
+          {personal.map((project) => (
+            <ProjectCard project={project} variant="tile" />
+          ))}
+        </div>
+      </section>
+    )}
     <section class="home-section" aria-labelledby="interests-title">
       <div class="section-heading">
         <h2 id="interests-title">Questions I'm drawn to</h2>
@@ -141,21 +114,10 @@ const textFeatures = personal.filter((project) => !project.data.cover);
       </div>
       {p.data.exploring && <p class="exploring">{p.data.exploring}</p>}
     </section>
-    <section class="home-section" aria-labelledby="publications-title">
-      <div class="section-heading">
-        <h2 id="publications-title">Selected publications</h2>
-        <a class="text-link" href="/cv/">
-          Full CV <Icon />
-        </a>
-      </div>
-      <PublicationList items={outputs} variant="compact" />
-    </section>
-    <section class="home-section blog-preview" id="blog" aria-labelledby="blog-title">
-      <div>
+    <div class="home-section home-updates">
+      <section class="blog-preview" id="blog" aria-labelledby="blog-title">
         <span class="eyebrow">{blog.length ? 'Blog' : 'Blog / Coming later'}</span>
         <h2 id="blog-title">Notes from the work.</h2>
-      </div>
-      <div>
         {blog.length ? (
           <ol class="blog-post-list">
             {blog.slice(0, 3).map((post) => (
@@ -181,19 +143,15 @@ const textFeatures = personal.filter((project) => !project.data.cover);
         <a class="text-link" href="/blog/">
           Visit the blog <Icon />
         </a>
-      </div>
-    </section>
-    {p.data.socialProfiles.length > 0 && (
-      <section
-        class="home-section social-section social-group"
-        id="sns"
-        aria-labelledby="social-title"
-      >
-        <span class="eyebrow">SNS</span>
-        <h2 id="social-title">Elsewhere</h2>
-        <SocialProfiles items={p.data.socialProfiles} />
       </section>
-    )}
+      {p.data.socialProfiles.length > 0 && (
+        <section class="social-section social-group" id="sns" aria-labelledby="social-title">
+          <span class="eyebrow">SNS</span>
+          <h2 id="social-title">Elsewhere</h2>
+          <SocialProfiles items={p.data.socialProfiles} />
+        </section>
+      )}
+    </div>
     <section class="background-contact" id="contact" aria-labelledby="contact-title">
       <div>
         <h2>Background</h2>

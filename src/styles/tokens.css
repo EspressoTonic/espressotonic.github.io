@@ -29,4 +29,9 @@
     Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic',
     sans-serif;
   --heading-font: Sora, Inter, system-ui, sans-serif;
+  --section-space: 56px;
+  --grid-gap: 24px;
+  --card-padding: 24px;
+  --card-radius: 10px;
+  --card-media-height: 176px;
 }

@@ -1,10 +1,19 @@
 # Implementation status
 
-- Current implementation: Night Gallery portfolio with three added case studies and horse-racing results integration
-- Latest completed task: horse-racing publication and live verification (2026-10-15)
-- Branch: main; integration merged from codex/horse-racing-integration
+## 2026-10-15 — Public curation and consistent component sizing
+
+The owner requested applying the audit's hold list and correcting uneven component sizes. Fridge Match, Location Todo, Commute Log, JUNIOR, TC Personal Agent, LawGPT, Nook Cam and Ballet Pose Feedback are drafts. Their source and assets remain in the repository; production routes, listings and sitemap entries are excluded. GeNeDis keeps its proposed JUNIOR context as text without a link to an unpublished route.
+
+The homepage now places publications immediately after the introduction, incorporates the MAGraph concept into its feature panel, and has one selected software/experiments section. Three research cards include EnzymeMatch. Shared cards use equal grid tracks, intrinsic text, bottom-aligned project links, 176px concept frames, 24px desktop/20px phone padding, and a 24px/20px gap. Research uses two desktop columns; the homepage and personal index use three, then two at tablet width and one on phones. Sections use a shared 56px desktop/40px phone scale. Blog and SNS share a compact area. Profile links remain absent; CV source/print layout and Horse-Racing release assets are unchanged. Two short card excerpts reuse the EnzymeMatch and Horse-Racing case-study facts without changing their full narratives.
+
+Local validation passed: 15 unit tests; release content/type/build/link checks and a two-page CV PDF; 35 Chromium tests, including all 13 public portfolio routes, draft-route exclusion, five responsive widths, axe checks, no-JavaScript navigation, card geometry and Horse-Racing integration. Type checking has zero errors/warnings and 28 existing vendor-code hints. The homepage measures 3,804px at 1280px wide (previously 6,833px); publications begin at y=653 rather than y=4,926. Public personal cards share 379px widths and 318px heights in that desktop view. Screenshot review covered desktop and 390px phone layouts; a mobile-only background issue found during review was corrected before the final checks. Browser plugin not available; used the existing Playwright runtime. This checkpoint records local verification; GitHub CI and publication are the remaining release steps.
+
+
+- Current implementation: curated Night Gallery portfolio with eight public projects, shared card sizing and Horse-Racing results integration
+- Latest completed local task: public curation and component sizing (2026-10-15)
+- Branch: codex/portfolio-curation-sizing; based on main at 60eaa74
 - Code: this separate projects repository
-- Local release preview: http://127.0.0.1:4326
+- Local release preview for this change: http://127.0.0.1:4336
 - Public site: https://espressotonic.github.io/; see dated release checkpoints below
 
 ## Initial v1 baseline — historical

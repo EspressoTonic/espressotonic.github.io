@@ -8,7 +8,7 @@
   "statusDetail": "Supervised bioinformatics-copilot prototype",
   "role": "Project concept & analysis-governance design",
   "featured": false,
-  "draft": false,
+  "draft": true,
   "topics": [
     "Scientific assistants",
     "Workflow validation",

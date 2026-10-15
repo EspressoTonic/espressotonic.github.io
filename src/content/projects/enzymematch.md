@@ -2,6 +2,7 @@
 {
   'title': 'EnzymeMatch',
   'summary': 'A structural-bioinformatics thesis project extending a database-dependent enzyme search tool. I developed and evaluated interaction matching, candidate ranking, and workflow improvements while examining computational tradeoffs.',
+  'shortSummary': 'Extending interaction matching and geometric ranking in a structural-bioinformatics thesis project.',
   'category': 'research',
   'context': 'academic',
   'status': 'completed',

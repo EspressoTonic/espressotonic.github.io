@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import { personalProjectGroups } from '../../lib/content';
-const groups = await personalProjectGroups();
+import { projects } from '../../lib/content';
+const items = await projects({ category: 'personal' });
 ---
 
 <BaseLayout
@@ -18,24 +18,15 @@ const groups = await personalProjectGroups();
         Each project shows its current stage, the work behind it, and what remains to be tested.
       </p>
     </header>
-    {groups.map((group, i) => (
-      <section class="project-group" aria-labelledby={`group-${i}`}>
-        <h2 id={`group-${i}`}>{group.title}</h2>
-        {group.items.some((project) => project.data.cover) && (
-          <div class="feature-grid">
-            {group.items
-              .filter((project) => project.data.cover)
-              .map((project) => (
-                <ProjectCard project={project} variant="feature" />
-              ))}
-          </div>
-        )}
-        {group.items
-          .filter((project) => !project.data.cover)
-          .map((project) => (
-            <ProjectCard project={project} />
-          ))}
-      </section>
-    ))}
+    <section aria-labelledby="personal-projects-title">
+      <div class="section-heading">
+        <h2 id="personal-projects-title">Selected tools &amp; experiments</h2>
+      </div>
+      <div class="project-grid">
+        {items.map((project) => (
+          <ProjectCard project={project} variant="tile" />
+        ))}
+      </div>
+    </section>
   </div>
 </BaseLayout>

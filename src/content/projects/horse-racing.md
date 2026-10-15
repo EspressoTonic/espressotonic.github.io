@@ -2,6 +2,7 @@
 {
   "title": "Horse-Racing Forecast Research",
   "summary": "A reproducible forecasting research project built around historical race data, chronological model evaluation, and timestamped prospective predictions. The emphasis is on reliable data lineage, honest baselines, and understanding where predictive performance fails to generalize.",
+  "shortSummary": "Forecasting research with chronological model comparisons and timestamped prospective predictions.",
   "category": "personal",
   "context": "independent",
   "status": "ongoing",

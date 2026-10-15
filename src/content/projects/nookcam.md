@@ -8,7 +8,7 @@
   "statusDetail": "Private prototype",
   "role": "Independent product design & prototype development",
   "featured": false,
-  "draft": false,
+  "draft": true,
   "topics": [
     "WebRTC",
     "Private networking",

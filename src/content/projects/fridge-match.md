@@ -11,7 +11,7 @@
   'sortDate': '2026-10-07',
   'featured': true,
   'featuredOrder': 1,
-  'draft': false,
+  'draft': true,
   'topics': ['Product design', 'Persistence', 'Everyday tools'],
   'links': [],
   'publicationIds': [],
