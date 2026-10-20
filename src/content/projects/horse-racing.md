@@ -17,7 +17,7 @@
   ],
   "links": [{"label": "Explore results", "url": "/demos/horse-racing/", "kind": "demo"}],
   "publicationIds": [],
-  "updated": "2026-10-15",
+  "updated": "2026-10-20",
   "dateLabel": "2025–2026",
   "sortDate": "2025"
 }
@@ -43,7 +43,38 @@ Scheduled batch retraining uses rolling chronological windows and prospective ev
 
 ## Prospective evidence
 
-Last-week replay results are retrospective, using revised starter information, even though their labels were excluded from fitting. Genuine prospective evidence begins with immutable forecasts captured before a race starts. The original earliest forecast remains intact. A separately registered procedure selects the first eligible capture after the Wednesday refresh, using its exact model version. Family results and selected-version results remain distinct. Published and raw win probabilities receive log loss, race-sum Brier and reliability checks after verified outcomes arrive; matched comparisons use identical captured fields. A frozen reference bundle receives the same fresh history as the refreshed model. Pending outcomes remain pending, and a refreshed model does not rewrite its predecessors' record.
+Model holdout replay results are retrospective, using revised starter information, even though their labels were excluded from fitting. Genuine prospective evidence begins with immutable forecasts captured before a race starts. The original earliest forecast remains intact. A separately registered procedure selects the first eligible capture after the Wednesday refresh, using its exact model version. Family results and selected-version results remain distinct. Published and raw win probabilities receive log loss, race-sum Brier and reliability checks after verified outcomes arrive; matched comparisons use identical captured fields. A frozen reference bundle receives the same fresh history as the refreshed model. Pending outcomes remain pending, and a refreshed model does not rewrite its predecessors' record.
+
+## October 20 checkpoint: the first completed forecast weekend
+
+Verified October 16–18 results now score all 44 races and 468 declared runners in the registered pre-race cohort. These predictions were saved on October 15, before racing began. Three later withdrawals retain their original forecast probabilities and receive zero winner mass.
+
+| Archived weekly model | Winners correct | Win log loss ↓ |
+| --- | --- | --- |
+| Fixed horse/jockey LSTM | 18/44 · 40.9% | 1.8370 |
+| Position-head LSTM | 18/44 · 40.9% | 1.8489 |
+| Conditional-head LSTM | 17/44 · 38.6% | 1.8440 |
+| CatBoost | 9/44 · 20.5% | 2.0519 |
+
+All three LSTMs included the winner among their three selections in 30/44 races (68.2%). The fixed model's raw versus published log loss is 1.8730 versus 1.8370; Brier is 0.7862 versus 0.7745. The uniform reference has log loss 2.3613. These are one-week observations, with uncertainty intervals suppressed under the registered 20-week reporting floor. They do not establish a durable advantage or justify switching the default model. The frozen reference is the same model bundle in this first cycle, so this week cannot demonstrate a benefit from retraining.
+
+The dashboard's **Results → Registered weekly updating procedure** contains these genuine scores. Its older model-holdout replay remains separately dated October 5–11.
+
+## Input repairs: correctness and model performance
+
+A later audit found that a numeric-only parser discarded valid alphanumeric jockey IDs. A versioned repair recovered 183 historical event identities and was tested separately from log-count/recency preprocessing and binary flags kept as 0/1.
+
+On the reused 2025 development races, identity repair changes horse-only LSTM accuracy from 32.39% to 32.71% and log loss from 1.9241 to 1.9114. It clears the four-comparison-adjusted loss criterion, but 90.7% of that reduction comes from one already-inspected international race. The model still misses its winner. This supports fixing identity handling while broad predictive improvement remains unconfirmed.
+
+I also replayed the frozen research checkpoints on October 16–18, without fitting or selecting a seed on those outcomes:
+
+| Horse-only research LSTM | Winners correct | Win log loss ↓ |
+| --- | --- | --- |
+| Original inputs and fitted model | 15/44 · 34.1% | 1.9221 |
+| Identity-repair candidate | 17/44 · 38.6% | 1.9067 |
+| Numeric-preprocessing candidate | 16/44 · 36.4% | 1.9132 |
+
+These are **after-the-fact research replays**, excluded from the genuine forecast record above. Their training dates and feature definitions differ from the operational weekly models. Archived card, horse and context inputs were retained; individual jockey rides were reconstructed from the same pre-race history with a strict pre-Monday cutoff. Weekly day-averaged records cannot be substituted just because their column names match. All three MLP research conditions selected 15/44 winners. One weekend is insufficient to promote a candidate.
 
 ## Published-study context
 
@@ -55,6 +86,6 @@ The historical fixed scorer has higher reported hit rates on all seven tasks in 
 
 ## Limitations and what I learned
 
-All seven historical equal-stake pools lose money. Better hit rates do not establish useful odds or profit, and the final-odds favourite remains a stronger reference with later information. Calibration worsened neural probability scores on the recent held-out week, so probabilities remain experimental. A single week and a short prospective record cannot establish stable performance.
+All seven historical equal-stake pools lose money. Better hit rates do not establish useful odds or profit, and the final-odds favourite remains a stronger reference with later information. Calibration worsened neural probability scores on the October 5–11 holdout, despite improving the October 16–18 prospective scores. Probabilities remain experimental. A single week and a short prospective record cannot establish stable performance.
 
 The useful engineering result is an auditable evaluation loop: preserve what was known, compare on the same races, measure uncertainty, and keep negative findings visible. The next research priority is more genuinely prospective evidence and comparable pre-race market information before promoting a new architecture or strategy.

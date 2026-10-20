@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { collection } from '../scripts/read-content.mjs';
+import { verifyInstalled } from '../scripts/horse-racing-release.mjs';
 interface SourceProject {
   id: string;
   data: { draft: boolean; category: 'research' | 'personal' };
@@ -381,16 +382,30 @@ test('Selected software navigates through the right indexes and keeps evidence l
 });
 
 test('Probability evidence keeps legacy and registered cohorts separate', async ({ page }) => {
+  const { data: snapshot } = await verifyInstalled();
   await page.goto('/demos/horse-racing/#results');
   await expect(page.getByLabel('Evaluation scope')).toBeVisible();
   await expect(
     page.getByRole('heading', { name: 'Prospective probability quality' }),
   ).toBeVisible();
+  const selected = snapshot.weekly.models.find(
+    (model: { id: string }) => model.id === snapshot.weekly.default_model,
+  );
+  const record = selected.evaluation.procedure;
+  const genuine = page.getByRole('heading', { name: 'Genuine pre-race record' }).locator('..');
+  await expect(genuine).toContainText(
+    `${record.recorded} races archived before the start; ${record.evaluated} evaluated.`,
+  );
+  if (record.probabilities.methods.calibrated) {
+    await expect(genuine.getByRole('table', { name: 'Prospective probability scores' })).toContainText(
+      record.probabilities.methods.calibrated.log_loss.toFixed(4),
+    );
+  }
   await page.getByLabel('Evaluation scope').selectOption('version');
   await expect(page.getByText('Exact version:', { exact: false })).toBeVisible();
   await page.getByLabel('Model', { exact: true }).selectOption('legacy');
   await expect(page.getByRole('table', { name: 'Prospective probability scores' })).toContainText(
-    '2.0089',
+    snapshot.prospective.probability_cohorts[0].probabilities.methods.calibrated.log_loss.toFixed(4),
   );
   await expect(page.getByRole('table', { name: 'Prospective reliability' })).toContainText(
     'Insufficient weeks',
