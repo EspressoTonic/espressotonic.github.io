@@ -287,6 +287,7 @@ test('Horse research summary works without JavaScript', async ({ browser, baseUR
 });
 for (const width of [390, 1440])
   test(`Horse dashboard integration ${width}px`, async ({ page, baseURL }) => {
+    const { data: snapshot } = await verifyInstalled();
     await page.setViewportSize({ width, height: 950 });
     const errors: string[] = [];
     const dataRequests: string[] = [];
@@ -309,6 +310,33 @@ for (const width of [390, 1440])
     expect(choices.length).toBe(5);
     for (const choice of choices) {
       await page.getByLabel('Model', { exact: true }).selectOption(choice);
+      const card = page.getByRole('region', { name: 'Top pick win probability' });
+      const model = snapshot.weekly.models.find((candidate: { id: string }) => candidate.id === choice);
+      const probability = model?.forecast.races[0]?.entrants[0]?.win_probability;
+      await expect(card.locator('.probability-value')).toHaveText(
+        probability == null ? '—' : `${(probability * 100).toFixed(1)}%`,
+      );
+      const bounds = (await card.boundingBox())!;
+      expect(Math.abs(bounds.width - bounds.height)).toBeLessThan(2);
+      const record = model?.evaluation?.procedure || model?.prospective || snapshot.prospective;
+      const weeks = (record.weekly || []).filter(
+        (week: { week: string; races: number }) => week.races > 0 && week.week.split('/')[1] < snapshot.prospective.history_as_of,
+      ).sort((a: { week: string }, b: { week: string }) => b.week.localeCompare(a.week));
+      const accuracy = page.getByRole('region', { name: 'Latest completed week accuracy' });
+      await expect(accuracy.locator('.probability-value')).toHaveText(
+        weeks.length ? `${(weeks[0].winner_hit_rate * 100).toFixed(1)}%` : '—',
+      );
+      const measuredBounds = (await accuracy.boundingBox())!;
+      expect(Math.abs(bounds.width - measuredBounds.width)).toBeLessThan(2);
+      expect(Math.abs(measuredBounds.height - measuredBounds.width)).toBeLessThan(2);
+      if (width === 1440) expect(Math.abs(bounds.y - measuredBounds.y)).toBeLessThan(2);
+      else expect(measuredBounds.y).toBeGreaterThan(bounds.y + bounds.height);
+      if (choice === 'lstm_fixed') {
+        const violations = (
+          await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()
+        ).violations;
+        expect(violations.map((v) => v.id)).toEqual([]);
+      }
       await page.getByRole('button', { name: 'Results', exact: true }).click();
       await expect(page.locator('main h1')).toHaveCount(1);
       await page.getByRole('button', { name: 'Forecasts', exact: true }).click();
