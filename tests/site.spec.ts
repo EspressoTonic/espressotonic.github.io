@@ -327,6 +327,9 @@ for (const width of [390, 1440])
         weeks.length ? `${(weeks[0].winner_hit_rate * 100).toFixed(1)}%` : '—',
       );
       const measuredBounds = (await accuracy.boundingBox())!;
+      const upcoming = page.getByRole('region', { name: 'Upcoming weekend forecasts' });
+      await expect(upcoming).toContainText('Thursday 08:00 and 18:00 KST');
+      expect((await upcoming.boundingBox())!.y).toBeGreaterThan(measuredBounds.y + measuredBounds.height);
       expect(Math.abs(bounds.width - measuredBounds.width)).toBeLessThan(2);
       expect(Math.abs(measuredBounds.height - measuredBounds.width)).toBeLessThan(2);
       if (width === 1440) expect(Math.abs(bounds.y - measuredBounds.y)).toBeLessThan(2);
