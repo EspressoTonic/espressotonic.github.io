@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "source_release": "ae00830be11dea5a",
-  "source_manifest_sha256": "92a132ade7d8618269f7357798145c5d14b6d2289dd08a8082e6a718a05eac68",
+  "source_release": "90142f24b1a2e4e8",
+  "source_manifest_sha256": "bf32a6edda81255b93f50e69f0e38d37f1d921a08a0eac22f485d830dd08c468",
   "source_commit": "0083939aee8be07fa1f8f22de1b9004deebe7a60",
-  "exported_at": "2026-10-20T06:56:17.585027+00:00",
+  "exported_at": "2026-10-21T03:09:39.462268+00:00",
   "research_run": "e6462b99e8e507ff",
-  "weekly_run": "f6ba14c6a904b15b",
+  "weekly_run": "658d03f233333d57",
   "source_files": {
     "web/src/Forecasts.jsx": "4be8b348aa78a8f463b32a6c4d6c8c0e0374a6f4e70860ab6fc020cb26fd634a",
     "web/src/Method.jsx": "810d3fc82c12988d0a4f5fe0303297464a09ea98de5bdbfae9592e64080d6d68",
@@ -56,7 +56,7 @@
     "assets/index-Cs_MxVHy.css": "25071d7d409db3b52f232d22305e34c03b652580b11a2acba38928fede7dd008",
     "assets/inter-latin-variable-8kRkwJBP.woff2": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
     "assets/sora-latin-variable-5v9NviDD.woff2": "3902474d3ece89c8580d5ef3325cf58753e6e45a86f9957b4dacc4fce2e7fde1",
-    "data/dashboard.json": "940f6a06bb5f656755fc336bfa8341457ba00bf9c9ca283e5b0febb4382a29c4",
+    "data/dashboard.json": "26a7097558d188e5583a4fc014c89458602c7b22e4e563668a64f1fabd92aeb4",
     "index.html": "423c7dff15ed06fb5ac52703ef01d74637e893fd4b542c79d6d512639f1fe5ea"
   }
 }
