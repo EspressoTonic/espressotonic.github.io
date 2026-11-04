@@ -71,7 +71,7 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
 </section>
 <style>
   .horse-evidence {
-    border-block: 1px solid #62769b;
+    border-block: 1px solid var(--control-border);
     padding-block: 1.5rem;
     margin-bottom: 3rem;
   }
@@ -79,7 +79,7 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
     margin-top: 0;
   }
   .evidence-date {
-    color: #adb9d0;
+    color: var(--muted);
     font-size: 0.85rem;
   }
   dl {
@@ -89,7 +89,7 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
     margin-block: 2rem;
   }
   dt {
-    color: #adb9d0;
+    color: var(--muted);
     font-size: 0.85rem;
   }
   dd {
@@ -97,7 +97,7 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
       600 1.5rem Sora,
       sans-serif;
     margin: 0.6rem 0 0;
-    color: #edf3ff;
+    color: var(--ink);
   }
   @media (max-width: 600px) {
     dl {

@@ -181,6 +181,30 @@ test('TOC brings the actual source heading into view', async ({ page }) => {
     page.getByRole('heading', { name: 'Limitations and current stage', exact: true }),
   ).toBeInViewport();
 });
+test('Theme switches on mobile and persists across pages and reloads', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(13, 13, 13)');
+  await page.getByRole('button', { name: 'Switch to light mode' }).click();
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(250, 249, 247)');
+  await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'CV', exact: true }).click();
+  await page.reload();
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(250, 249, 247)');
+  await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+  await page.reload();
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(13, 13, 13)');
+});
+
+test('Light mode preserves accessibility on the homepage, CV, and project case studies', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Switch to light mode' }).click();
+  for (const route of ['/', '/cv/', '/projects/enzymematch/', '/projects/horse-racing/']) {
+    await page.goto(route);
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    expect(results.violations, route).toEqual([]);
+  }
+});
+
 test('No JavaScript navigation and keyboard focus', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
