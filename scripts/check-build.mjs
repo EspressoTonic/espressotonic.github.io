@@ -90,6 +90,8 @@ export async function checkBuild() {
     }
   }
   const pdf = await readFile(join(root, 'files/woo-young-cho-cv.pdf'));
+  const publicCv = await readFile('public/files/woo-young-cho-cv.pdf');
+  if (!pdf.equals(publicCv)) issues.push('CV download differs from the public application CV');
   if (pdf.subarray(0, 5).toString() !== '%PDF-') issues.push('CV download is not a PDF');
   const loading = getDocument({ data: new Uint8Array(pdf), useSystemFonts: true });
   const document = await loading.promise;
@@ -100,20 +102,19 @@ export async function checkBuild() {
         .map((item) => item.str ?? '')
         .join(' ') + '\n';
   }
-  for (const required of ['Woo Young Cho', 'Arontier', 'ConnectaGen', 'M.Sc. Bioinformatics'])
+  for (const required of [
+    'WOO YOUNG CHO',
+    'RESEARCH PROFILE',
+    'M.Sc. Bioinformatics',
+    'ACADEMIC AND UNIVERSITY RESEARCH PROJECTS',
+    'PUBLICATIONS AND PREPRINT',
+    'LANGUAGES',
+  ]) {
     if (!pdfTextIncludes(extracted, required))
-      issues.push('PDF missing expected content: ' + required);
-  const cv = (await collection('cv'))[0];
-  for (const language of cv.data.languages ?? [])
-    if (!pdfTextIncludes(extracted, language)) issues.push('PDF missing language: ' + language);
-  for (const id of cv.data.selectedPublicationIds) {
-    const output = (await collection('publications')).find((item) => item.id === id);
-    if (!output) issues.push('PDF publication reference missing: ' + id);
-    else
-      for (const author of output.data.authors)
-        if (!pdfTextIncludes(extracted, author))
-          issues.push('PDF missing source author: ' + author);
+      issues.push('PDF missing expected application CV content: ' + required);
   }
+  if (/\+82[\s()-]*\d|\bORCID\b|github\.com/i.test(extracted))
+    issues.push('PDF contains a phone number, ORCID, or GitHub contact');
   const pdfLinks = [];
   for (let i = 1; i <= document.numPages; i++)
     pdfLinks.push(
@@ -121,6 +122,8 @@ export async function checkBuild() {
         .filter((a) => a.subtype === 'Link')
         .map((a) => a.url ?? a.unsafeUrl ?? ''),
     );
+  if (pdfLinks.some((url) => /^(?:tel:)|github\.com|orcid\.org/i.test(url)))
+    issues.push('PDF contains a phone, ORCID, or GitHub link');
   if (pdfLinks.some((url) => /localhost|127\.0\.0\.1/.test(url)))
     issues.push('PDF has local preview link targets');
   console.log(`PDF text verified: ${document.numPages} pages.`);
