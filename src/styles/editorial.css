@@ -7,6 +7,23 @@
   max-width: 68ch;
   padding-bottom: clamp(18px, 3vw, 32px);
 }
+.home-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 68ch) auto;
+  justify-content: space-between;
+  align-items: start;
+  gap: 24px;
+  max-width: none;
+}
+.home-intro-text {
+  min-width: 0;
+}
+.home-portrait {
+  display: block;
+  width: 100px;
+  height: auto;
+  border: 1px solid var(--border);
+}
 .editorial-intro h1 {
   margin-bottom: 16px;
 }
@@ -142,6 +159,13 @@
   scroll-margin-top: 20px;
 }
 @media (max-width: 640px) {
+  .home-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .home-portrait {
+    width: 80px;
+  }
   .editorial-project {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 4px;

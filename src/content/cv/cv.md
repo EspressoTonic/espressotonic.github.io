@@ -41,6 +41,14 @@
         multi-cohort metagenomic gene catalogue.'
       - 'In related thesis research, designed and implemented MAGraph and
         demonstrated operon-level analysis on two metagenomic cohorts.'
+  - 'id': 'private-tutoring'
+    'organization': 'Independent'
+    'role': 'Private Tutor'
+    'period': '2018–present'
+    'start': '2018'
+    'current': true
+    'bullets':
+      - 'Tutor students in IB Mathematics, IB Physics, English, and German.'
 'education':
   - 'id': 'msc'
     'institution': 'Technical University of Munich & Ludwig Maximilian University of
@@ -86,8 +94,8 @@
       - 'APIs, automated reporting, and deployment of research software.'
 'languages':
   - 'Korean — native'
-  - 'English — fluent'
-  - 'German — fluent'
+  - 'English — fluent (primary schooling in New Zealand, academic and professional use)'
+  - 'German — fluent (Austrian Gymnasium graduate with Matura, B.Sc. and M.Sc. studies in Germany)'
 'selectedProjectIds':
   - 'magraph'
   - 'enzymematch'

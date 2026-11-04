@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectIndex from '../components/ProjectIndex.astro';
 import PublicationList from '../components/PublicationList.astro';
 import SocialProfiles from '../components/SocialProfiles.astro';
+import portrait from '../assets/identity/portrait.jpg';
 import {
   profile,
   homepageProjects,
@@ -23,17 +24,26 @@ const blog = await posts();
 
 <BaseLayout>
   <div class="wrap editorial-page home-editorial">
-    <header class="editorial-intro">
-      <h1>{p.data.name}</h1>
-      <p class="intro-role">Bioinformatics researcher</p>
-      <div class="intro-copy">
-        <Content />
+    <header class="editorial-intro home-intro">
+      <div class="home-intro-text">
+        <h1>{p.data.name}</h1>
+        <p class="intro-role">Bioinformatics researcher</p>
+        <div class="intro-copy">
+          <Content />
+        </div>
+        <nav class="editorial-links" aria-label="Quick links">
+          <a href="#publications-title">Publications</a>
+          <a href="/cv/">View CV</a>
+          {p.data.email && <a href={`mailto:${p.data.email}`}>Email</a>}
+        </nav>
       </div>
-      <nav class="editorial-links" aria-label="Quick links">
-        <a href="#publications-title">Publications</a>
-        <a href="/cv/">View CV</a>
-        {p.data.email && <a href={`mailto:${p.data.email}`}>Email</a>}
-      </nav>
+      <img
+        class="home-portrait"
+        src={portrait.src}
+        alt={p.data.name}
+        width={portrait.width}
+        height={portrait.height}
+      />
     </header>
 
     <section class="editorial-section" aria-labelledby="publications-title">
