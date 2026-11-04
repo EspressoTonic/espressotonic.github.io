@@ -20,7 +20,7 @@
 }
 .home-portrait {
   display: block;
-  width: 100px;
+  width: 128px;
   height: auto;
   border: 1px solid var(--border);
 }
@@ -164,7 +164,7 @@
     gap: 12px;
   }
   .home-portrait {
-    width: 80px;
+    width: 96px;
   }
   .editorial-project {
     grid-template-columns: minmax(0, 1fr);
