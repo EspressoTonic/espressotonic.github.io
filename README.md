@@ -21,7 +21,7 @@ npm run test:site
 npm run preview
 ```
 
-`build:release` checks data/types, builds the static site, prints the built `/cv/` page to `dist/files/woo-young-cho-cv.pdf`, and validates local links. It does not rebuild after generating the PDF. Plain `npm run build` and the development server do not generate a fresh PDF; use the release preview for download verification.
+`build:release` checks data and types, builds the static site, and validates local links and the CV download. Astro copies the public copy of the PhD application CV from `public/files/woo-young-cho-cv.pdf` to the download URL. To update the download, replace that file with a reviewed public copy of the application CV.
 
 ## Content
 
