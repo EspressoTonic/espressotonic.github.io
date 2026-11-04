@@ -8,8 +8,8 @@ const c = await cv();
 const sections = [
   { id: 'experience', title: 'Experience' },
   { id: 'education', title: 'Education' },
-  { id: 'outputs', title: 'Research outputs' },
   { id: 'selected-projects', title: 'Selected projects' },
+  { id: 'outputs', title: 'Research outputs' },
   { id: 'capabilities', title: 'Capabilities' },
   ...(c.data.languages ? [{ id: 'languages', title: 'Languages' }] : []),
 ];

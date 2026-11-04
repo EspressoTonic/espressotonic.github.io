@@ -101,7 +101,7 @@
   .cv-entry {
     display: flow-root;
     padding: 0;
-    margin: 0 0 12pt;
+    margin: 0 0 7pt;
     border: 0;
   }
   .cv-entry .date {
@@ -131,7 +131,15 @@
   }
   .cv-entry li,
   .skills-grid li {
-    margin-bottom: 4pt;
+    margin-bottom: 3pt;
+  }
+  .education-entry .cv-entry-copy > p:not(.entry-subtitle) {
+    margin: 3pt 0 0;
+    font-size: 9pt;
+    line-height: 1.42;
+  }
+  .cv-publications {
+    break-before: page;
   }
   h3 {
     break-after: avoid;
@@ -141,7 +149,7 @@
     widows: 3;
   }
   .cv-section .publication-list li {
-    padding: 6pt 0;
+    padding: 5pt 0;
     break-inside: avoid;
   }
   .cv-section .publication-list h3 {
@@ -152,7 +160,7 @@
   .cv-section .publication-list p {
     font-size: 8.5pt;
     line-height: 1.4;
-    margin-bottom: 5pt;
+    margin-bottom: 3pt;
   }
   .cv-section .publication-list .project-meta {
     font-size: 8pt;

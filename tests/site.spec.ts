@@ -208,7 +208,12 @@ test('CV selections remain authored and download is a real PDF', async ({ page }
     'MAGraph',
     'EnzymeMatch',
   ]);
-  await expect(page.locator('#outputs + .publication-list li')).toHaveCount(3);
+  const outputs = page.locator('#outputs + .publication-list');
+  await expect(outputs.locator('li')).toHaveCount(5);
+  await expect(outputs.locator('a[href="https://doi.org/10.71150/jm.2409020"]')).toBeVisible();
+  await expect(
+    outputs.locator('a[href="https://doi.org/10.1186/s44342-024-00029-w"]'),
+  ).toBeVisible();
   const [download] = await Promise.all([
     page.waitForEvent('download'),
     page.getByRole('link', { name: 'Download PDF', exact: true }).click(),
@@ -247,7 +252,7 @@ test('The homepage reaches publications, the CV, and the thesis directly', async
   await links.getByRole('link', { name: 'Publications' }).click();
   await expect(page).toHaveURL(/#publications-title$/);
   const papers = page.getByRole('region', { name: 'Selected publications' });
-  await expect(papers.getByRole('link')).toHaveCount(3);
+  await expect(papers.getByRole('link')).toHaveCount(5);
   await expect(papers.getByRole('heading', { level: 2 })).toBeInViewport();
   await links.getByRole('link', { name: 'View CV' }).click();
   await expect(page).toHaveURL(/\/cv\/$/);
