@@ -138,7 +138,7 @@
     font-size: 9pt;
     line-height: 1.42;
   }
-  .cv-publications {
+  .cv-section:has(.cv-projects) {
     break-before: page;
   }
   h3 {
@@ -149,13 +149,13 @@
     widows: 3;
   }
   .cv-section .publication-list li {
-    padding: 5pt 0;
+    padding: 2pt 0;
     break-inside: avoid;
   }
   .cv-section .publication-list h3 {
     font-size: 10pt;
     line-height: 1.4;
-    margin: 4pt 0;
+    margin: 3pt 0;
   }
   .cv-section .publication-list p {
     font-size: 8.5pt;
@@ -180,13 +180,14 @@
   .skills-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10pt;
+    gap: 4pt 10pt;
   }
   .skills-grid h3 {
     font-size: 10pt;
     margin-bottom: 4pt;
   }
   .cv-section:has(.skills-grid) {
+    padding-block: 5pt;
     break-inside: avoid;
   }
   a {
