@@ -92,3 +92,8 @@ This owner-requested revision supersedes the older expanded-gallery/homepage com
 - Homepage/personal grids: three columns at desktop, two below 1024px and one below 768px. Research: two columns above 768px. Never stretch a lone experimental entry into a different card treatment.
 - Main section spacing: 56px desktop/40px phone; section H2 is 28px/26px and card H3 is 22px. Inputs and navigation retain 44px minimum touch targets. Detail prose and CV keep their existing readable widths and full text.
 - SNS remains four local decorative SVG marks with readable names and no URLs. Blog remains a zero-post route. No model, product or scientific result is fabricated to fill a visual gap.
+
+
+## Research homepage revision — 2026-11-04
+
+The public homepage and indexes use a reading layout with a narrower column, short headings, and open project rows. Keep the existing dark palette and typefaces. Introduce the researcher directly; use publication titles as links and put the CV within easy reach. Feature MAGraph through the authored thesis contribution and evidence, without a decorative figure. Use a real, publishable figure only when one is selected. Keep unpublished projects out of the public indexes and put no homepage writing section on an empty blog. This supersedes the earlier homepage and index tile guidance; project detail pages and the CV remain on their existing layouts.

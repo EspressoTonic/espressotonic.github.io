@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectIndex from '../../components/ProjectIndex.astro';
 import PublicationList from '../../components/PublicationList.astro';
 import { projects, publications, profile } from '../../lib/content';
 import Icon from '../../components/Icon.astro';
@@ -15,36 +15,25 @@ const p = await profile();
   title="Research"
   description="Academic and professional work in biological representations, omics analysis, and research software."
 >
-  <div class="wrap index-page">
-    <header class="page-intro">
-      <span class="eyebrow">Research &amp; professional work</span>
+  <div class="wrap editorial-page">
+    <header class="editorial-intro">
       <h1>Research</h1>
       <p>
         My work spans metagenomic gene neighborhoods, sequence and structural analysis,
         translational omics, and spatial imaging.
       </p>
     </header>
-    <section aria-labelledby="research-projects-title">
-      <div class="section-heading">
-        <h2 id="research-projects-title">Research projects</h2>
-      </div>
-      <div class="project-grid research-grid">
-        {selected.map((project) => (
-          <ProjectCard project={project} variant="tile" />
-        ))}
-      </div>
+    <section class="editorial-section" aria-labelledby="research-projects-title">
+      <h2 id="research-projects-title">Research projects</h2>
+      <ProjectIndex items={selected} />
     </section>
     {ongoing.length > 0 && (
-      <section class="research-in-progress" aria-labelledby="ongoing-research-title">
-        <div class="section-heading">
-          <h2 id="ongoing-research-title">Research in progress</h2>
-        </div>
-        {ongoing.map((project) => (
-          <ProjectCard project={project} compact />
-        ))}
+      <section class="editorial-section" aria-labelledby="ongoing-research-title">
+        <h2 id="ongoing-research-title">Research in progress</h2>
+        <ProjectIndex items={ongoing} />
       </section>
     )}
-    <section class="research-interests" aria-labelledby="interests-title">
+    <section class="editorial-section" aria-labelledby="interests-title">
       <h2 id="interests-title">Research interests</h2>
       <div class="interest-grid">
         {p.data.interests.map((interest) => (
@@ -56,8 +45,8 @@ const p = await profile();
       </div>
       {p.data.exploring && <p class="exploring">{p.data.exploring}</p>}
     </section>
-    <section class="outputs-section" aria-labelledby="research-outputs-title">
-      <div class="section-heading">
+    <section class="editorial-section" aria-labelledby="research-outputs-title">
+      <div class="editorial-section-heading">
         <h2 id="research-outputs-title">Research outputs</h2>
         <a class="text-link" href="/cv/">
           View CV <Icon />

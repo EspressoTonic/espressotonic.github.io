@@ -1,32 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectIndex from '../../components/ProjectIndex.astro';
 import { projects } from '../../lib/content';
 const items = await projects({ category: 'personal' });
 ---
 
-<BaseLayout
-  title="Personal Projects"
-  description="Independent software projects, prototypes, and lessons from building practical tools."
->
-  <div class="wrap index-page">
-    <header class="page-intro">
-      <span class="eyebrow">Independent projects</span>
+<BaseLayout title="Personal Projects" description="Independent software projects and experiments.">
+  <div class="wrap editorial-page">
+    <header class="editorial-intro">
       <h1>Personal Projects</h1>
-      <p>Practical tools for everyday problems, and experiments in building useful software.</p>
-      <p>
-        Each project shows its current stage, the work behind it, and what remains to be tested.
-      </p>
+      <p>Software and experiments I work on outside of bioinformatics.</p>
     </header>
-    <section aria-labelledby="personal-projects-title">
-      <div class="section-heading">
-        <h2 id="personal-projects-title">Selected tools &amp; experiments</h2>
-      </div>
-      <div class="project-grid">
-        {items.map((project) => (
-          <ProjectCard project={project} variant="tile" />
-        ))}
-      </div>
+    <section class="editorial-section" aria-label="Selected tools & experiments">
+      <ProjectIndex items={items} />
     </section>
   </div>
 </BaseLayout>

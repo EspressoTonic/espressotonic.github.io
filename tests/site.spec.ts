@@ -75,7 +75,10 @@ for (const width of [360, 390, 768, 1280, 1440])
     }
     if (width === 390) {
       await page.goto('/');
-      for (const action of await page.locator('.hero .actions a').all())
+      for (const action of await page
+        .getByRole('navigation', { name: 'Quick links' })
+        .getByRole('link')
+        .all())
         expect(
           (await action.boundingBox())!.y + (await action.boundingBox())!.height,
         ).toBeLessThanOrEqual(844);
@@ -104,9 +107,14 @@ test('Homepage leads with publications and selects three inspectable personal pr
   page,
 }) => {
   await page.goto('/');
-  await expect(page.locator('.hero-feature')).toContainText('MAGraph');
-  await expect(page.locator('.hero-feature a[href="/projects/magraph/"]')).toHaveCount(1);
-  await expect(page.locator('.home-section [data-project-id="magraph"]')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Woo Young Cho', level: 1 })).toBeVisible();
+  const featured = page.locator('[data-project-id="magraph"]');
+  await expect(featured).toHaveCount(1);
+  await expect(featured).toContainText('operon-level analysis on two cohorts');
+  await expect(featured.getByRole('link', { name: 'MAGraph' })).toHaveAttribute(
+    'href',
+    '/projects/magraph/',
+  );
   expect(
     await page
       .locator('.personal-home [data-project-id]')
@@ -117,7 +125,7 @@ test('Homepage leads with publications and selects three inspectable personal pr
     page
       .getByRole('region', { name: 'Selected research', exact: true })
       .locator('[data-project-id]'),
-  ).toHaveCount(3);
+  ).toHaveCount(4);
   const output = await page.locator('#publications-title').boundingBox();
   const research = await page.locator('#research-title').boundingBox();
   expect(output!.y).toBeLessThan(research!.y);
@@ -237,46 +245,23 @@ test('Zoom reflow remains readable at a narrow viewport', async ({ page }) => {
   }
 });
 
-test('Project cards share equal tracks, spacing and media sizes without clipping', async ({
-  page,
-}) => {
-  for (const width of [390, 768, 1280, 1440]) {
-    await page.setViewportSize({ width, height: 1000 });
-    for (const route of ['/', '/research/', '/personal-projects/']) {
-      await page.goto(route);
-      await page.evaluate(() => document.fonts.ready);
-      for (const grid of await page.locator('.project-grid').all()) {
-        const cards = await grid.locator('.project-tile').evaluateAll((nodes) =>
-          nodes.map((node) => {
-            const rect = node.getBoundingClientRect();
-            const copy = node.querySelector('.project-card-copy')!;
-            return {
-              x: rect.x,
-              y: rect.y,
-              width: rect.width,
-              height: rect.height,
-              padding: getComputedStyle(copy).padding,
-              clipped: node.scrollHeight > node.clientHeight + 1,
-            };
-          }),
-        );
-        for (const card of cards) {
-          expect(card.clipped, `${width} ${route}`).toBe(false);
-          expect(card.padding).toBe(cards[0].padding);
-          expect(Math.abs(card.width - cards[0].width)).toBeLessThan(1);
-          for (const peer of cards.filter((peer) => Math.abs(peer.y - card.y) < 1))
-            expect(Math.abs(peer.height - card.height)).toBeLessThan(1);
-        }
-        if (width === 390) expect(new Set(cards.map((card) => card.x)).size).toBe(1);
-      }
-      const media = await page
-        .locator('.project-tile .project-media > :first-child')
-        .evaluateAll((nodes) => nodes.map((node) => node.getBoundingClientRect().height));
-      expect(new Set(media).size).toBeLessThanOrEqual(1);
-      for (const link of await page.locator('.project-tile .text-link').all())
-        expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
-    }
-  }
+test('The homepage reaches publications, the CV, and the thesis directly', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const links = page.getByRole('navigation', { name: 'Quick links' });
+  await links.getByRole('link', { name: 'Publications' }).click();
+  await expect(page).toHaveURL(/#publications-title$/);
+  const papers = page.getByRole('region', { name: 'Selected publications' });
+  await expect(papers.getByRole('link')).toHaveCount(5);
+  await expect(papers.getByRole('heading', { level: 2 })).toBeInViewport();
+  await links.getByRole('link', { name: 'View CV' }).click();
+  await expect(page).toHaveURL(/\/cv\/$/);
+  await page.goto('/');
+  await page
+    .getByRole('region', { name: 'Selected research' })
+    .getByRole('link', { name: 'MAGraph', exact: true })
+    .click();
+  await expect(page.getByRole('heading', { name: 'MAGraph', level: 1 })).toBeVisible();
 });
 
 test('Horse research summary works without JavaScript', async ({ browser, baseURL }) => {
@@ -316,7 +301,9 @@ for (const width of [390, 1440])
     for (const choice of choices) {
       await page.getByLabel('Model', { exact: true }).selectOption(choice);
       const card = page.getByRole('region', { name: 'Top pick win probability' });
-      const model = snapshot.weekly.models.find((candidate: { id: string }) => candidate.id === choice);
+      const model = snapshot.weekly.models.find(
+        (candidate: { id: string }) => candidate.id === choice,
+      );
       const probability = model?.forecast.races[0]?.entrants[0]?.win_probability;
       await expect(card.locator('.probability-value')).toHaveText(
         probability == null ? '—' : `${(probability * 100).toFixed(1)}%`,
@@ -324,9 +311,12 @@ for (const width of [390, 1440])
       const bounds = (await card.boundingBox())!;
       expect(Math.abs(bounds.width - bounds.height)).toBeLessThan(2);
       const record = model?.evaluation?.procedure || model?.prospective || snapshot.prospective;
-      const weeks = (record.weekly || []).filter(
-        (week: { week: string; races: number }) => week.races > 0 && week.week.split('/')[1] < snapshot.prospective.history_as_of,
-      ).sort((a: { week: string }, b: { week: string }) => b.week.localeCompare(a.week));
+      const weeks = (record.weekly || [])
+        .filter(
+          (week: { week: string; races: number }) =>
+            week.races > 0 && week.week.split('/')[1] < snapshot.prospective.history_as_of,
+        )
+        .sort((a: { week: string }, b: { week: string }) => b.week.localeCompare(a.week));
       const accuracy = page.getByRole('region', { name: 'Latest completed week accuracy' });
       await expect(accuracy.locator('.probability-value')).toHaveText(
         weeks.length ? `${(weeks[0].winner_hit_rate * 100).toFixed(1)}%` : '—',
@@ -334,7 +324,9 @@ for (const width of [390, 1440])
       const measuredBounds = (await accuracy.boundingBox())!;
       const upcoming = page.getByRole('region', { name: 'Upcoming weekend forecasts' });
       await expect(upcoming).toContainText('Thursday 08:00 and 18:00 KST');
-      expect((await upcoming.boundingBox())!.y).toBeGreaterThan(measuredBounds.y + measuredBounds.height);
+      expect((await upcoming.boundingBox())!.y).toBeGreaterThan(
+        measuredBounds.y + measuredBounds.height,
+      );
       expect(Math.abs(bounds.width - measuredBounds.width)).toBeLessThan(2);
       expect(Math.abs(measuredBounds.height - measuredBounds.width)).toBeLessThan(2);
       if (width === 1440) expect(Math.abs(bounds.y - measuredBounds.y)).toBeLessThan(2);
@@ -433,15 +425,17 @@ test('Probability evidence keeps legacy and registered cohorts separate', async 
     `${record.recorded} races archived before the start; ${record.evaluated} evaluated.`,
   );
   if (record.probabilities.methods.calibrated) {
-    await expect(genuine.getByRole('table', { name: 'Prospective probability scores' })).toContainText(
-      record.probabilities.methods.calibrated.log_loss.toFixed(4),
-    );
+    await expect(
+      genuine.getByRole('table', { name: 'Prospective probability scores' }),
+    ).toContainText(record.probabilities.methods.calibrated.log_loss.toFixed(4));
   }
   await page.getByLabel('Evaluation scope').selectOption('version');
   await expect(page.getByText('Exact version:', { exact: false })).toBeVisible();
   await page.getByLabel('Model', { exact: true }).selectOption('legacy');
   await expect(page.getByRole('table', { name: 'Prospective probability scores' })).toContainText(
-    snapshot.prospective.probability_cohorts[0].probabilities.methods.calibrated.log_loss.toFixed(4),
+    snapshot.prospective.probability_cohorts[0].probabilities.methods.calibrated.log_loss.toFixed(
+      4,
+    ),
   );
   await expect(page.getByRole('table', { name: 'Prospective reliability' })).toContainText(
     'Insufficient weeks',
