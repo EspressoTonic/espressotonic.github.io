@@ -6,8 +6,13 @@ import { projects, publications, profile } from '../../lib/content';
 import Icon from '../../components/Icon.astro';
 const items = await projects({ category: 'research' });
 const outputs = await publications();
-const selected = await projects({ category: 'research', featured: true });
-const ongoing = items.filter((project) => !project.data.featured);
+const challengeIds = ['virtual-cell-challenge', 'genedis'];
+const challenges = challengeIds
+  .map((id) => items.find((project) => project.id === id))
+  .filter((project) => project !== undefined);
+const selected = (await projects({ category: 'research', featured: true }))
+  .filter((project) => !challengeIds.includes(project.id));
+const ongoing = items.filter((project) => !project.data.featured && !challengeIds.includes(project.id));
 const p = await profile();
 ---
 
@@ -31,6 +36,12 @@ const p = await profile();
       <section class="editorial-section" aria-labelledby="ongoing-research-title">
         <h2 id="ongoing-research-title">Research in progress</h2>
         <ProjectIndex items={ongoing} />
+      </section>
+    )}
+    {challenges.length > 0 && (
+      <section class="editorial-section" aria-labelledby="research-challenges-title">
+        <h2 id="research-challenges-title">Research challenges</h2>
+        <ProjectIndex items={challenges} />
       </section>
     )}
     <section class="editorial-section" aria-labelledby="interests-title">

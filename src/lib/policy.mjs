@@ -45,11 +45,10 @@ export function selectPosts(entries, preview = false) {
         a.id.localeCompare(b.id),
     );
 }
+const featuredPersonalIds = ['workflow-board', 'horse-racing'];
 export const personalGroups = [
-  { title: 'Developer tools', ids: ['ai-usage-bar', 'codex-account-switcher'] },
-  { title: 'Everyday tools', ids: ['fridge-match', 'location-todo', 'commute-log'] },
-  { title: 'Agents & knowledge', ids: ['junior', 'tc-personal-agent', 'lawgpt'] },
-  { title: 'Vision & data experiments', ids: ['nookcam', 'ballet-pose-feedback', 'horse-racing'] },
+  { title: 'Selected projects', ids: featuredPersonalIds },
+  { title: 'Small tools', ids: ['ai-usage-bar', 'codex-account-switcher'] },
 ];
 export function groupPersonalProjects(entries, groups = personalGroups) {
   const used = new Set();
@@ -82,8 +81,6 @@ export function selectHomepageProjects(entries, { preview = false, heroProjectId
   })
     .filter((p) => p.id !== hero?.id)
     .slice(0, 3);
-  const personal = ['ai-usage-bar', 'codex-account-switcher', 'horse-racing']
-    .map(find)
-    .filter(Boolean);
+  const personal = featuredPersonalIds.map(find).filter(Boolean);
   return { hero, research, personal };
 }

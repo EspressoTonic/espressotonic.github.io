@@ -89,6 +89,19 @@
   max-width: 66ch;
   font-size: 15px;
 }
+.editorial-project-demo {
+  display: block;
+  width: fit-content;
+  margin-top: 6px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--control-border);
+  text-underline-offset: 4px;
+}
+.editorial-project-demo:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
 .editorial-project-meta {
   grid-column: 2;
   grid-row: 1 / span 2;

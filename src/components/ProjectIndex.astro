@@ -5,14 +5,16 @@ import { label, projectUrl } from '../lib/content';
 interface Props {
   items: CollectionEntry<'projects'>[];
   featureId?: string;
+  showDemo?: boolean;
 }
-const { items, featureId } = Astro.props;
+const { items, featureId, showDemo = false } = Astro.props;
 ---
 
 <ul class="editorial-projects" role="list">
   {items.map(({ id, data }) => {
     const feature = id === featureId;
     const thesis = feature && id === 'magraph';
+    const demo = showDemo && data.links.find((link) => link.kind === 'demo');
     return (
       <li>
         <article
@@ -26,6 +28,7 @@ const { items, featureId } = Astro.props;
             {thesis
               ? 'For my master’s thesis, I built a graph that connects gene families found near each other on assembled metagenomic sequences. I used it to demonstrate operon-level analysis on two cohorts.'
               : (data.shortSummary ?? data.summary)}
+            {demo && <a class="editorial-project-demo" href={demo.url}>{demo.label}</a>}
           </p>
           <p class="editorial-project-meta">
             {thesis

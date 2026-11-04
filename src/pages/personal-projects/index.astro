@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectIndex from '../../components/ProjectIndex.astro';
-import { projects } from '../../lib/content';
-const items = await projects({ category: 'personal' });
+import { personalProjectGroups } from '../../lib/content';
+const groups = await personalProjectGroups();
 ---
 
 <BaseLayout title="Personal Projects" description="Independent software projects and experiments.">
@@ -11,8 +11,11 @@ const items = await projects({ category: 'personal' });
       <h1>Personal Projects</h1>
       <p>Software and experiments I work on outside of bioinformatics.</p>
     </header>
-    <section class="editorial-section" aria-label="Selected tools & experiments">
-      <ProjectIndex items={items} />
-    </section>
+    {groups.map(({ title, items }, index) => (
+      <section class="editorial-section" aria-labelledby={`personal-group-${index}`}>
+        <h2 id={`personal-group-${index}`}>{title}</h2>
+        <ProjectIndex items={items} showDemo={title === 'Selected projects'} />
+      </section>
+    ))}
   </div>
 </BaseLayout>
