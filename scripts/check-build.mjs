@@ -100,7 +100,7 @@ export async function checkBuild() {
         .map((item) => item.str ?? '')
         .join(' ') + '\n';
   }
-  for (const required of ['Woo Young Cho', 'Arontier', 'Connectagen', 'M.Sc. Bioinformatics'])
+  for (const required of ['Woo Young Cho', 'Arontier', 'ConnectaGen', 'M.Sc. Bioinformatics'])
     if (!pdfTextIncludes(extracted, required))
       issues.push('PDF missing expected content: ' + required);
   const cv = (await collection('cv'))[0];
