@@ -47,19 +47,19 @@ const selectedProjects = d.selectedProjectIds.map((id) => {
     </article>
   ))}
 </section>
-<section class="cv-section" aria-labelledby="outputs">
-  <h2 id="outputs">Research outputs</h2>
-  <PublicationList items={selectedOutputs} />
-</section>
 <section class="cv-section" aria-labelledby="selected-projects">
   <h2 id="selected-projects">Selected projects</h2>
   <ul class="cv-projects">
     {selectedProjects.map((project) => (
       <li>
-        <a href={projectUrl(project.id)}>{project.data.title}</a> — {project.data.summary}
+        <a href={projectUrl(project.id)}>{project.data.title}</a> — {project.data.shortSummary ?? project.data.summary}
       </li>
     ))}
   </ul>
+</section>
+<section class="cv-section cv-publications" aria-labelledby="outputs">
+  <h2 id="outputs">Research outputs</h2>
+  <PublicationList items={selectedOutputs} />
 </section>
 <section class="cv-section" aria-labelledby="capabilities">
   <h2 id="capabilities">Capabilities</h2>
