@@ -59,7 +59,50 @@ const nav = [
       type="font/woff2"
       crossorigin="anonymous"
     />
-    <meta name="theme-color" content="#090e1b" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <script is:inline>
+      {
+        const key = 'portfolio-theme';
+        const root = document.documentElement;
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        const apply = (theme) => {
+          root.dataset.theme = theme;
+          themeColor?.setAttribute('content', theme === 'light' ? '#faf9f7' : '#0d0d0d');
+        };
+        try {
+          if (localStorage.getItem(key) === 'light') apply('light');
+        } catch {
+          // Default to dark if storage is unavailable.
+        }
+        document.addEventListener(
+          'DOMContentLoaded',
+          () => {
+            const button = document.querySelector('[data-theme-toggle]');
+            if (!button) return;
+            const update = () => {
+              const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+              const label = `Switch to ${next} mode`;
+              button.textContent = next === 'light' ? 'Light' : 'Dark';
+              button.setAttribute('aria-label', label);
+              button.title = label;
+            };
+            update();
+            button.hidden = false;
+            button.addEventListener('click', () => {
+              const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+              apply(next);
+              update();
+              try {
+                localStorage.setItem(key, next);
+              } catch {
+                // The current page still switches if the choice cannot be saved.
+              }
+            });
+          },
+          { once: true },
+        );
+      }
+    </script>
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -87,6 +130,9 @@ const nav = [
             </a>
           ))}
         </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle hidden>
+          Light
+        </button>
       </div>
     </header>
     <main id="main">

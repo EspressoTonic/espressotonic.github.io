@@ -97,3 +97,8 @@ This owner-requested revision supersedes the older expanded-gallery/homepage com
 ## Research homepage revision — 2026-11-04
 
 The public homepage and indexes use a reading layout with a narrower column, short headings, and open project rows. Keep the existing dark palette and typefaces. Introduce the researcher directly; use publication titles as links and put the CV within easy reach. Feature MAGraph through the authored thesis contribution and evidence, without a decorative figure. Use a real, publishable figure only when one is selected. Keep unpublished projects out of the public indexes and put no homepage writing section on an empty blog. This supersedes the earlier homepage and index tile guidance; project detail pages and the CV remain on their existing layouts.
+
+
+## Neutral dark and light themes
+
+The public pages default to neutral near-black and use paper-toned light mode as an option. Both keep the same editorial layout and type. The header control remembers the choice locally; it stays hidden without JavaScript. Diagrams and the Horse-Racing case-study summary use the same theme tokens. The standalone dashboard keeps its independent palette and the CV PDF retains its print palette. This supersedes the earlier blue and periwinkle color guidance.
