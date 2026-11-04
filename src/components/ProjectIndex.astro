@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { label, projectUrl } from '../lib/content';
+
+interface Props {
+  items: CollectionEntry<'projects'>[];
+  featureId?: string;
+}
+const { items, featureId } = Astro.props;
+---
+
+<ul class="editorial-projects" role="list">
+  {items.map(({ id, data }) => {
+    const feature = id === featureId;
+    const thesis = feature && id === 'magraph';
+    return (
+      <li>
+        <article
+          class:list={['editorial-project', { 'editorial-feature': feature }]}
+          data-project-id={id}
+        >
+          <h3>
+            <a href={projectUrl(id)}>{data.title}</a>
+          </h3>
+          <p class="editorial-project-summary">
+            {thesis
+              ? 'For my master’s thesis, I built a graph that connects gene families found near each other on assembled metagenomic sequences. I used it to demonstrate operon-level analysis on two cohorts.'
+              : (data.shortSummary ?? data.summary)}
+          </p>
+          <p class="editorial-project-meta">
+            {thesis
+              ? 'Master’s thesis'
+              : (data.statusDetail ?? `${label(data.context)} · ${label(data.status)}`)}
+            {data.draft && <span class="draft-label">Draft preview</span>}
+          </p>
+        </article>
+      </li>
+    );
+  })}
+</ul>

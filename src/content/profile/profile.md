@@ -1,7 +1,7 @@
 ---
 {
   "name": "Woo Young Cho",
-  "headline": "Understanding biology through its many measurements.",
+  "headline": "Woo Young Cho, bioinformatics researcher working on metagenomics, spatial imaging, and scientific software.",
   "heroProjectId": "magraph",
   "email": "wooyoung510@gmail.com",
   "links": [
@@ -48,6 +48,4 @@
 }
 ---
 
-I'm Woo Young Cho, a bioinformatics researcher working across omics, spatial imaging, and scientific software. I'm interested in developing machine-learning methods that bring complementary measurements into a shared representation of cellular states.
-
-Alongside research, I build practical applications and explore how useful AI assistants should work.
+I work on metagenomics, spatial imaging, and scientific software. I’m interested in how the context around a gene or a cell changes what we can infer from it.
