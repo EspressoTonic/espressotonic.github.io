@@ -15,7 +15,7 @@
     "Chronological evaluation",
     "Data pipelines"
   ],
-  "links": [{"label": "Explore results", "url": "/demos/horse-racing/", "kind": "demo"}],
+  "links": [{"label": "Forecast archive", "url": "/demos/horse-racing/", "kind": "demo"}],
   "publicationIds": [],
   "updated": "2026-10-20",
   "dateLabel": "2025–2026",

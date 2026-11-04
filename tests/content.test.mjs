@@ -69,6 +69,7 @@ test('Homepage excludes the hero before limiting research and filters held perso
     entry('enzymematch', { featuredOrder: 4 }),
     entry('other-research', { featuredOrder: 5 }),
     entry('ai-usage-bar', { category: 'personal' }),
+    entry('workflow-board', { category: 'personal' }),
     entry('codex-account-switcher', { category: 'personal', draft: true }),
     entry('horse-racing', { category: 'personal' }),
     entry('fridge-match', { category: 'personal', draft: true }),
@@ -81,14 +82,14 @@ test('Homepage excludes the hero before limiting research and filters held perso
   );
   assert.deepEqual(
     home.personal.map((p) => p.id),
-    ['ai-usage-bar', 'horse-racing'],
+    ['workflow-board', 'horse-racing'],
   );
 });
 test('Personal groups preserve curation and never lose new public records', () => {
   const items = selectProjects(
     [
-      entry('lawgpt', { category: 'personal' }),
-      entry('fridge-match', { category: 'personal' }),
+      entry('workflow-board', { category: 'personal' }),
+      entry('ai-usage-bar', { category: 'personal' }),
       entry('new-tool', { category: 'personal' }),
       entry('junior', { category: 'personal', draft: true }),
     ],
@@ -97,11 +98,11 @@ test('Personal groups preserve curation and never lose new public records', () =
   const groups = groupPersonalProjects(items);
   assert.deepEqual(
     groups.map((g) => g.title),
-    ['Everyday tools', 'Agents & knowledge', 'More projects'],
+    ['Selected projects', 'Small tools', 'More projects'],
   );
   assert.deepEqual(
     groups.flatMap((g) => g.items.map((p) => p.id)),
-    ['fridge-match', 'lawgpt', 'new-tool'],
+    ['workflow-board', 'ai-usage-bar', 'new-tool'],
   );
   assert.throws(
     () =>
@@ -219,7 +220,7 @@ test('Actual public collection excludes the eight held projects without deleting
     selectProjects(projects, { category: 'personal' })
       .map((project) => project.id)
       .sort(),
-    ['ai-usage-bar', 'codex-account-switcher', 'horse-racing'],
+    ['ai-usage-bar', 'codex-account-switcher', 'horse-racing', 'workflow-board'],
   );
   assert.equal(selectProjects(projects, { category: 'research' }).length, 5);
 });

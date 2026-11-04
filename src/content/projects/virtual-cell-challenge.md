@@ -1,51 +1,37 @@
 ---
 {
   "title": "Virtual Cell Challenge 2026",
-  "summary": "An independent investigation of how cellular-response models transfer across biological contexts. I compare simple baselines, biological priors and cell-state models while keeping development results, competition scores and biological claims distinct.",
+  "summary": "I submitted a model to the 2026 Virtual Cell Challenge, which asks how gene knockdowns change gene expression in unfamiliar cellular contexts. I compared simple transfer baselines with network-informed models using public perturbation data.",
+  "shortSummary": "Predicting gene-expression responses to CRISPRi across cell contexts, with matched tests of network features.",
   "category": "research",
   "context": "independent",
   "status": "ongoing",
-  "statusDetail": "Independent research · Experiments and evaluation",
+  "statusDetail": "Final entry submitted · Results pending",
   "role": "Research design, model development & evaluation",
   "featured": true,
   "draft": false,
-  "topics": [
-    "Cellular-response modeling",
-    "Transfer evaluation",
-    "Reproducible research"
-  ],
-  "links": [],
+  "topics": ["Perturbation response", "Transfer evaluation", "Network features"],
+  "links": [{"label": "Challenge brief", "url": "https://arcinstitute.org/news/virtual-cell-challenge-2026", "kind": "write-up"}],
   "publicationIds": [],
-  "updated": "2026-10-13",
+  "updated": "2026-11-04",
   "dateLabel": "September 2026–present",
   "sortDate": "2026-09",
-  "featuredOrder": 2,
-  "shortSummary": "Developing and evaluating models of cellular responses across biological contexts."
+  "featuredOrder": 2
 }
 ---
 
 ## The research question
 
-Can a response learned in one cellular context help predict another when only untreated cells are available? The project uses public perturbation data and the 2026 Virtual Cell Challenge as a setting for studying that transfer problem.
+Can we use measured responses in one cell context to predict what happens after a gene knockdown in another? I used public single-cell perturbation data and the challenge's CRISPRi prediction task to study this transfer problem.
 
 ## My contribution
 
-I direct the research questions and comparison design, develop the modeling and evaluation workflow, and examine where its conclusions fail to generalize. The work emphasizes reproducible data preparation, explicit target and context exclusions, and frozen predictions before outcome scoring.
+I designed the comparisons, built the model and evaluation workflows, and examined where performance broke down. I defined which targets and contexts to hold out and froze predictions before scoring. I compared transferred-effect and low-rank baselines with pathway and gene-network features.
 
-## Experiments completed
+## What the comparisons showed
 
-Completed comparisons include transferred-effect and low-rank baselines, pathway and directed-graph priors, and a bounded native LEMUR study. These experiments use different evaluation settings; their scores are not interchangeable.
+An early baseline transferred poorly on the official validation panel. In a separate development experiment on a held-out cell context, adding STRING network features did not improve the population and count comparison over the matched reference. These experiments used different evaluation settings.
 
-A first baseline received an official 2026 validation result and transferred poorly. The matched directed-graph comparison did not establish a real-graph advantage. The native LEMUR pilot showed modest distributional signals in a narrower represented-target setting, without demonstrating challenge transfer.
+## Submission
 
-## Current work
-
-A streaming conditional count-model comparison has been prepared using public individual-cell data. Data preparation and resource profiling established bounded scale feasibility; predictive results were still pending at the latest recorded checkpoint on 13 October 2026.
-
-A separate population-supervision follow-up is a research proposal. It must not be described as a completed experiment or an improvement over the current models.
-
-## What this establishes
-
-The strongest result so far is a clearer evaluation boundary: a more expressive model or a biological prior does not automatically improve transfer. Simple comparators, matched controls and negative findings remain part of the project record.
-
-Model-generated responses do not establish biological validity, causal mechanisms or individual-cell histories. Gene coverage and the limited number of source contexts remain material constraints.
+I submitted a final entry for the 2026 challenge. The final competition score and ranking are pending.

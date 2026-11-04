@@ -103,7 +103,7 @@ test('Research, personal projects, full inventory and back-links', async ({ page
   ).toBeVisible();
   await expect(page.locator('.project-facts')).toContainText('Integration validation ongoing');
 });
-test('Homepage leads with publications and selects three inspectable personal projects', async ({
+test('Homepage leads with publications and features two personal projects', async ({
   page,
 }) => {
   await page.goto('/');
@@ -119,7 +119,7 @@ test('Homepage leads with publications and selects three inspectable personal pr
     await page
       .locator('.personal-home [data-project-id]')
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-project-id'))),
-  ).toEqual(['ai-usage-bar', 'codex-account-switcher', 'horse-racing']);
+  ).toEqual(['workflow-board', 'horse-racing']);
   await expect(page.getByRole('region', { name: 'Recently added', exact: true })).toHaveCount(0);
   await expect(
     page
@@ -293,7 +293,7 @@ test('Horse research summary works without JavaScript', async ({ browser, baseUR
   const page = await context.newPage();
   await page.goto(`${baseURL}/projects/horse-racing/`);
   await expect(page.locator('.horse-evidence')).toContainText('Historical winner hit rate');
-  await page.getByRole('link', { name: 'Explore results', exact: true }).click();
+  await page.getByRole('link', { name: 'Forecast archive', exact: true }).click();
   await expect(page.locator('main h1')).toHaveText('Pferderennen research dashboard');
   await page.getByRole('link', { name: 'Back to case study' }).click();
   await expect(page.locator('.horse-evidence')).toBeVisible();
@@ -315,7 +315,7 @@ for (const width of [390, 1440])
       if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
     });
     await page.goto('/projects/horse-racing/');
-    await page.getByRole('link', { name: 'Explore results', exact: true }).click();
+    await page.getByRole('link', { name: 'Forecast archive', exact: true }).click();
     await expect(page).toHaveTitle('Pferderennen — Woo Young Cho');
     await expect(page.getByLabel('Model', { exact: true })).toBeVisible();
     const choices = await page
@@ -404,8 +404,19 @@ test('Selected software navigates through the right indexes and keeps evidence l
     await recent
       .locator('[data-project-id]')
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-project-id'))),
-  ).toEqual(['ai-usage-bar', 'codex-account-switcher', 'horse-racing']);
-  await recent.getByRole('link', { name: 'AI Usage Bar', exact: true }).click();
+  ).toEqual(['workflow-board', 'horse-racing']);
+  await recent.getByRole('link', { name: 'Workflow Board', exact: true }).click();
+  await expect(page.locator('h1')).toHaveText('Workflow Board');
+  await expect(page.getByRole('heading', { name: 'An illustrative example' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveCount(0);
+  await page.getByRole('link', { name: 'Back to Personal Projects', exact: true }).click();
+  const selected = page.getByRole('region', { name: 'Selected projects', exact: true });
+  await expect(selected.getByRole('link', { name: 'Forecast archive' })).toHaveAttribute(
+    'href',
+    '/demos/horse-racing/',
+  );
+  const tools = page.getByRole('region', { name: 'Small tools', exact: true });
+  await tools.getByRole('link', { name: 'AI Usage Bar', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'AI Usage Bar', exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveAttribute(
     'href',
@@ -416,7 +427,6 @@ test('Selected software navigates through the right indexes and keeps evidence l
   await expect(page.locator('h1')).toHaveText('Codex Account Switcher');
   await expect(page.locator('main')).toContainText('Live account validation pending');
   await page.getByRole('link', { name: 'Back to Personal Projects', exact: true }).click();
-  const tools = page.getByRole('region', { name: 'Selected tools & experiments', exact: true });
   await expect(tools.getByRole('link', { name: 'AI Usage Bar', exact: true })).toBeVisible();
   await expect(
     tools.getByRole('link', { name: 'Codex Account Switcher', exact: true }),
@@ -425,12 +435,20 @@ test('Selected software navigates through the right indexes and keeps evidence l
     .getByRole('navigation', { name: 'Main navigation' })
     .getByRole('link', { name: 'Research', exact: true })
     .click();
-  await page.getByRole('link', { name: 'GeNeDis Multi-Omics', exact: true }).click();
-  await expect(page.locator('h1')).toHaveText('GeNeDis Multi-Omics');
-  await expect(page.locator('main')).toContainText('No final endpoint, trained model');
+  const challenges = page.getByRole('region', { name: 'Research challenges', exact: true });
+  expect(await challenges.getByRole('link').allTextContents()).toEqual([
+    'Virtual Cell Challenge 2026',
+    'GeNeDis Multi-Omics Hackathon',
+  ]);
+  await challenges.getByRole('link', { name: 'Virtual Cell Challenge 2026' }).click();
+  await expect(page.locator('.project-facts')).toContainText('Final entry submitted');
+  await expect(page.locator('main')).toContainText('final competition score and ranking are pending');
+  await page.getByRole('link', { name: 'Back to Research', exact: true }).click();
+  await challenges.getByRole('link', { name: 'GeNeDis Multi-Omics Hackathon' }).click();
+  await expect(page.locator('h1')).toHaveText('GeNeDis Multi-Omics Hackathon');
+  await expect(page.locator('.project-facts')).toContainText('Submission received');
+  await expect(page.locator('main')).toContainText('separate from the received package');
   await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveCount(0);
-  await expect(page.locator('main')).toContainText('JUNIOR');
-  await expect(page.getByRole('link', { name: 'JUNIOR', exact: true })).toHaveCount(0);
 });
 
 test('Probability evidence keeps legacy and registered cohorts separate', async ({ page }) => {
