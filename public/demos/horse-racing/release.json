@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "source_release": "64cb0375c9b3ab37",
-  "source_manifest_sha256": "7479a623acb9f107a9a0144df094161ebe1c87c79f2a28aab4131175a220b417",
+  "source_release": "23146bdcefd38706",
+  "source_manifest_sha256": "f4061c8aab701dcbc89ccb00cd7f1330263cd91ff89d02c9b4f277348524b5a4",
   "source_commit": "0fa42e0953708cde629b253a9688e3c9abdddaf1",
-  "exported_at": "2026-11-04T03:10:31.139886+00:00",
+  "exported_at": "2026-11-06T14:31:28.104322+00:00",
   "research_run": "e6462b99e8e507ff",
   "weekly_run": "9bef5dd726324ee0",
   "source_files": {
@@ -56,7 +56,7 @@
     "assets/index-Cs_MxVHy.css": "25071d7d409db3b52f232d22305e34c03b652580b11a2acba38928fede7dd008",
     "assets/inter-latin-variable-8kRkwJBP.woff2": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
     "assets/sora-latin-variable-5v9NviDD.woff2": "3902474d3ece89c8580d5ef3325cf58753e6e45a86f9957b4dacc4fce2e7fde1",
-    "data/dashboard.json": "554a808c565f166a050281d84a6aa5bd9d47b2c56fbeba184f444494214d76ad",
+    "data/dashboard.json": "97645e19dbee8ed6fa1b07352ac5c5ea713d13a495c5a4e2fc875b6905e486a9",
     "index.html": "423c7dff15ed06fb5ac52703ef01d74637e893fd4b542c79d6d512639f1fe5ea"
   }
 }
