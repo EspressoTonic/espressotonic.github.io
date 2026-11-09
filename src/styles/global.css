@@ -1265,6 +1265,25 @@ li {
   max-height: 700px;
   object-fit: contain;
 }
+.prose :is(.project-figure, #project-figures) {
+  scroll-margin-top: 1.75rem;
+}
+.prose .project-figure {
+  margin-block: 24px;
+}
+.prose .project-figure > p {
+  margin: 0;
+}
+.prose .project-figure img {
+  display: block;
+  height: auto;
+}
+.prose .project-figure figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
 .prose blockquote {
   margin-inline: 0;
   padding-left: 20px;

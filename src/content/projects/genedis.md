@@ -1,7 +1,7 @@
 ---
 {
   "title": "GeNeDis Multi-Omics Hackathon",
-  "summary": "For the GeNeDis hackathon, I built a workflow to predict RNA expression from DNA copy number and vice versa in lung cancer. I compared a learned residual model with simpler baselines on TCGA and tested gene-rank transfer on an independent CPTAC cohort.",
+  "summary": "I built a workflow to predict RNA expression from DNA copy number, and vice versa, in lung tumors. I tested how well it recovered measured values and whether it could recover gene rankings in a separate cohort.",
   "shortSummary": "Predicting lung-cancer RNA expression from copy number and vice versa, with an independent test of gene-rank transfer.",
   "category": "research",
   "context": "independent",
@@ -12,11 +12,6 @@
   "draft": false,
   "topics": ["Multi-omics", "Lung cancer", "Cross-modal reconstruction"],
   "links": [{"label": "Hackathon brief", "url": "https://2026.genedis.org/hackathon/", "kind": "write-up"}],
-  "figures": [
-    {"id": "genedis-workflow", "src": "../../assets/projects/genedis/workflow.svg", "alt": "Four steps from matching both assays to a ridge estimate, a learned R3D2 correction, and evaluation on held-out TCGA and CPTAC patients.", "caption": "Submitted workflow. At prediction time the ridge and neural branches both use the same observed assay. The measured target assay is used for scoring."},
-    {"id": "genedis-tcga", "src": "../../assets/projects/genedis/tcga-reconstruction.svg", "alt": "Paired difference plot. Both TCGA estimates and their intervals favor R3D2 over the strongest listed comparator for each prediction direction.", "caption": "TCGA continuous reconstruction on 199 previously examined test patients. R3D2 minus the strongest listed comparator was −0.0176 mean squared error (MSE) for RNA to CNA and −0.0484 for CNA to RNA. Bars show paired 95% patient bootstrap intervals conditional on the fitted models. Negative values favor R3D2."},
-    {"id": "genedis-cptac", "src": "../../assets/projects/genedis/cptac-rank-transfer.svg", "alt": "Paired difference plot. PCA ridge is favored for RNA to CNA, R3D2 is favored over PCA ridge for CNA to RNA, and the CNA to RNA comparison with the tumor-type mean spans zero.", "caption": "CPTAC gene-rank transfer across 217 independent tumors. R3D2 minus PCA ridge was +0.000204 percentile MSE for RNA to CNA and −0.000488 for CNA to RNA. The CNA-to-RNA comparison with the tumor-type mean was near zero. Bars show paired 95% patient bootstrap intervals conditional on the fitted models. Negative values favor R3D2."}
-  ],
   "publicationIds": [],
   "updated": "2026-11-09",
   "dateLabel": "October 2026–present",
@@ -26,22 +21,63 @@
 
 ## The challenge
 
-Can measurements from one molecular assay recover information normally measured by another? I focused on RNA expression and continuous DNA copy-number alterations (CNA) in lung adenocarcinoma and lung squamous cell carcinoma. The two prediction tasks were RNA to CNA and CNA to RNA. [GeNeDis hackathon brief](https://2026.genedis.org/hackathon/)
+Can one tumor assay recover information usually measured by another? RNA expression measures how much RNA a gene produces. DNA copy number measures how many copies of a gene’s region are present. The plots use CNA for copy-number alterations. I tested prediction in both directions using samples from lung adenocarcinoma and lung squamous cell carcinoma. [GeNeDis hackathon brief](https://2026.genedis.org/hackathon/)
 
 ## How the submitted workflow worked
 
-1. **Match the assays before fitting.** My Snakemake workflow paired RNA and CNA from the same tumor sample and kept one sample per patient. I checked identifiers, excluded ambiguous genes, and froze the patient splits. The primary TCGA benchmark used 991 paired patients. I selected the genes and fit scaling using training patients only. [TCGA PanCancer Atlas cohorts via cBioPortal DataHub](https://github.com/cBioPortal/datahub)
-2. **Start with linear and factor models.** I compared ridge regression on principal components, regularized canonical correlation analysis, and MOFA+ factors. These gave me reference points for what could be predicted from each assay with simpler models. [MOFA+](https://doi.org/10.1186/s13059-020-02015-1)
-3. **Learn a correction to the ridge prediction.** In the updated submission, the R3D2 model first predicted the target assay with ridge regression. A small neural network learned to correct its remaining errors in a lower-dimensional representation of the target assay. At inference, both branches took only the observed assay.
-4. **Test transfer on a separate cohort.** I refit on TCGA alone and evaluated on 217 paired tumors from CPTAC. Because the assay scales differed, I compared within-sample gene percentiles on a shared gene panel and reported results by tumor type. [CPTAC adenocarcinoma data](https://www.linkedomics.org/data_download/CPTAC-pancan-LUAD/) · [CPTAC squamous carcinoma data](https://www.linkedomics.org/data_download/CPTAC-pancan-LSCC/)
+I paired the two assays from the same tumor sample and kept one sample per patient. The workflow learned from those pairs, then predicted the missing assay using only the assay available for a new tumor.
 
-[View the submitted workflow diagram](#genedis-workflow).
+<div id="project-figures"></div>
+
+<figure id="genedis-workflow" class="project-figure">
+
+![Paired tumor assays train a ridge model and a neural correction. Predictions are evaluated in TCGA and in a separate CPTAC cohort.](../../assets/projects/genedis/workflow.svg)
+
+<figcaption>Ridge regression estimates the target profile. The R3D2 neural network learns a correction to that estimate from the same observed assay.</figcaption>
+
+</figure>
+
+### Pair the assays and split by patient
+
+My Snakemake pipeline checked sample identifiers and excluded ambiguous gene matches. I split the 991 TCGA patients into 594 for training, 198 for validation and 199 for testing. Gene selection and scaling used the training patients. [TCGA cohorts via cBioPortal DataHub](https://github.com/cBioPortal/datahub)
+
+### Learn what ridge regression misses
+
+For each prediction direction, I trained a ridge model and asked a small neural network to predict its remaining errors. The network learned those corrections in a compressed representation of the target assay. I compared the resulting R3D2 model with simpler models based on principal components (PCA), canonical correlation analysis (CCA) and [MOFA+ factors](https://doi.org/10.1186/s13059-020-02015-1).
 
 ## What the comparisons showed
 
-R3D2 gave the lowest continuous-value reconstruction error in both directions on the previously examined TCGA development split. In CPTAC, PCA ridge gave the lowest gene-rank error for RNA to CNA. For CNA to RNA, R3D2 improved on PCA ridge and roughly tied a baseline that predicted the average profile for the tumor type. The CPTAC experiment tests transfer of relative gene ranks. Continuous cross-platform prediction and clinical utility remain unvalidated.
+### TCGA · How close were the predicted values?
 
-[View the TCGA reconstruction comparison](#genedis-tcga) and [CPTAC gene-rank comparison](#genedis-cptac).
+I compared each prediction with the measured, standardized assay values for the 199 TCGA test patients. I had already examined this split during development. Each row compares R3D2 with the strongest listed baseline for that direction.
+
+**How to read the plot.** The dot is R3D2’s mean squared error (MSE) minus the baseline’s. Zero is a tie. Dots to the left mean R3D2 had lower error. The bars show the uncertainty estimated by resampling the same patients for both models.
+
+<figure id="genedis-tcga" class="project-figure">
+
+![On the TCGA test split, both estimates and their intervals favor R3D2 over the strongest listed baseline for each direction.](../../assets/projects/genedis/tcga-reconstruction.svg)
+
+<figcaption>R3D2 reduced MSE by 0.0176 versus MOFA+ ridge for RNA to copy number, and by 0.0484 versus CCA ridge for copy number to RNA. Bars show 95% paired patient bootstrap intervals for the fitted models.</figcaption>
+
+</figure>
+
+R3D2 had lower reconstruction error in both directions on this split. I used a separate cohort to ask whether it could still recover relative differences across genes when assay scales changed.
+
+### CPTAC · Did gene rankings transfer?
+
+I refit the models using TCGA patients only and tested on 217 independent CPTAC tumors. To make the two cohorts comparable, I ranked genes within each tumor on a shared panel. The benchmark tests transfer of relative gene ranks. Its error scale is based on percentiles. [CPTAC adenocarcinoma](https://www.linkedomics.org/data_download/CPTAC-pancan-LUAD/) · [CPTAC squamous carcinoma](https://www.linkedomics.org/data_download/CPTAC-pancan-LSCC/)
+
+**How to read the plot.** Left of zero again favors R3D2. The tumor-type mean, labeled “histology mean” in the plot, predicts the same average profile for every tumor of a given type. It shows how much the observed assay adds beyond knowing the tumor type.
+
+<figure id="genedis-cptac" class="project-figure">
+
+![On CPTAC, PCA ridge has lower error for RNA to copy number. R3D2 has lower error than PCA ridge for copy number to RNA, and its interval against the tumor-type mean crosses zero.](../../assets/projects/genedis/cptac-rank-transfer.svg)
+
+<figcaption>Against PCA ridge, R3D2’s percentile MSE changed by +0.000204 for RNA to copy number and −0.000488 for copy number to RNA. Bars show 95% paired patient bootstrap intervals for the fitted models.</figcaption>
+
+</figure>
+
+PCA ridge did better at ranking copy number from RNA. In the reverse direction, R3D2 improved on PCA ridge and performed about as well as the tumor-type average. Recovery of absolute values across platforms and clinical performance remain open.
 
 ## Submission status
 
