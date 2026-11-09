@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "source_release": "23146bdcefd38706",
-  "source_manifest_sha256": "f4061c8aab701dcbc89ccb00cd7f1330263cd91ff89d02c9b4f277348524b5a4",
-  "source_commit": "0fa42e0953708cde629b253a9688e3c9abdddaf1",
-  "exported_at": "2026-11-06T14:31:28.104322+00:00",
+  "source_release": "c460921330daeff6",
+  "source_manifest_sha256": "ea176c557236a9becbd3a3a01ec7f0211c428f31f9e7c385e1d267c0b3d2ab69",
+  "source_commit": "724413ba5c5f9e535108999c71175117785d4a18",
+  "exported_at": "2026-11-09T01:57:28.008287+00:00",
   "research_run": "e6462b99e8e507ff",
   "weekly_run": "9bef5dd726324ee0",
   "source_files": {
@@ -56,7 +56,7 @@
     "assets/index-Cs_MxVHy.css": "25071d7d409db3b52f232d22305e34c03b652580b11a2acba38928fede7dd008",
     "assets/inter-latin-variable-8kRkwJBP.woff2": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
     "assets/sora-latin-variable-5v9NviDD.woff2": "3902474d3ece89c8580d5ef3325cf58753e6e45a86f9957b4dacc4fce2e7fde1",
-    "data/dashboard.json": "97645e19dbee8ed6fa1b07352ac5c5ea713d13a495c5a4e2fc875b6905e486a9",
+    "data/dashboard.json": "0ca28855f2d6afd3d9c9509ef8a08f2d2ad028d12b212197925cf36277496f54",
     "index.html": "423c7dff15ed06fb5ac52703ef01d74637e893fd4b542c79d6d512639f1fe5ea"
   }
 }
