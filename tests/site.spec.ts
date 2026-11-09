@@ -442,12 +442,14 @@ test('Selected software navigates through the right indexes and keeps evidence l
   ]);
   await challenges.getByRole('link', { name: 'Virtual Cell Challenge 2026' }).click();
   await expect(page.locator('.project-facts')).toContainText('Final entry submitted');
+  await expect(page.getByRole('heading', { name: 'How the submitted model worked' })).toBeVisible();
   await expect(page.locator('main')).toContainText('final competition score and ranking are pending');
   await page.getByRole('link', { name: 'Back to Research', exact: true }).click();
   await challenges.getByRole('link', { name: 'GeNeDis Multi-Omics Hackathon' }).click();
   await expect(page.locator('h1')).toHaveText('GeNeDis Multi-Omics Hackathon');
-  await expect(page.locator('.project-facts')).toContainText('Submission received');
-  await expect(page.locator('main')).toContainText('separate from the received package');
+  await expect(page.locator('.project-facts')).toContainText('Updated submission sent');
+  await expect(page.getByRole('heading', { name: 'How the submitted workflow worked' })).toBeVisible();
+  await expect(page.locator('main')).toContainText('transfer of relative gene ranks');
   await expect(page.getByRole('link', { name: 'Source code', exact: true })).toHaveCount(0);
 });
 
