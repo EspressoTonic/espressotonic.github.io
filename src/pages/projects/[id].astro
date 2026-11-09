@@ -181,6 +181,7 @@ const sections = headings.filter((heading) => heading.depth === 2);
             {sections.map((heading) => (
               <a href={`#${heading.slug}`}>{heading.text}</a>
             ))}
+            {d.figures.length > 0 && <a href="#project-figures">Figures</a>}
           </div>
         </nav>
       )}
@@ -189,9 +190,9 @@ const sections = headings.filter((heading) => heading.depth === 2);
         <Content />
         {d.figures.length > 0 && (
           <section>
-            <h2>Images and diagrams</h2>
+            <h2 id="project-figures">Figures</h2>
             {d.figures.map((figure) => (
-              <figure id={figure.id}>
+              <figure id={figure.id} class="project-figure">
                 <Image src={figure.src} alt={figure.alt} width={880} loading="lazy" />
                 <figcaption>
                   {figure.caption}
@@ -216,3 +217,15 @@ const sections = headings.filter((heading) => heading.depth === 2);
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .project-figure {
+    scroll-margin-top: 1rem;
+  }
+  .project-figure figcaption {
+    margin-top: 0.5rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+</style>

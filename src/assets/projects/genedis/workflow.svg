@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="308" viewBox="0 0 520 308" role="img" aria-labelledby="title">
+  <title id="title">GeNeDis submitted workflow</title>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #192329; }
+    .number { fill: #136854; font-size: 15px; font-weight: 700; text-anchor: middle; }
+    .label { font-size: 19px; font-weight: 650; }
+    .detail { fill: #47585f; font-size: 17px; }
+  </style>
+  <rect x="0.5" y="0.5" width="519" height="307" rx="8" fill="#f7f6f2" stroke="#cdd5d4"/>
+  <circle cx="37" cy="39" r="15" fill="#e0ece7"/>
+  <text x="37" y="44" class="number">1</text>
+  <text x="65" y="33" class="label">Pair the assays</text>
+  <text x="65" y="54" class="detail">Match RNA and copy number from the same tumor sample</text>
+  <path d="M37 60v15m-4 -5 4 5 4-5" fill="none" stroke="#136854" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="37" cy="113" r="15" fill="#e0ece7"/>
+  <text x="37" y="118" class="number">2</text>
+  <text x="65" y="107" class="label">Fit a ridge baseline</text>
+  <text x="65" y="128" class="detail">Use the observed assay to predict the other assay</text>
+  <path d="M37 134v15m-4 -5 4 5 4-5" fill="none" stroke="#136854" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="37" cy="187" r="15" fill="#e0ece7"/>
+  <text x="37" y="192" class="number">3</text>
+  <text x="65" y="181" class="label">Add the learned correction</text>
+  <text x="65" y="202" class="detail">R3D2 estimates what the ridge prediction misses</text>
+  <path d="M37 208v15m-4 -5 4 5 4-5" fill="none" stroke="#136854" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="37" cy="261" r="15" fill="#e0ece7"/>
+  <text x="37" y="266" class="number">4</text>
+  <text x="65" y="255" class="label">Evaluate on held-out patients</text>
+  <text x="65" y="276" class="detail">TCGA continuous values and independent CPTAC ranks</text>
+</svg>
