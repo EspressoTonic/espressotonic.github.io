@@ -1,7 +1,7 @@
 ---
 {
   "title": "Virtual Cell Challenge 2026",
-  "summary": "I built and submitted a model that predicts single-cell responses to CRISPRi in unfamiliar cell lines from untreated profiles. The final model combined a learned response predictor with a correction based on directed signaling paths.",
+  "summary": "I built and submitted a model to predict how unfamiliar cell lines respond when a gene is turned down. I tested whether known signaling relationships could improve a predictor trained on measured responses.",
   "shortSummary": "Predicting CRISPRi responses in unseen cell contexts with a learned response model and directed signaling paths.",
   "category": "research",
   "context": "independent",
@@ -15,10 +15,6 @@
     {"label": "Challenge brief", "url": "https://arcinstitute.org/news/virtual-cell-challenge-2026", "kind": "write-up"},
     {"label": "Official rules", "url": "https://virtualcellchallenge.org/rules", "kind": "write-up"}
   ],
-  "figures": [
-    {"id": "vcc-workflow", "src": "../../assets/projects/virtual-cell-challenge/workflow.svg", "alt": "Four steps from untreated RNA and a target gene through ordered response prediction, SIGNOR correction, and count sampling.", "caption": "Submitted model workflow. The ordered predictor estimates gene-expression shifts, and the SIGNOR model adjusts them where suitable signaling paths are available."},
-    {"id": "vcc-h1-counts", "src": "../../assets/projects/virtual-cell-challenge/h1-count-comparison.svg", "alt": "Dot plot of the local H1 count composite. Longer-path and submitted SIGNOR are close together above the Ordered base. Rewired SIGNOR and STRING are below the base.", "caption": "Local H1 development comparison across 65 targets and three fixed sampling banks. Mean composite scores were 0.05675 for submitted SIGNOR, 0.05678 for longer paths, 0.05493 for the Ordered base, 0.05416 for the rewired control, and 0.05175 for STRING. The sampling banks share one biological context."}
-  ],
   "publicationIds": [],
   "updated": "2026-11-09",
   "dateLabel": "September 2026–present",
@@ -29,22 +25,45 @@
 
 ## The challenge
 
-Given untreated single-cell RNA profiles and a gene to knock down, predict the resulting gene expression in a cell line with no observed knockdown responses available to the model. I designed the comparisons and built the workflow from training through submission. [Arc Institute’s challenge brief](https://arcinstitute.org/news/virtual-cell-challenge-2026)
+When a gene is turned down, which other genes change their expression? CRISPR interference (CRISPRi) reduces transcription of the target gene and lets researchers measure how cells respond. In this challenge, the model received untreated single-cell RNA profiles and a target gene. It had to predict a whole population of treated cells in a cell line whose responses were unavailable to the model. I designed the comparisons and built the workflow from training through submission. [Arc Institute’s challenge brief](https://arcinstitute.org/news/virtual-cell-challenge-2026)
 
 ## How the submitted model worked
 
-1. **Learn from measured responses.** I trained on public CRISPRi Perturb-seq profiles from K562 and RPE1 (Replogle et al.) and HepG2 and Jurkat (Nadig et al.). At inference, untreated RNA represented the new cell context, and the requested gene identified the intervention. [Replogle and Nadig data references](https://github.com/Virtual-Cell-Research-Community/scPertEval/blob/main/docs/user-guide/datasets.md)
-2. **Predict a change for each output gene.** An ensemble trained with three seeds combined a learned response predictor with GenePT embeddings and Reactome pathway membership. The decoder treated the knocked-down gene and the measured gene as an ordered pair, so reversing their roles could change the prediction. [GenePT](https://pubmed.ncbi.nlm.nih.gov/37905130/) · [Reactome](https://reactome.org/)
-3. **Add a signaling-path correction.** I trained a second model to adjust the base prediction using short, directed SIGNOR paths and untreated expression from the new cell context. The path features distinguished activating, inhibitory, and unknown-sign links. The submitted version allowed paths of up to four steps and used the base prediction for pairs without usable path features. [SIGNOR 3.0](https://doi.org/10.1093/nar/gkac883)
-4. **Generate single-cell counts.** I applied the predicted shifts to samples from the untreated cells and used negative binomial or Poisson distributions to generate count profiles. This produced a population of predicted cells for each requested knockdown.
+The workflow first predicts how much each gene’s expression will shift. It then uses those shifts to simulate RNA counts for individual cells, so the submission represents a population with cell-to-cell variation.
 
-[View the submitted workflow diagram](#vcc-workflow).
+<div id="project-figures"></div>
+
+<figure id="vcc-workflow" class="project-figure">
+
+![Untreated RNA and the target gene enter the Ordered predictor, followed by the SIGNOR correction and count sampling.](../../assets/projects/virtual-cell-challenge/workflow.svg)
+
+<figcaption>From untreated RNA to simulated treated cells. SIGNOR adjusts the base estimate where usable signaling paths are available.</figcaption>
+
+</figure>
+
+### Learn the base response
+
+I trained on public CRISPRi Perturb-seq data from K562, RPE1, HepG2 and Jurkat cells. The base model, which I call Ordered, combined three training runs with [GenePT embeddings](https://pubmed.ncbi.nlm.nih.gov/37905130/) and [Reactome pathway membership](https://reactome.org/). It keeps the intervention and measurement roles distinct. Turning down gene A to predict gene B can produce a different result from turning down gene B to predict gene A. [Training datasets](https://github.com/Virtual-Cell-Research-Community/scPertEval/blob/main/docs/user-guide/datasets.md)
+
+### Use signaling paths where available
+
+A second model learned which corrections to make from the untreated RNA profile and directed [SIGNOR](https://doi.org/10.1093/nar/gkac883) paths of up to four steps. It treated activating, inhibitory and unknown-sign links separately and fell back to the base estimate for gene pairs without usable paths. I sampled from negative binomial or Poisson distributions to turn the resulting shifts into single-cell RNA counts.
 
 ## What the comparisons showed
 
-I tested simple transfer and low-rank baselines, then compared the frozen base model with several network additions. STRING did not improve the matched count benchmark on public H1 cells. The submitted SIGNOR correction modestly improved the composite score on 65 H1 targets relative to the base model and the degree-preserving rewired graph control. The H1 benchmark was used repeatedly during development, so this comparison cannot establish generalization to a new cell line.
+I held Ordered fixed and tested what each graph added on 65 knockdown targets in public H1 cells. The graph variants included a longer-path version of SIGNOR, a version with SIGNOR’s connections shuffled while preserving each gene’s degree, and a version using the STRING association network. The shuffled graph checks whether the specific connections helped. The local score combines six measures of how closely simulated cells match measured responses.
 
-[View the local H1 comparison](#vcc-h1-counts).
+**How to read the plot.** Each dot is a mean composite score across three fixed sets of sampled cells. The dashed line is the Ordered base model. Farther right is better.
+
+<figure id="vcc-h1-counts" class="project-figure">
+
+![Local H1 scores. Both SIGNOR path models are to the right of the Ordered baseline. Rewired SIGNOR and STRING are to its left.](../../assets/projects/virtual-cell-challenge/h1-count-comparison.svg)
+
+<figcaption>On the local H1 benchmark, submitted SIGNOR scored 0.05675, compared with 0.05493 for Ordered and 0.05416 for the rewired control.</figcaption>
+
+</figure>
+
+The four-step model beat Ordered in all three sampling sets. The longer-path model had a slightly higher mean, but beat Ordered in two of the three, so I submitted the shorter version. All three sets came from the same cell line, and I examined H1 repeatedly during development. Performance on unseen cell lines remains open.
 
 ## Submission status
 
