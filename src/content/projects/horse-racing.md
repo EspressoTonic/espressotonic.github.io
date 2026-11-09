@@ -17,7 +17,7 @@
   ],
   "links": [{"label": "Forecast archive", "url": "/demos/horse-racing/", "kind": "demo"}],
   "publicationIds": [],
-  "updated": "2026-10-20",
+  "updated": "2026-11-09",
   "dateLabel": "2025–2026",
   "sortDate": "2025"
 }
@@ -40,6 +40,29 @@ Dataset manifests select source versions rather than concatenating overlapping a
 The neural model encodes each horse's prior runs and each jockey's activity across distinct days, then scores runners within a race. A fixed ranking head is the retained research baseline. Position-specific and conditional heads test richer interactions; they have not established a reliable gain on the matched historical experiment. CatBoost provides a separate tree-based comparison.
 
 Scheduled batch retraining uses rolling chronological windows and prospective evaluation. The weekly recipe separates weight training, model selection, probability calibration and the final held-out week. Saved weekly versions are distinct from the historical study. The dropdown changes which saved results a visitor reads; training and prediction happen on the compute host.
+
+## November research checkpoint: measure what each change adds
+
+A review of 29 studies helped organize the next comparisons around feature availability, training objectives, competitor interactions and probability quality. I tested each proposed input exclusion with fresh models: an unchanged control and five separate exclusions, each with three fixed seeds. Every model used the same training, selection, calibration and scoring periods.
+
+On 1,232 historical development races, none of the five exclusions established a meaningful improvement:
+
+| Input treatment | Winner hit rate | Win log loss ↓ |
+| --- | ---: | ---: |
+| Unchanged control | 33.36% | 1.8881 |
+| Remove duplicate missing-data flags | 33.12% | 1.8871 |
+| Remove jockey-history raw times | 33.28% | 1.8881 |
+| Remove jockey-history mount bodyweights | 33.04% | 1.8884 |
+| Remove jockey-history moisture values | 33.36% | 1.8882 |
+| Remove runner number | 33.77% | 1.8862 |
+
+All five adjusted uncertainty intervals include no change. Removing runner number adds five correct winners, but the loss improvement is smaller than the threshold set before fitting. The near-zero effects of the jockey measurement exclusions describe their incremental value in this representation; they do not show that ground or physical condition is irrelevant. An independent audit reproduced the selected checkpoints, probability pooling, calibration and race scores.
+
+A separate matched experiment found a stronger historical signal from sectional pace. Its no-pace control scored 32.63% winner hits and 1.8901 log loss; adding the horse's historical pace and rival summaries scored 34.17% and 1.8663. Own-horse pace also improved loss, while the extra contribution from rivals remained uncertain. These reused historical races support further investigation rather than a claim of confirmed future improvement.
+
+To test those findings prospectively, I archived every one of nine research variants for all 28 remaining November 7–8 races before Saturday racing began: the pruning control and five exclusions, plus three pace variants. Their original fields, model versions and estimated probabilities are preserved. These research forecasts have a separate identity from the operational model choices in the dashboard.
+
+The modelling audit also clarified a structural limit: current first-place scores are computed for each runner individually. Later conditional ranking stages do not make the first-place score respond to a rival's running style. A small field-conditioned scoring model and a model of finishing-time distributions remain hypotheses for later controlled experiments.
 
 ## Prospective evidence
 
