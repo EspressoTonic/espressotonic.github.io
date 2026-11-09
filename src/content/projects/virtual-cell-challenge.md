@@ -1,8 +1,8 @@
 ---
 {
   "title": "Virtual Cell Challenge 2026",
-  "summary": "I submitted a model to the 2026 Virtual Cell Challenge, which asks how gene knockdowns change gene expression in unfamiliar cellular contexts. I compared simple transfer baselines with network-informed models using public perturbation data.",
-  "shortSummary": "Predicting gene-expression responses to CRISPRi across cell contexts, with matched tests of network features.",
+  "summary": "I built and submitted a model that predicts single-cell responses to CRISPRi in unfamiliar cell lines from untreated profiles. The final model combined a learned response predictor with a correction based on directed signaling paths.",
+  "shortSummary": "Predicting CRISPRi responses in unseen cell contexts with a learned response model and directed signaling paths.",
   "category": "research",
   "context": "independent",
   "status": "ongoing",
@@ -11,27 +11,33 @@
   "featured": true,
   "draft": false,
   "topics": ["Perturbation response", "Transfer evaluation", "Network features"],
-  "links": [{"label": "Challenge brief", "url": "https://arcinstitute.org/news/virtual-cell-challenge-2026", "kind": "write-up"}],
+  "links": [
+    {"label": "Challenge brief", "url": "https://arcinstitute.org/news/virtual-cell-challenge-2026", "kind": "write-up"},
+    {"label": "Official rules", "url": "https://virtualcellchallenge.org/rules", "kind": "write-up"}
+  ],
   "publicationIds": [],
-  "updated": "2026-11-04",
+  "updated": "2026-11-09",
   "dateLabel": "September 2026–present",
   "sortDate": "2026-09",
   "featuredOrder": 2
 }
 ---
 
-## The research question
+## The challenge
 
-Can we use measured responses in one cell context to predict what happens after a gene knockdown in another? I used public single-cell perturbation data and the challenge's CRISPRi prediction task to study this transfer problem.
+Given untreated single-cell RNA profiles and a gene to knock down, predict the resulting gene expression in a cell line with no observed knockdown responses available to the model. I designed the comparisons and built the workflow from training through submission. [Arc Institute’s challenge brief](https://arcinstitute.org/news/virtual-cell-challenge-2026)
 
-## My contribution
+## How the submitted model worked
 
-I designed the comparisons, built the model and evaluation workflows, and examined where performance broke down. I defined which targets and contexts to hold out and froze predictions before scoring. I compared transferred-effect and low-rank baselines with pathway and gene-network features.
+1. **Learn from measured responses.** I trained on public CRISPRi Perturb-seq profiles from K562 and RPE1 (Replogle et al.) and HepG2 and Jurkat (Nadig et al.). At inference, untreated RNA represented the new cell context, and the requested gene identified the intervention. [Replogle and Nadig data references](https://github.com/Virtual-Cell-Research-Community/scPertEval/blob/main/docs/user-guide/datasets.md)
+2. **Predict a change for each output gene.** An ensemble trained with three seeds combined a learned response predictor with GenePT embeddings and Reactome pathway membership. The decoder treated the knocked-down gene and the measured gene as an ordered pair, so reversing their roles could change the prediction. [GenePT](https://pubmed.ncbi.nlm.nih.gov/37905130/) · [Reactome](https://reactome.org/)
+3. **Add a signaling-path correction.** I trained a second model to adjust the base prediction using short, directed SIGNOR paths and untreated expression from the new cell context. The path features distinguished activating, inhibitory, and unknown-sign links. The submitted version allowed paths of up to four steps and used the base prediction for pairs without usable path features. [SIGNOR 3.0](https://doi.org/10.1093/nar/gkac883)
+4. **Generate single-cell counts.** I applied the predicted shifts to samples from the untreated cells and used negative binomial or Poisson distributions to generate count profiles. This produced a population of predicted cells for each requested knockdown.
 
 ## What the comparisons showed
 
-An early baseline transferred poorly on the official validation panel. In a separate development experiment on a held-out cell context, adding STRING network features did not improve the population and count comparison over the matched reference. These experiments used different evaluation settings.
+I tested simple transfer and low-rank baselines, then compared the frozen base model with several network additions. STRING did not improve the matched count benchmark on public H1 cells. The submitted SIGNOR correction modestly improved the composite score on 65 H1 targets relative to the base model and the degree-preserving rewired graph control. The H1 benchmark was used repeatedly during development, so this comparison cannot establish generalization to a new cell line.
 
-## Submission
+## Submission status
 
-I submitted a final entry for the 2026 challenge. The final competition score and ranking are pending.
+I submitted the final SIGNOR model on November 6, 2026, Korea time. The organizers processed the entry. The final competition score and ranking are pending.
