@@ -17,7 +17,7 @@
   ],
   "links": [{"label": "Forecast archive", "url": "/demos/horse-racing/", "kind": "demo"}],
   "publicationIds": [],
-  "updated": "2026-11-09",
+  "updated": "2026-11-11",
   "dateLabel": "2025–2026",
   "sortDate": "2025"
 }
@@ -63,6 +63,24 @@ A separate matched experiment found a stronger historical signal from sectional 
 To test those findings prospectively, I archived every one of nine research variants for all 28 remaining November 7–8 races before Saturday racing began: the pruning control and five exclusions, plus three pace variants. Their original fields, model versions and estimated probabilities are preserved. These research forecasts have a separate identity from the operational model choices in the dashboard.
 
 The modelling audit also clarified a structural limit: current first-place scores are computed for each runner individually. Later conditional ranking stages do not make the first-place score respond to a rival's running style. A small field-conditioned scoring model and a model of finishing-time distributions remain hypotheses for later controlled experiments.
+
+## November 11: scoring the forecasts saved before racing
+
+Fresh official results resolve all 28 November 7–8 races in the research archive. Every variant was recorded before Saturday racing, and every model is scored on the same 270 declared runners. The original probabilities and model versions are retained; none of these research models was refitted for this result.
+
+| Saved forecast | Winners correct | Win log loss ↓ | Brier score ↓ |
+| --- | ---: | ---: | ---: |
+| Pruning control | 6/28 · 21.4% | 2.0472 | 0.8418 |
+| Remove runner number | 6/28 · 21.4% | 2.0119 | 0.8373 |
+| Pace control | 6/28 · 21.4% | 2.0527 | 0.8399 |
+| Horse's own historical pace | 7/28 · 25.0% | 1.9625 | 0.8150 |
+| Horse pace plus rival summaries | 7/28 · 25.0% | 1.9681 | 0.8197 |
+| Operational fixed LSTM, same archived card | 7/28 · 25.0% | 2.1446 | 0.8640 |
+| Operational CatBoost, same archived card | 4/28 · 14.3% | 1.9828 | 0.8316 |
+
+All five pruning variants still pick six winners; their differences concern probability quality. Own-horse pace improves log loss by 0.0902 against its matched control while adding one correct winner. Rival summaries do not improve on own pace in this weekend. The operational models use different training recipes, so their scores provide context rather than an isolated architecture comparison.
+
+This is one genuinely prospective research weekend. It supports continued evaluation of historical pace, but the hit rates remain modest and no stable improvement, reliable individual confidence or profitable strategy is established. The 28-race comparison is separate from the dashboard's complete Friday–Sunday operational record.
 
 ## Prospective evidence
 
