@@ -7,6 +7,11 @@ const weekly = data.weekly.models.find(
 );
 const prospective = weekly.evaluation?.procedure || weekly.prospective;
 const loss = prospective.probabilities?.methods?.calibrated;
+const clinic = data.clinic_study;
+const completedWeeks = [...(prospective.weekly || [])]
+  .filter((week: {week: string; races: number}) => week.races > 0 && week.week.split('/')[1] < data.prospective.history_as_of)
+  .sort((a: {week: string}, b: {week: string}) => b.week.localeCompare(a.week));
+const latestWeek = completedWeeks[0];
 const rate = (value: number) => `${(value * 100).toFixed(1)}%`;
 const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
   timeZone: 'Asia/Seoul',
@@ -49,6 +54,9 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
     <strong>Registered prospective updating procedure:</strong> {prospective.recorded} captured /{' '}
     {prospective.evaluated} scored. Upcoming predictions are not scored as losses.
   </p>
+  {latestWeek && <p><strong>Latest completed week:</strong> {latestWeek.first_date}–{latestWeek.last_date} ·
+    {' '}{latestWeek.winner_credit}/{latestWeek.races} winners correct ({rate(latestWeek.winner_hit_rate)}).
+    {prospective.metrics && ` Across the registered record: ${rate(prospective.metrics.winner_hit_rate)} winner hits.`}</p>}
   <p>
     <strong>Prospective probability scores:</strong>{' '}
     {loss
@@ -56,6 +64,29 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
       : 'pending verified outcomes'}
     . Lower scores indicate better probability forecasts.
   </p>
+  {clinic && (
+    <div class="clinic-forward-evidence">
+      <h3>Clinic activity: forward study</h3>
+      <p>{clinic.scored_races} races scored across {clinic.weeks} calendar week(s).
+        {clinic.period && ` Scored dates: ${clinic.period.begin}–${clinic.period.end}.`}</p>
+      {clinic.scored_races > 0 && (
+        <div class="comparison-scroll" tabindex="0" role="region" aria-label="Forward clinic comparison">
+          <table>
+            <thead><tr><th scope="col">Model / reference</th><th scope="col">Winner hit</th><th scope="col">Win log loss ↓</th><th scope="col">Brier ↓</th></tr></thead>
+            <tbody>{clinic.rows.map((row: {id: string; label: string; metrics: {winner_hit: number; log_loss: number; brier: number}}) => (
+              <tr><th scope="row">{row.label}</th><td>{rate(row.metrics.winner_hit)}</td><td>{row.metrics.log_loss.toFixed(4)}</td><td>{row.metrics.brier.toFixed(4)}</td></tr>
+            ))}</tbody>
+          </table>
+        </div>
+      )}
+      <p>Preliminary research evidence. Historical clinic gains were withdrawn because
+        the training archive depends on a later horse roster. Future inputs are timestamped;
+        the training limitation remains. This candidate is separate from operational models.</p>
+      <p>The uniform winner-hit rate is the expected random-pick rate for these fields.</p>
+      <p>Weekly values are descriptive. The fixed final report is after {clinic.final_report_after},
+        requiring {clinic.required_weeks} scored calendar weeks. No reliable gain or profit is established.</p>
+    </div>
+  )}
   <p>
     Models use scheduled batch retraining with rolling chronological windows. Future results
     evaluate the updating procedure and each exact version separately.
@@ -70,6 +101,10 @@ const snapshot = new Date(data.exported_at).toLocaleString('en-GB', {
   </a>
 </section>
 <style>
+  .comparison-scroll { overflow-x: auto; margin-block: 1rem; }
+  table { border-collapse: collapse; width: 100%; min-width: 32rem; }
+  th, td { text-align: left; padding: 0.7rem; border-bottom: 1px solid var(--control-border); }
+  .clinic-forward-evidence { margin-block: 2rem; }
   .horse-evidence {
     border-block: 1px solid var(--control-border);
     padding-block: 1.5rem;

@@ -382,6 +382,14 @@ for (const width of [390, 1440])
         await page.getByRole('button', { name: 'End', exact: true }).click();
         await expect(page.getByTestId('replay-balance')).not.toHaveText('₩1,000,000');
       }
+      if (tab === 'Research' && snapshot.clinic_study?.scored_races) {
+        const clinic = page.getByRole('table', { name: 'Forward clinic comparison' });
+        await expect(clinic).toBeVisible();
+        await expect(clinic).toContainText(
+          snapshot.clinic_study.rows.find((row: { id: string }) => row.id === 'clinic').metrics.log_loss.toFixed(4),
+        );
+        await expect(page.getByText('Preliminary research evidence.', { exact: false })).toBeVisible();
+      }
     }
     expect(dataRequests).toHaveLength(1);
     expect(external).toEqual([]);
