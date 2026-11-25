@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "source_release": "3a2ce861ce3caf14",
-  "source_manifest_sha256": "1d1bcc3df7547893b8a8bd1d9f688ad0bbd4e2a21cae1df76574cb0e1ca64bb5",
+  "source_release": "fdbc150f0db49af1",
+  "source_manifest_sha256": "24712a63c00f0fb1e061acf0626ae4c546da61e82ec9e2209146489572955cc9",
   "source_commit": "7b63ac349ae8186801cc2cf1f2dd9f957246e075",
-  "exported_at": "2026-11-19T01:18:42.254438+00:00",
+  "exported_at": "2026-11-25T03:12:10.180562+00:00",
   "research_run": "e6462b99e8e507ff",
-  "weekly_run": "5bc4ef7fbcc4c428",
+  "weekly_run": "beeb64c8daf27895",
   "source_files": {
     "web/src/ClinicStudy.jsx": "a4857e732e04c6d8df267a142634947a91a04a81699049b486a081c91565e5e4",
     "web/src/Forecasts.jsx": "4be8b348aa78a8f463b32a6c4d6c8c0e0374a6f4e70860ab6fc020cb26fd634a",
@@ -58,7 +58,7 @@
     "assets/index-D0x9w2MH.js": "20651ca687f1cab05fa94f56ee77a4b1f34f832d320a400e6536e6690612eb13",
     "assets/inter-latin-variable-8kRkwJBP.woff2": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4",
     "assets/sora-latin-variable-5v9NviDD.woff2": "3902474d3ece89c8580d5ef3325cf58753e6e45a86f9957b4dacc4fce2e7fde1",
-    "data/dashboard.json": "5ac0b3623814b0cde236d2b99436cda8100fc445574d2b16681ca4d689ef86d9",
+    "data/dashboard.json": "df8bac40553545ea3eb41ff7144724e49fddddbe983dd06bc8421f917769b2a7",
     "index.html": "a8f730d99aab988924cc18ffd5560244cbec1e8e3f8a6be7b89969b814ce8ea3"
   }
 }
